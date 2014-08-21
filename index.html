@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Tutorial on publishing 5-star open data</title>
-<!-- 2014-08-21 Thu 18:04 -->
+<!-- 2014-08-21 Thu 18:27 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Christoph Lange" />
@@ -190,7 +190,7 @@ Original data (HTML): <a href="http://www.emse.fr/~zimmermann/WI_2014_Site/Progr
 </p>
 
 <p>
-<a href="1%20star%20PDF/schedule.pdf">schedule.pdf</a>
+<a href="1star_PDF/schedule.pdf">schedule.pdf</a>
 </p>
 </div>
 </div>
@@ -202,7 +202,7 @@ Original data (HTML): <a href="http://www.emse.fr/~zimmermann/WI_2014_Site/Progr
 </p>
 
 <p>
-<a href="2%20star%20Excel/schedule.xls">schedule.xls</a>
+<a href="2star_Excel/schedule.xls">schedule.xls</a>
 </p>
 
 <p>
@@ -212,7 +212,7 @@ It is not impossible to read this file outside of Excel:
 
 <pre class="src src-sh" id="code-process-xls">perl -MSpreadsheet::ParseExcel -le <span style="font-style: italic;">'</span>
 <span style="font-style: italic;">  print Spreadsheet::ParseExcel-&gt;new()</span>
-<span style="font-style: italic;">    -&gt;parse("2 star Excel/schedule.xls")</span>
+<span style="font-style: italic;">    -&gt;parse("2star_Excel/schedule.xls")</span>
 <span style="font-style: italic;">    -&gt;worksheet("Schedule")</span>
 <span style="font-style: italic;">    -&gt;get_cell(1,0)</span>
 <span style="font-style: italic;">    -&gt;value();'</span>
@@ -247,7 +247,7 @@ However, free software libraries do not support all features of this file format
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh" id="code-file-xls">file 2<span style="font-style: italic;">\ </span>star<span style="font-style: italic;">\ </span>Excel/schedule.xls
+<pre class="src src-sh" id="code-file-xls">file 2star_Excel/schedule.xls
 </pre>
 </div>
 
@@ -255,7 +255,7 @@ However, free software libraries do not support all features of this file format
 Output:
 </p>
 <pre class="example">
-2 star Excel/schedule.xls: Composite Document File V2 Document, corrupt: Can't read SSAT
+2star_Excel/schedule.xls: Composite Document File V2 Document, corrupt: Can't read SSAT
 </pre>
 </div>
 </div>
@@ -268,7 +268,7 @@ Output:
 </p>
 
 <p>
-<a href="1%20star%20PDF/schedule.pdf">schedule.ods</a>
+<a href="1star_PDF/schedule.pdf">schedule.ods</a>
 </p>
 
 <p>
@@ -276,12 +276,12 @@ Shell command:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh" id="code-unzip-ods">unzip -l 3<span style="font-style: italic;">\ </span>star<span style="font-style: italic;">\ </span>OpenDocument/schedule.ods
+<pre class="src src-sh" id="code-unzip-ods">unzip -l 3star_OpenDocument/schedule.ods
 </pre>
 </div>
 
 <pre class="example">
-Archive:  3 star OpenDocument/schedule.ods
+Archive:  3star_OpenDocument/schedule.ods
   Length      Date    Time    Name
 ---------  ---------- -----   ----
        46  08-21-2014 08:13   mimetype
@@ -313,9 +313,9 @@ Archive:  3 star OpenDocument/schedule.ods
 We need one CSV file per sheet:
 </p>
 <ul class="org-ul">
-<li><a href="3.5%20star%20CSV/schedule.csv">schedule.csv</a>
+<li><a href="3.5star_CSV/schedule.csv">schedule.csv</a>
 </li>
-<li><a href="3.5%20star%20CSV/presenters.csv">presenters.csv</a>
+<li><a href="3.5star_CSV/presenters.csv">presenters.csv</a>
 </li>
 </ul>
 </div>
@@ -333,9 +333,9 @@ From here onwards, <a href="http://5stardata.info/">the original 5-star open dat
 </p>
 
 <ul class="org-ul">
-<li><a href="4%20star%20CSV/schedule.csv">schedule.csv</a>
+<li><a href="4star_CSV/schedule.csv">schedule.csv</a>
 </li>
-<li><a href="4%20star%20CSV/presenters.csv">presenters.csv</a>
+<li><a href="4star_CSV/presenters.csv">presenters.csv</a>
 </li>
 </ul>
 </div>
@@ -384,7 +384,7 @@ http://ecole.web-intelligence-rhone-alpes.org/presenters/#markus,Markus Krötzsc
 <h3 id="sec-6-2"><span class="section-number-3">6.2</span> Datatypes</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
-With an alternative export configuration, the 3-star CSV may have ended up <a href="3.5%20star%20CSV/schedule-alt.csv">like this</a>:
+With an alternative export configuration, the 3-star CSV may have ended up <a href="3.5star_CSV/schedule-alt.csv">like this</a>:
 </p>
 
 <pre class="example">
@@ -450,7 +450,7 @@ This tutorial is based on an idea by <a href="http://www.emse.fr/~zimmermann/">A
 <div id="postamble" class="status">
 <p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-08-21 Thu&gt;</span></span></p>
 <p class="author">Author: Christoph Lange</p>
-<p class="date">Created: 2014-08-21 Thu 18:04</p>
+<p class="date">Created: 2014-08-21 Thu 18:27</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
