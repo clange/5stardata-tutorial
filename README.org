@@ -16,6 +16,13 @@ Practical examples of how to create and publish [[http://5stardata.info][5-star 
 * ★★ Excel (*.xls)
   [[http://5stardata.info/#addendum2][Cost and benefits of ★★ Web data]]
 
+#+BEGIN_SRC sh :results output replace :exports both
+file 2\ star\ Excel/schedule.xls
+#+END_SRC
+
+#+RESULTS:
+: 2 star Excel/schedule.xls: Composite Document File V2 Document, corrupt: Can't read SSAT
+
 * ★★★ OpenDocument (*.ods)
   [[http://5stardata.info/#addendum3][Cost and benefits of ★★★ Web data]]
 
