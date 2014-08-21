@@ -7,10 +7,12 @@
 
 Practical examples of how to create and publish [[http://5stardata.info][5-star open data]] on the Web; originally written for the [[http://www.emse.fr/~zimmermann/WI_2014_Site/][2014 Web Intelligence Summer School “Web of Data”]].
 
-Based on an idea by [[http://www.emse.fr/~zimmermann/][Antoine Zimmermann]].
-
 * Use case: event schedule and presenters of a summer school
+  Original data (HTML): [[http://www.emse.fr/~zimmermann/WI_2014_Site/Programme/][schedule]], [[http://www.emse.fr/~zimmermann/WI_2014_Site/Committee/][presenters]]
+  
+* Credits
+  This tutorial is based on an idea by [[http://www.emse.fr/~zimmermann/][Antoine Zimmermann]].  The motivation was to prepare something for the [[http://www.emse.fr/~zimmermann/WI_2014_Site/][2014 Web Intelligence Summer School “Web of Data”]] that's not too heavily biased towards RDF.
 
-
-
-
+* License
+  [[https://i.creativecommons.org/l/by-sa/4.0/88x31.png]]
+  This work is licensed under a [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Commons Attribution-ShareAlike 4.0 International License]].
