@@ -11,18 +11,24 @@ Practical examples of how to create and publish [[http://5stardata.info][5-star 
   Original data (HTML): [[http://www.emse.fr/~zimmermann/WI_2014_Site/Programme/][schedule]], [[http://www.emse.fr/~zimmermann/WI_2014_Site/Committee/][presenters]]
 
 * ★ PDF
+  [[http://5stardata.info/#addendum1][Cost and benefits of ★ Web data]]
 
 * ★★ Excel (*.xls)
+  [[http://5stardata.info/#addendum2][Cost and benefits of ★★ Web data]]
 
 * ★★★ OpenDocument (*.ods)
+  [[http://5stardata.info/#addendum3][Cost and benefits of ★★★ Web data]]
 
 * ★★★☆ CSV
   
 * ★★★★ CSV with URIs
+  From here onwards, [[http://5stardata.info/][the original 5-star open data examples]] use RDF.  We will continue with CSV for a while, to point out that open data on the Web is not /only/ RDF.
 
+  [[http://5stardata.info/#addendum4][Cost and benefits of ★★★★ Web data]]
 * ★★★★☆ CSV with URIs, schema and links
 
 * ★★★★★ RDF (and a comparison to CSV)
+  [[http://5stardata.info/#addendum5][Cost and benefits of ★★★★★ Web data]]
 
 * ★★★★★☆ Further possible improvements: standard schemas, quality, …
 
