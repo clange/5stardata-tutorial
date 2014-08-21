@@ -1,0 +1,16 @@
+#+TITLE:  Tutorial on publishing 5-star open data
+#+AUTHOR: Christoph Lange
+#+EMAIL:  math.semantic.web@gmail.com
+#+DATE:   <2014-08-21 Thu>
+
+*Work in Progress – expect more to be here by <2014-08-25 Mon>*
+
+Practical examples of how to create and publish [[http://5stardata.info][5-star open data]] on the Web; originally written for the [[http://www.emse.fr/~zimmermann/WI_2014_Site/][2014 Web Intelligence Summer School “Web of Data”]].
+
+Based on an idea by [[http://www.emse.fr/~zimmermann/][Antoine Zimmermann]].
+
+* Use case: event schedule and presenters of a summer school
+
+
+
+
