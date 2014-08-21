@@ -1,20 +1,32 @@
 HOMEPAGE = homepage
+DEMO_FILES = 1star_PDF/schedule.pdf \
+	2star_Excel/schedule.xls \
+	3star_OpenDocument/schedule.ods \
+	3.5star_CSV/presenters.csv \
+	3.5star_CSV/schedule.csv \
+	3.5star_CSV/schedule-alt.csv \
+	4star_CSV/presenters.csv \
+	4star_CSV/schedule.csv
 
-.sync: $(HOMEPAGE)/index.html
-	touch $@ ; \
+.sync: $(HOMEPAGE)/.sync $(HOMEPAGE)/index.html
 	(cd $(HOMEPAGE) ; \
 		git commit -m "regenerated" index.html ; \
-		git push)
+		git push) ; \
+	touch $@
+
+$(HOMEPAGE)/.sync: $(DEMO_FILES)
+	rsync -avR $(DEMO_FILES) homepage/ ; \
+	touch $@
 
 # exports to "flat XML", which we don't want
 # 
-# 3\ star\ OpenDocument/schedule.ods: 2\ star\ Excel/schedule.xls
+# 3star_OpenDocument/schedule.ods: 2star_Excel/schedule.xls
 # 	soffice --headless --convert-to ods --outdir "$$(dirname "$@")" "$<"
 
-3.5\ star\ CSV/schedule.csv: 3\ star\ OpenDocument/schedule.ods
-	soffice --headless --convert-to csv --outdir "$$(dirname "$@")" "$<"
+# 3.5star_CSV/schedule.csv: 3star_OpenDocument/schedule.ods
+# 	soffice --headless --convert-to csv --outdir "$$(dirname "$@")" "$<"
 
-homepage/index.html: README.org
+$(HOMEPAGE)/index.html: README.org
 	emacs --batch \
 		-Q \
 		--eval "(progn \
