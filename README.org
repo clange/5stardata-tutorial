@@ -7,6 +7,8 @@
 
 Practical examples of how to create and publish [[http://5stardata.info][5-star open data]] on the Web; originally written for the [[http://www.emse.fr/~zimmermann/WI_2014_Site/][2014 Web Intelligence Summer School “Web of Data”]].
 
+Published online at http://clange.github.io/5stardata-tutorial/
+
 * Use case: event schedule and presenters of a summer school
   Original data (HTML): [[http://www.emse.fr/~zimmermann/WI_2014_Site/Programme/][schedule]], [[http://www.emse.fr/~zimmermann/WI_2014_Site/Committee/][presenters]]
 
@@ -15,17 +17,75 @@ Practical examples of how to create and publish [[http://5stardata.info][5-star 
 
 * ★★ Excel (*.xls)
   [[http://5stardata.info/#addendum2][Cost and benefits of ★★ Web data]]
+  
+  [[file:2%20star%20Excel/schedule.xls][schedule.xls]]
 
+  It is not impossible to read this file outside of Excel:
+#+NAME: code-process-xls
+#+BEGIN_SRC sh :results output replace :exports both
+perl -MSpreadsheet::ParseExcel -le '
+  print Spreadsheet::ParseExcel->new()
+    ->parse("2 star Excel/schedule.xls")
+    ->worksheet("Schedule")
+    ->get_cell(1,0)
+    ->value();'
+#+END_SRC
+  
+  Output:
+#+RESULTS: code-process-xls
+: 25 Aug 2014 09:00
+
+  It is harder, but not impossible, to have questions answered such as “when is the first coffee break”.
+
+  Think of an algorithm that does the following:
+  1. In the column titled “Event”, identify all cells whose value is “Coffee break”.
+  2. On each row of such a cell, get the entry of the cell in the “Time” column.
+  3. Sort these cells and return the smallest value.
+
+  However, free software libraries do not support all features of this file format.  Here is what happens when we ask a popular free tool to determine the type of this file:
+#+NAME: code-file-xls
 #+BEGIN_SRC sh :results output replace :exports both
 file 2\ star\ Excel/schedule.xls
 #+END_SRC
 
-#+RESULTS:
+  Output:
+#+RESULTS: code-file-xls
 : 2 star Excel/schedule.xls: Composite Document File V2 Document, corrupt: Can't read SSAT
 
 * ★★★ OpenDocument (*.ods)
   [[http://5stardata.info/#addendum3][Cost and benefits of ★★★ Web data]]
 
+  Shell command:
+#+NAME: code-unzip-ods
+#+BEGIN_SRC sh :results output replace :exports both
+unzip -l 3\ star\ OpenDocument/schedule.ods
+#+END_SRC
+
+#+RESULTS: code-unzip-ods
+#+begin_example
+Archive:  3 star OpenDocument/schedule.ods
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+       46  08-21-2014 08:13   mimetype
+    52832  08-21-2014 08:13   Thumbnails/thumbnail.png
+    27279  08-21-2014 08:13   styles.xml
+    15227  08-21-2014 08:13   content.xml
+      852  08-21-2014 08:13   meta.xml
+     8774  08-21-2014 08:13   settings.xml
+      899  08-21-2014 08:13   manifest.rdf
+        0  08-21-2014 08:13   Configurations2/accelerator/current.xml
+        0  08-21-2014 08:13   Configurations2/progressbar/
+        0  08-21-2014 08:13   Configurations2/statusbar/
+        0  08-21-2014 08:13   Configurations2/images/Bitmaps/
+        0  08-21-2014 08:13   Configurations2/floater/
+        0  08-21-2014 08:13   Configurations2/toolbar/
+        0  08-21-2014 08:13   Configurations2/popupmenu/
+        0  08-21-2014 08:13   Configurations2/toolpanel/
+        0  08-21-2014 08:13   Configurations2/menubar/
+     1093  08-21-2014 08:13   META-INF/manifest.xml
+---------                     -------
+   107002                     17 files
+#+end_example
 * ★★★☆ CSV
   
 * ★★★★ CSV with URIs
