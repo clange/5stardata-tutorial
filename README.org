@@ -15,17 +15,18 @@ Published online at http://clange.github.io/5stardata-tutorial/
 * ★ PDF
   [[http://5stardata.info/#addendum1][Cost and benefits of ★ Web data]]
 
+  [[file:1star_PDF/schedule.pdf][schedule.pdf]]
 * ★★ Excel (*.xls)
   [[http://5stardata.info/#addendum2][Cost and benefits of ★★ Web data]]
   
-  [[file:2%20star%20Excel/schedule.xls][schedule.xls]]
+  [[file:2star_Excel/schedule.xls][schedule.xls]]
 
   It is not impossible to read this file outside of Excel:
 #+NAME: code-process-xls
 #+BEGIN_SRC sh :results output replace :exports both
 perl -MSpreadsheet::ParseExcel -le '
   print Spreadsheet::ParseExcel->new()
-    ->parse("2 star Excel/schedule.xls")
+    ->parse("2star_Excel/schedule.xls")
     ->worksheet("Schedule")
     ->get_cell(1,0)
     ->value();'
@@ -45,25 +46,27 @@ perl -MSpreadsheet::ParseExcel -le '
   However, free software libraries do not support all features of this file format.  Here is what happens when we ask a popular free tool to determine the type of this file:
 #+NAME: code-file-xls
 #+BEGIN_SRC sh :results output replace :exports both
-file 2\ star\ Excel/schedule.xls
+file 2star_Excel/schedule.xls
 #+END_SRC
 
   Output:
 #+RESULTS: code-file-xls
-: 2 star Excel/schedule.xls: Composite Document File V2 Document, corrupt: Can't read SSAT
+: 2star_Excel/schedule.xls: Composite Document File V2 Document, corrupt: Can't read SSAT
 
 * ★★★ OpenDocument (*.ods)
   [[http://5stardata.info/#addendum3][Cost and benefits of ★★★ Web data]]
 
+  [[file:1star_PDF/schedule.pdf][schedule.ods]]
+
   Shell command:
 #+NAME: code-unzip-ods
 #+BEGIN_SRC sh :results output replace :exports both
-unzip -l 3\ star\ OpenDocument/schedule.ods
+unzip -l 3star_OpenDocument/schedule.ods
 #+END_SRC
 
 #+RESULTS: code-unzip-ods
 #+begin_example
-Archive:  3 star OpenDocument/schedule.ods
+Archive:  3star_OpenDocument/schedule.ods
   Length      Date    Time    Name
 ---------  ---------- -----   ----
        46  08-21-2014 08:13   mimetype
@@ -87,11 +90,83 @@ Archive:  3 star OpenDocument/schedule.ods
    107002                     17 files
 #+end_example
 * ★★★☆ CSV
+  We need one CSV file per sheet:
+  * [[file+emacs:3.5star_CSV/schedule.csv][schedule.csv]]
+  * [[file+emacs:3.5star_CSV/presenters.csv][presenters.csv]]
   
 * ★★★★ CSV with URIs
+  [[http://5stardata.info/#addendum4][Cost and benefits of ★★★★ Web data]]
+
   From here onwards, [[http://5stardata.info/][the original 5-star open data examples]] use RDF.  We will continue with CSV for a while, to point out that open data on the Web is not /only/ RDF.
 
-  [[http://5stardata.info/#addendum4][Cost and benefits of ★★★★ Web data]]
+  * [[file+emacs:4star_CSV/schedule.csv][schedule.csv]]
+  * [[file+emacs:4star_CSV/presenters.csv][presenters.csv]]
+
+** Links using Web-scale identifiers
+   An example from the 3-star CSV:
+#+NAME: code-csv-id-before
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+head -n 1 3.5star_CSV/schedule.csv ;
+echo ... ;
+fgrep "Markus Krötzsch" 3.5star_CSV/schedule.csv ;
+echo ;
+head -n 1 3.5star_CSV/presenters.csv ;
+echo ... ;
+fgrep "Markus Krötzsch" 3.5star_CSV/presenters.csv ;
+#+END_SRC
+#+RESULTS: code-csv-id-before
+: Time,Event,Type,Presenter,Location
+: ...
+: 27 Aug 2014 09:00,Wikidata,Keynote,Markus Krötzsch,
+: 27 Aug 2014 10:15,Working with Wikidata: A Hands-on Guide for Researchers and Developers,Tutorial,Markus Krötzsch,
+: 
+: Name,Affiliation,Town,Country
+: ...
+: Markus Krötzsch,TU Dresden,Dresden,Germany
+
+  * How do we know it's twice the same instructor?
+  * How can we make this connection Web-safe?  (There might be others by the same name; how about [[https://www.facebook.com/markus.krotzsch][this person on Facebook]]?)
+  
+  Give the presenter a unique identifier!
+#+NAME: code-csv-id-after
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+head -n 1 4star_CSV/schedule.csv ;
+echo ... ;
+fgrep "#markus" 4star_CSV/schedule.csv ;
+echo ;
+head -n 1 4star_CSV/presenters.csv ;
+echo ... ;
+fgrep "#markus" 4star_CSV/presenters.csv ;
+#+END_SRC
+#+RESULTS: code-csv-id-after
+: Time,Event,Type,Presenter,Location
+: ...
+: 27 Aug 2014 09:00,Wikidata,Keynote,http://ecole.web-intelligence-rhone-alpes.org/presenters/#markus,
+: 27 Aug 2014 10:15,Working with Wikidata: A Hands-on Guide for Researchers and Developers,Tutorial,http://ecole.web-intelligence-rhone-alpes.org/presenters/#markus,
+: 
+: ID,Name,Affiliation,Town,Country
+: ...
+: http://ecole.web-intelligence-rhone-alpes.org/presenters/#markus,Markus Krötzsch,TU Dresden,Dresden,Germany
+
+** Datatypes
+   With an alternative export configuration, the 3-star CSV may have ended up [[file+emacs:3.5star_CSV/schedule-alt.csv][like this]]:
+
+#+NAME: code-csv-datatype-before
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+head -n 3 3.5star_CSV/schedule-alt.csv ;
+#+END_SRC
+#+RESULTS: code-csv-datatype-before
+: Time,Event,Type,Presenter,Location
+: 08/25/2014 09:00:00,Introduction,,,
+: 08/25/2014 09:15:00,Keynote,Keynote,Stefan Decker,
+
+   =08/25/2014= is sufficiently unambiguous, but what does =01/02/03= mean?
+
+   * 1 February 2003?
+   * 2 January 2003?
+   * 3 February 2001?
+   * …?
+
 * ★★★★☆ CSV with URIs, schema and links
 
 * ★★★★★ RDF (and a comparison to CSV)
