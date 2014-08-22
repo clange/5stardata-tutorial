@@ -141,10 +141,10 @@ fgrep "#markus" 4star_CSV/presenters.csv ;
 #+RESULTS: code-csv-id-after
 : Time,Event,Type,Presenter,Location
 : ...
-: 27 Aug 2014 09:00,Wikidata,Keynote,http://ecole.web-intelligence-rhone-alpes.org/presenters/#markus,
-: 27 Aug 2014 10:15,Working with Wikidata: A Hands-on Guide for Researchers and Developers,Tutorial,http://ecole.web-intelligence-rhone-alpes.org/presenters/#markus,
+: 2014-08-27T09:00:00+02:00,Wikidata,Keynote,http://ecole.web-intelligence-rhone-alpes.org/presenters/#markus,
+: 2014-08-27T10:15:00+02:00,Working with Wikidata: A Hands-on Guide for Researchers and Developers,Tutorial,http://ecole.web-intelligence-rhone-alpes.org/presenters/#markus,
 : 
-: ID,Name,Affiliation,Town,Country
+: $id,Name,Affiliation,Town,Country
 : ...
 : http://ecole.web-intelligence-rhone-alpes.org/presenters/#markus,Markus Krötzsch,TU Dresden,Dresden,Germany
 
@@ -166,7 +166,12 @@ head -n 3 3.5star_CSV/schedule-alt.csv ;
    * 2 January 2003?
    * 3 February 2001?
    * …?
+   
+   If we don't know how to interpret date entries, we can't answer queries such as “when is the first coffee break”.
 
+   Also, if your family from a different timezone wanted to phone you in the lunch break, how do we know that =09:00:00= is in CEST?
+
+   
 * ★★★★☆ CSV with URIs, schema and links
 
 * ★★★★★ RDF (and a comparison to CSV)
