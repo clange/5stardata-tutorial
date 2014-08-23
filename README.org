@@ -2,6 +2,17 @@
 #+AUTHOR: Christoph Lange
 #+EMAIL:  math.semantic.web@gmail.com
 #+DATE:   <2014-08-21 Thu>
+#+LANGUAGE:  en
+#+STARTUP:   hidestars
+#+OPTIONS:   H:1 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:showall toc:t ltoc:t mouse:underline buttons:t path:org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:
+#+LINK_HOME:
+#+XSLT:
+#+STYLE: <style type="text/css"> .timestamp { color: purple; font-weight: bold; } </style>
 
 *Work in Progress – expect more to be here by <2014-08-25 Mon>*
 
@@ -141,14 +152,25 @@ fgrep "#markus" 4star_CSV/presenters.csv ;
 #+RESULTS: code-csv-id-after
 : Time,Event,Type,Presenter,Location
 : ...
-: 2014-08-27T09:00:00+02:00,Wikidata,Keynote,http://ecole.web-intelligence-rhone-alpes.org/presenters/#markus,
-: 2014-08-27T10:15:00+02:00,Working with Wikidata: A Hands-on Guide for Researchers and Developers,Tutorial,http://ecole.web-intelligence-rhone-alpes.org/presenters/#markus,
+: 2014-08-27T09:00:00+02:00,Wikidata,Keynote,http://purl.org/wiss2014/presenters/#markus,
+: 2014-08-27T10:15:00+02:00,Working with Wikidata: A Hands-on Guide for Researchers and Developers,Tutorial,http://purl.org/wiss2014/presenters/#markus,
 : 
 : $id,Name,Affiliation,Town,Country
 : ...
-: http://ecole.web-intelligence-rhone-alpes.org/presenters/#markus,Markus Krötzsch,TU Dresden,Dresden,Germany
+: http://purl.org/wiss2014/presenters/#markus,Markus Krötzsch,TU Dresden,Dresden,Germany
 
+   (The timestamp format has also changed; we'll discuss this [[id:2e724ba4-6b8b-4bbc-bdf8-60f07e223620][next]].)
+
+   It is good practice to …
+   * use HTTP URLs for such URIs,
+   * choose them from a namespace that /you/ own,
+   * publish a machine-comprehensible, self-describing description of the things identified by these URIs at that same URL,
+   * so that any client who wants to know something about these things can easily look it up!
+   This approach is called *linked data*.
 ** Datatypes
+   :PROPERTIES:
+   :ID:       2e724ba4-6b8b-4bbc-bdf8-60f07e223620
+   :END:
    With an alternative export configuration, the 3-star CSV may have ended up [[file+emacs:3.5star_CSV/schedule-alt.csv][like this]]:
 
 #+NAME: code-csv-datatype-before
@@ -171,7 +193,16 @@ head -n 3 3.5star_CSV/schedule-alt.csv ;
 
    Also, if your family from a different timezone wanted to phone you in the lunch break, how do we know that =09:00:00= is in CEST?
 
-   
+   So let's use an ISO 8601 conforming date and time format, with time zone information:
+#+NAME: code-csv-datatype-after
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+head -n 3 4star_CSV/schedule.csv
+#+END_SRC
+#+RESULTS: code-csv-datatype-after
+: Time,Event,Type,Presenter,Location
+: 2014-08-25T09:00:00+02:00,Introduction,,,
+: 2014-08-25T09:15:00+02:00,Keynote,Keynote,http://purl.org/wiss2014/presenters/#stefan,
+
 * ★★★★☆ CSV with URIs, schema and links
 
 * ★★★★★ RDF (and a comparison to CSV)
