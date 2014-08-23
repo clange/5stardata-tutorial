@@ -386,11 +386,13 @@ head -n 3 4.5star_CSV/schedule-more.csv
 
 #+NAME: code-csv-multi-object
 #+BEGIN_SRC sh :results output verbatim replace :exports results
-fgrep ';http://' 4.5star_CSV/schedule-more.csv | head -n 1
+fgrep ';http://' 4.5star_CSV/schedule-more.csv | head -n 1 ;
+grep '.*#stefan.*;' 4.5star_CSV/presenters-more.csv | head -n 1
 #+END_SRC
 
 #+RESULTS: code-csv-multi-object
 : ,2014-08-26T18:00:00+02:00,Hackathon dinner,http://purl.org/wiss2014/vocab/#Dinner;http://purl.org/wiss2014/vocab/#Hackathon,,Maison des Élèves
+: ,http://purl.org/wiss2014/presenters/#stefan,Stefan Decker,INSIGHT;National University of Ireland,Galway,Ireland
 
    In RDF, that's no problem:
 
