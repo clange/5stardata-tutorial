@@ -1,4 +1,5 @@
 HOMEPAGE = homepage
+SYNC_FILES = org-info.js
 DEMO_FILES = 1star_PDF/schedule.pdf \
 	2star_Excel/schedule.xls \
 	3star_OpenDocument/schedule.ods \
@@ -14,8 +15,8 @@ DEMO_FILES = 1star_PDF/schedule.pdf \
 		git push) ; \
 	touch $@
 
-$(HOMEPAGE)/.sync: $(DEMO_FILES)
-	rsync -avR $(DEMO_FILES) homepage/ ; \
+$(HOMEPAGE)/.sync: $(DEMO_FILES) $(SYNC_FILES)
+	rsync -avR $(DEMO_FILES) $(SYNC_FILES) homepage/ ; \
 	touch $@
 
 # exports to "flat XML", which we don't want
