@@ -206,7 +206,7 @@ head -n 3 4star_CSV/schedule.csv
 : 2014-08-25T09:15:00+02:00,Keynote,Keynote,http://purl.org/wiss2014/presenters/#stefan,
 
 * ★★★★☆ CSV with a schema
-  Let's continue to make our CSV even more self-describing.
+  Let's continue to make our CSV even more self-describing, by introducing a /schema/ (also called /vocabulary/ on the Web of Data).
 
   * [[file+emacs:4.5star_CSV/schedule.csv][schedule.csv]]
   * [[file+emacs:4.5star_CSV/presenters.csv][presenters.csv]]
