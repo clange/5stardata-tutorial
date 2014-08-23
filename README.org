@@ -216,7 +216,7 @@ head -n 3 4star_CSV/schedule.csv
 
    Let's introduce a domain-specific /vocabulary/.
 
-   Instead of a string ="Keynote"= let's use a self-describing URI:
+   Instead of a string "=Keynote=" let's use a self-describing URI:
 #+NAME: code-csv-vocab-ref
 #+BEGIN_SRC sh :results output verbatim replace :exports results
 fgrep 'vocab/#Keynote' 4.5star_CSV/schedule.csv | head -n 1
@@ -301,7 +301,7 @@ fgrep 'vocab/#Keynote' 4.5star_CSV/schedule-more.csv | head -n 1
 #+END_SRC
 #+RESULTS: code-csv-type-vocab
 : #,Time,Event,Type,Presenter,Location
-: type,dct:time,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,	http://linkedevents.org/ontology/atPlace
+: type,dct:time,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,http://linkedevents.org/ontology/atPlace
 : ,2014-08-25T09:15:00+02:00,Keynote,http://purl.org/wiss2014/vocab/#Keynote,http://purl.org/wiss2014/presenters/#stefan,
 
    * Here, we found reusable terms in standard vocabularies.
@@ -310,6 +310,11 @@ fgrep 'vocab/#Keynote' 4.5star_CSV/schedule-more.csv | head -n 1
 * ★★★★★ RDF (and a comparison to CSV)
   [[http://5stardata.info/#addendum5][Cost and benefits of ★★★★★ Web data]]
 
+  More widely than CSV, the /RDF/ data model is used for linked data.
+
+  Whenever a URI conforms to linked data, you can expect RDF there (usually in the ugly but widely supported RDF/XML encoding).
+  
+  Let's therefore redo our example in RDF, and discuss some differences from CSV.
 * ★★★★★☆ Further possible improvements: standard schemas, quality, …
 
 * Credits
