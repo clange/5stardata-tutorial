@@ -294,19 +294,33 @@ head -n 3 4.5star_CSV/schedule.csv
    
    No! – Let's also reuse some standard vocabularies here!
 
-#+NAME: code-csv-type-vocab
+   * [[file+emacs:4.5star_CSV/schedule-more.csv][schedule-more.csv]]
+   * [[file+emacs:4.5star_CSV/presenters-more.csv][presenters-more.csv]]
+     
+   Schedule:
+#+NAME: code-csv-type-vocab-schedule
 #+BEGIN_SRC sh :results output verbatim replace :exports results
 head -n 2 4.5star_CSV/schedule-more.csv ;
 fgrep 'vocab/#Keynote' 4.5star_CSV/schedule-more.csv | head -n 1
 #+END_SRC
-#+RESULTS: code-csv-type-vocab
+#+RESULTS: code-csv-type-vocab-schedule
 : #,Time,Event,Type,Presenter,Location
 : type,dct:time,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,http://linkedevents.org/ontology/atPlace
 : ,2014-08-25T09:15:00+02:00,Keynote,http://purl.org/wiss2014/vocab/#Keynote,http://purl.org/wiss2014/presenters/#stefan,
 
-   * Here, we found reusable terms in standard vocabularies.
+   Presenters:
+#+NAME: code-csv-type-vocab-presenters
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+head -n 3 4.5star_CSV/presenters-more.csv
+#+END_SRC
+#+RESULTS: code-csv-type-vocab-presenters
+: #,$id,Name,Affiliation,Town,Country
+: type,url,foaf:name,schema:affiliation,http://purl.org/wiss2014/vocab/#town,http://purl.org/wiss2014/vocab/#country
+: ,http://purl.org/wiss2014/presenters/#soeren,Sören Auer,Universität Bonn;Fraunhofer IAIS,Bonn,Germany
+
+   * We found a lot of reusable terms in standard vocabularies.
    * [[http://lov.okfn.org][Linked Open Vocabularies (LOV)]] helps with that.
-   * We could also have pointed to our own vocabulary.
+   * Where didn't find perfectly reusable terms, we defined our own, in /our/ vocabulary.
 * ★★★★★ RDF (and a comparison to CSV)
   [[http://5stardata.info/#addendum5][Cost and benefits of ★★★★★ Web data]]
 

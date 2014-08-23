@@ -6,3 +6,5 @@ url,rdfs:label,rdfs:comment,owl:seeAlso
 #Hackathon,hackathon,an event of intensive collaboration on a software project,http://en.wikipedia.org/wiki/Hackathon
 #Dinner,dinner,evening meal,http://en.wikipedia.org/wiki/Dinner
 #OutdoorEvent,outdoor event,,
+#town,town,the town where someone comes from,
+#country,country,the country where someone comes from,
