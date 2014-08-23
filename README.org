@@ -447,11 +447,20 @@ sed -ne '0,/^$/p' 5star_RDF/data.ttl
 : @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 : 
 
+   This is just syntactic sugar, not part of the RDF data model.
+
    Note that the =rdfs:seeAlso= link points to DBpedia.
 
    DBpedia is a linked dataset extracted from Wikipedia.
-* ★★★★★☆ Further possible improvements: standard schemas, quality, …
+* ★★★★★☆ Further possible improvements
+  Additional stars have been suggested for publishing data …
+  * … that uses standard schemas – we've done this already.
+  * … whose quality has been checked – our group does research on this.
 
+  Also recall that our original use case started from an HTML homepage.  With the following standards it's possible to embed linked data into HTML:
+  * Microformats (very basic)
+  * Microdata (more powerful; emphasizes syntactic conciseness)
+  * RDFa (widest support of the RDF data model) – try it with http://rdfa.info/play/!
 * Credits
   This tutorial is based on an idea by [[http://www.emse.fr/~zimmermann/][Antoine Zimmermann]].  The motivation was to prepare something for the [[http://www.emse.fr/~zimmermann/WI_2014_Site/][2014 Web Intelligence Summer School “Web of Data”]] that's not too heavily biased towards RDF.
 
