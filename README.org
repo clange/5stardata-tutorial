@@ -13,6 +13,7 @@
 #+LINK_HOME:
 #+XSLT:
 #+STYLE: <style type="text/css"> .timestamp { color: purple; font-weight: bold; } </style>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
 
 *Work in Progress – expect more to be here by <2014-08-25 Mon>*
 
@@ -236,7 +237,7 @@ fgrep '#Keynote' 4.5star_CSV/vocab.csv | head -n 1
    The relative URI =#Keynote= works out if this file is published at http://purl.org/wiss2014/vocab/.
 
 ** An explicit description of types
-   1. We introduced ISO 8601 timestamps, but how does a client /know/ that the first column of =schedule.csv= is an ISO 8601 timestamp?
+   We introduced ISO 8601 timestamps, but how does a client /know/ that the first column of =schedule.csv= is an ISO 8601 timestamp?
 #+NAME: code-csv-datatype-implicit
 #+BEGIN_SRC sh :results output verbatim replace :exports results
 head -n 2 4star_CSV/schedule.csv
@@ -245,11 +246,11 @@ head -n 2 4star_CSV/schedule.csv
 : Time,Event,Type,Presenter,Location
 : 2014-08-25T09:00:00+02:00,Introduction,,,
    
-   2. We introduced a vocabulary, but how do we make explicit what we mean by “label”, “description” and “see also”?
+   We also introduced a vocabulary, but how do we make explicit what we mean by “label”, “description” and “see also”?
 
    Let's explicitly indicate the types!
 
-   1. for the timestamps and other entries in the schedule:
+   For the timestamps and other entries in the schedule:
 #+NAME: code-csv-datatype-explicit
 #+BEGIN_SRC sh :results output verbatim replace :exports results
 head -n 3 4.5star_CSV/schedule.csv
@@ -261,7 +262,7 @@ head -n 3 4.5star_CSV/schedule.csv
 
    (We'll get to the structure of the new, first column later.)
 
-   2. for the properties of vocabulary terms:
+   For the properties of vocabulary terms:
 #+NAME: code-csv-vocab-properties
 #+BEGIN_SRC sh :results output verbatim replace :exports results
 head -n 3 4.5star_CSV/vocab.csv
