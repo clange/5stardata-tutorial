@@ -4,7 +4,7 @@
 #+DATE:   <2014-08-21 Thu>
 #+LANGUAGE:  en
 #+STARTUP:   hidestars
-#+OPTIONS:   H:1 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:showall toc:t ltoc:t mouse:underline buttons:t path:org-info.js
 #+EXPORT_SELECT_TAGS: export
@@ -105,10 +105,12 @@ Archive:  3star_OpenDocument/schedule.ods
   * [[file+emacs:3.5star_CSV/schedule.csv][schedule.csv]]
   * [[file+emacs:3.5star_CSV/presenters.csv][presenters.csv]]
   
-* ★★★★ CSV with URIs
+* ★★★★ CSV for the Web
   [[http://5stardata.info/#addendum4][Cost and benefits of ★★★★ Web data]]
 
   From here onwards, [[http://5stardata.info/][the original 5-star open data examples]] use RDF.  We will continue with CSV for a while, to point out that open data on the Web is not /only/ RDF.
+
+  The following examples roughly conform to [[http://jenit.github.io/linked-csv/][Linked CSV]], one of the candidates for an RDF-conforming specification of CSV, as discussed by the [[http://www.w3.org/2013/csvw/][CSV on the Web Working Group]].
 
   * [[file+emacs:4star_CSV/schedule.csv][schedule.csv]]
   * [[file+emacs:4star_CSV/presenters.csv][presenters.csv]]
@@ -203,8 +205,107 @@ head -n 3 4star_CSV/schedule.csv
 : 2014-08-25T09:00:00+02:00,Introduction,,,
 : 2014-08-25T09:15:00+02:00,Keynote,Keynote,http://purl.org/wiss2014/presenters/#stefan,
 
-* ★★★★☆ CSV with URIs, schema and links
+* ★★★★☆ CSV with a schema
+  Let's continue to make our CSV even more self-describing.
 
+  * [[file+emacs:4.5star_CSV/schedule.csv][schedule.csv]]
+  * [[file+emacs:4.5star_CSV/presenters.csv][presenters.csv]]
+** A vocabulary of domain-specific concepts
+   We introduced linked data style URIs for the presenters (so that they describe themselves); let's also do it for other concepts, e.g. the types of presentations.
+
+   Let's introduce a domain-specific /vocabulary/.
+
+   Instead of a string ="Keynote"= let's use a self-describing URI:
+#+NAME: code-csv-vocab-ref
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+fgrep 'vocab/#Keynote' 4.5star_CSV/schedule.csv | head -n 1
+#+END_SRC
+#+RESULTS: code-csv-vocab-ref
+: ,2014-08-25T09:15:00+02:00,Keynote,http://purl.org/wiss2014/vocab/#Keynote,http://purl.org/wiss2014/presenters/#stefan,
+
+   And let's create another CSV file for the vocabulary, where we define our terms:
+#+NAME: code-csv-vocab-def
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+head -n 1 4.5star_CSV/vocab.csv ;
+fgrep '#Keynote' 4.5star_CSV/vocab.csv | head -n 1
+#+END_SRC
+#+RESULTS: code-csv-vocab-def
+: $id,label,description,see also
+: #Keynote,keynote,a talk that establishes a theme,http://en.wikipedia.org/wiki/Keynote
+
+   The relative URI =#Keynote= works out if this file is published at http://purl.org/wiss2014/vocab/.
+
+** An explicit description of types
+   1. We introduced ISO 8601 timestamps, but how does a client /know/ that the first column of =schedule.csv= is an ISO 8601 timestamp?
+#+NAME: code-csv-datatype-implicit
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+head -n 2 4star_CSV/schedule.csv
+#+END_SRC
+#+RESULTS: code-csv-datatype-implicit
+: Time,Event,Type,Presenter,Location
+: 2014-08-25T09:00:00+02:00,Introduction,,,
+   
+   2. We introduced a vocabulary, but how do we make explicit what we mean by “label”, “description” and “see also”?
+
+   Let's explicitly indicate the types!
+
+   1. for the timestamps and other entries in the schedule:
+#+NAME: code-csv-datatype-explicit
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+head -n 3 4.5star_CSV/schedule.csv
+#+END_SRC
+#+RESULTS: code-csv-datatype-explicit
+: #,Time,Event,Type,Presenter,Location
+: type,time,string,url,url,string
+: ,2014-08-25T09:00:00+02:00,Introduction,,,
+
+   (We'll get to the structure of the new, first column later.)
+
+   2. for the properties of vocabulary terms:
+#+NAME: code-csv-vocab-properties
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+head -n 3 4.5star_CSV/vocab.csv
+#+END_SRC
+#+RESULTS: code-csv-vocab-properties
+: $id,label,description,see also
+: url,rdfs:label,rdfs:comment,owl:seeAlso
+: #Keynote,keynote,a talk that establishes a theme,http://en.wikipedia.org/wiki/Keynote
+
+   =rdfs:= and =owl:= are well-known prefixes that abbreviate URIs.  =rdfs:label= (actually: http://www.w3.org/2000/01/rdf-schema#label) once more is a vocabulary term, in a widely used standard vocabulary.  Its =rdfs:comment= is “A human-readable name for the subject.”.
+** Distinguishing data and metadata
+   When a CSV has a type declaration rows such as =url,rdfs:label,rdfs:comment,owl:seeAlso=, how do we know that this is metadata rather than data?
+
+   Let's make it explicit!
+
+#+NAME: code-csv-datatype-explicit
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+head -n 3 4.5star_CSV/schedule.csv
+#+END_SRC
+#+RESULTS: code-csv-datatype-explicit
+: #,Time,Event,Type,Presenter,Location
+: ,2014-08-25T09:00:00+02:00,Introduction,,,
+
+   * When the first column has a =type= entry, we are in the type declaration row.
+   * An empty first column means “data”.
+** More precise types for data columns
+   * Is the title of an event really just a string?
+   * Is the presenter really just a URI (that happens to point to a presenter)?
+   
+   No! – Let's also reuse some standard vocabularies here!
+
+#+NAME: code-csv-type-vocab
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+head -n 2 4.5star_CSV/schedule-more.csv ;
+fgrep 'vocab/#Keynote' 4.5star_CSV/schedule-more.csv | head -n 1
+#+END_SRC
+#+RESULTS: code-csv-type-vocab
+: #,Time,Event,Type,Presenter,Location
+: type,dct:time,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,	http://linkedevents.org/ontology/atPlace
+: ,2014-08-25T09:15:00+02:00,Keynote,http://purl.org/wiss2014/vocab/#Keynote,http://purl.org/wiss2014/presenters/#stefan,
+
+   * Here, we found reusable terms in standard vocabularies.
+   * [[http://lov.okfn.org][Linked Open Vocabularies (LOV)]] helps with that.
+   * We could also have pointed to our own vocabulary.
 * ★★★★★ RDF (and a comparison to CSV)
   [[http://5stardata.info/#addendum5][Cost and benefits of ★★★★★ Web data]]
 

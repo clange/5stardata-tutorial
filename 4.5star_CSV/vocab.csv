@@ -1,0 +1,8 @@
+$id,label,description,see also
+url,rdfs:label,rdfs:comment,owl:seeAlso
+#Keynote,keynote,a talk that establishes a theme,http://en.wikipedia.org/wiki/Keynote
+#CoffeeBreak,coffee break,,
+#Tutorial,tutorial,"an interactive method of transferring knowledge, teaching by example",http://en.wikipedia.org/wiki/Tutorial
+#Hackathon,hackathon,an event of intensive collaboration on a software project,http://en.wikipedia.org/wiki/Hackathon
+#Dinner,dinner,evening meal,http://en.wikipedia.org/wiki/Dinner
+#OutdoorEvent,outdoor event,,
