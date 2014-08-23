@@ -1,5 +1,5 @@
 #,Time,Event,Type,Presenter,Location
-type,dct:time,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,http://linkedevents.org/ontology/atPlace
+type,dct:time,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,schema:location
 ,2014-08-25T09:00:00+02:00,Introduction,,,
 ,2014-08-25T09:15:00+02:00,Keynote,http://purl.org/wiss2014/vocab/#Keynote,http://purl.org/wiss2014/presenters/#stefan,
 ,2014-08-25T10:15:00+02:00,Coffee break,http://purl.org/wiss2014/vocab/#CoffeeBreak,,
