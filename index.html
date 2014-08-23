@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Tutorial on publishing 5-star open data</title>
-<!-- 2014-08-23 Sat 22:53 -->
+<!-- 2014-08-24 Sun 00:01 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Christoph Lange" />
@@ -205,6 +205,48 @@ for the JavaScript code in this tag.
    if(elem.cacheClassTarget)
      target.className = elem.cacheClassTarget;
  }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
 /*]]>*///-->
 </script>
 </head>
@@ -558,7 +600,7 @@ Let's introduce a domain-specific <i>vocabulary</i>.
 </p>
 
 <p>
-Instead of a string ="Keynote"= let's use a self-describing URI:
+Instead of a string "<code>Keynote</code>" let's use a self-describing URI:
 </p>
 <pre class="example">
 ,2014-08-25T09:15:00+02:00,Keynote,http://purl.org/wiss2014/vocab/#Keynote,http://purl.org/wiss2014/presenters/#stefan,
@@ -620,7 +662,7 @@ url,rdfs:label,rdfs:comment,owl:seeAlso
 </pre>
 
 <p>
-<code>rdfs:</code> and <code>owl:</code> are well-known prefixes that abbreviate URIs.  <code>rdfs:label</code> (actually: <a href="http://www.w3.org/2000/01/rdf-schema#label">http://www.w3.org/2000/01/rdf-schema#label</a>) once more is a vocabulary term, in a widely used standard vocabulary.  Its <code>rdfs:comment</code> is “A human-readable name for the subject.”.
+<code>rdfs:</code> is a well-known prefix that abbreviates a URI.  <code>rdfs:label</code> (actually: <a href="http://www.w3.org/2000/01/rdf-schema#label">http://www.w3.org/2000/01/rdf-schema#label</a>) once more is a vocabulary term, in a widely used standard vocabulary.  Its <code>rdfs:comment</code> is “A human-readable name for the subject.”.
 </p>
 </div>
 </div>
@@ -662,18 +704,37 @@ Let's make it explicit!
 No! – Let's also reuse some standard vocabularies here!
 </p>
 
+<ul class="org-ul">
+<li><a href="4.5star_CSV/schedule-more.csv">schedule-more.csv</a>
+</li>
+<li><a href="4.5star_CSV/presenters-more.csv">presenters-more.csv</a>
+</li>
+</ul>
+
+<p>
+Schedule:
+</p>
 <pre class="example">
 #,Time,Event,Type,Presenter,Location
-type,dct:time,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,     http://linkedevents.org/ontology/atPlace
+type,dct:time,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,http://linkedevents.org/ontology/atPlace
 ,2014-08-25T09:15:00+02:00,Keynote,http://purl.org/wiss2014/vocab/#Keynote,http://purl.org/wiss2014/presenters/#stefan,
 </pre>
 
+<p>
+Presenters:
+</p>
+<pre class="example">
+#,$id,Name,Affiliation,Town,Country
+type,url,foaf:name,schema:affiliation,http://purl.org/wiss2014/vocab/#town,http://purl.org/wiss2014/vocab/#country
+,http://purl.org/wiss2014/presenters/#soeren,Sören Auer,Universität Bonn;Fraunhofer IAIS,Bonn,Germany
+</pre>
+
 <ul class="org-ul">
-<li>Here, we found reusable terms in standard vocabularies.
+<li>We found a lot of reusable terms in standard vocabularies.
 </li>
 <li><a href="http://lov.okfn.org">Linked Open Vocabularies (LOV)</a> helps with that.
 </li>
-<li>We could also have pointed to our own vocabulary.
+<li>Where didn't find perfectly reusable terms, we defined our own, in <i>our</i> vocabulary.
 </li>
 </ul>
 </div>
@@ -685,9 +746,140 @@ type,dct:time,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,     
 <p>
 <a href="http://5stardata.info/#addendum5">Cost and benefits of ★★★★★ Web data</a>
 </p>
-</div>
-</div>
 
+<p>
+More widely than CSV, the <i>RDF</i> data model is used for linked data.
+</p>
+
+<p>
+Whenever a URI conforms to linked data, you can expect RDF there (usually in the ugly but widely supported RDF/XML encoding).
+</p>
+
+<p>
+Let's therefore redo our example in RDF, and discuss some differences from CSV.
+</p>
+
+<ul class="org-ul">
+<li><a href="5star_RDF/data.ttl">data.ttl</a> (Turtle, human-friendly)
+</li>
+<li><a href="5star_RDF/data.rdf">data.rdf</a> (RDF/XML, widely understood by machines)
+</li>
+</ul>
+
+<pre class="example">
+&lt;#day1intro&gt;
+        dct:time "2014-08-25T09:00:00+02:00"^^xsd:date ;
+        dct:title "Introduction" .
+</pre>
+
+<p>
+CSV is based on records (one per row, with a fixed number of columns).
+</p>
+
+<p>
+RDF is based on triples (subject–predicate–object).
+</p>
+
+<p>
+Usually more than one triple belongs to a subject (“resource”), which is why it's convenient to group them.
+</p>
+
+<p>
+Every resource needs to have an identifier.  (In the CSV, our events didn't have any.)
+</p>
+
+<p>
+You can precisely indicate the datatype of an object, but you also <i>have</i> to do it always.
+</p>
+
+<pre class="example">
+&lt;#day1keynote&gt;
+        a wv:Keynote ;
+        dct:time "2014-08-25T09:15:00+02:00"^^xsd:date ;
+        dct:title "Keynote" ;
+        marcrel:pre &lt;http://purl.org/wiss2014/presenters/#stefan&gt; .
+</pre>
+
+<p>
+It's no problem for resources to have different number of properties.
+</p>
+
+<p>
+Compare sparsely populated CSV:
+</p>
+<pre class="example">
+#,Time,Event,Type,Presenter,Location
+type,dct:time,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,schema:location
+,2014-08-25T09:00:00+02:00,Introduction,,,
+</pre>
+
+<p>
+On the other hand, the CSV data model has an order, which RDF does not have.
+</p>
+
+<p>
+Also, \(n\)-ary structures are much harder to represent in RDF.
+</p>
+
+<p>
+For one subject and predicate, there can be multiple objects.  In the CSV we had to cheat:
+</p>
+
+<pre class="example">
+,2014-08-26T18:00:00+02:00,Hackathon dinner,http://purl.org/wiss2014/vocab/#Dinner;http://purl.org/wiss2014/vocab/#Hackathon,,Maison des Élèves
+</pre>
+
+<p>
+In RDF, that's no problem:
+</p>
+
+<pre class="example">
+&lt;#day2hackathondinner&gt;
+        rdf:type wv:Dinner, wv:Hackathon ;
+        dct:time "2014-08-26T18:00:00+02:00"^^xsd:date ;
+        dct:title "Hackathon dinner" ;
+        schema:location "Maison des Élèves" .
+
+&lt;http://purl.org/wiss2014/presenters/#stefan&gt;
+        foaf:name "Stefan Decker" ;
+        schema:affiliation "INSIGHT", "National University of Ireland" ;
+        wv:town "Galway" ;
+        wv:country "Ireland" .
+</pre>
+
+<p>
+Vocabulary definitions are no problem in RDF either:
+</p>
+<pre class="example">
+wv:Hackathon
+        rdfs:label "hackathon" ;
+        rdfs:comment "an event of intensive collaboration on a software project" ;
+        rdfs:seeAlso &lt;http://dbpedia.org/resource/Hackathon&gt; .
+</pre>
+
+<p>
+Here, we introduced a custom prefix to abbreviate the URI of our vocabulary.  Here's how prefixes work:
+</p>
+<pre class="example">
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+@prefix marcrel: &lt;http://id.loc.gov/vocabulary/relators/&gt; .
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix schema: &lt;http://schema.org/&gt; .
+@prefix wv: &lt;http://purl.org/wiss2014/vocab/#&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+</pre>
+
+<p>
+Note that the <code>rdfs:seeAlso</code> link points to DBpedia.
+</p>
+
+<p>
+DBpedia is a linked dataset extracted from Wikipedia.
+</p>
+</div>
+</div>
 <div id="outline-container-sec-9" class="outline-2">
 <h2 id="sec-9"><span class="section-number-2">9</span> ★★★★★☆ Further possible improvements: standard schemas, quality, …</h2>
 </div>
@@ -714,7 +906,7 @@ This tutorial is based on an idea by <a href="http://www.emse.fr/~zimmermann/">A
 <div id="postamble" class="status">
 <p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-08-21 Thu&gt;</span></span></p>
 <p class="author">Author: Christoph Lange</p>
-<p class="date">Created: 2014-08-23 Sat 22:53</p>
+<p class="date">Created: 2014-08-24 Sun 00:01</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
