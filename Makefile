@@ -11,7 +11,9 @@ DEMO_FILES = 1star_PDF/schedule.pdf \
 	4.5star_CSV/presenters.csv \
 	4.5star_CSV/schedule-more.csv \
 	4.5star_CSV/schedule.csv \
-	4.5star_CSV/vocab.csv
+	4.5star_CSV/vocab.csv \
+	5star_RDF/data.rdf \
+	5star_RDF/data.ttl 
 
 .sync: $(HOMEPAGE)/.sync $(HOMEPAGE)/index.html
 	(cd $(HOMEPAGE) ; \
@@ -30,6 +32,9 @@ $(HOMEPAGE)/.sync: $(DEMO_FILES) $(SYNC_FILES)
 
 # 3.5star_CSV/schedule.csv: 3star_OpenDocument/schedule.ods
 # 	soffice --headless --convert-to csv --outdir "$$(dirname "$@")" "$<"
+
+%.rdf: %.ttl
+	rapper -i turtle -o rdfxml-abbrev $< > $@
 
 $(HOMEPAGE)/index.html: README.org
 	emacs --batch \

@@ -272,7 +272,7 @@ head -n 3 4.5star_CSV/vocab.csv
 : url,rdfs:label,rdfs:comment,owl:seeAlso
 : #Keynote,keynote,a talk that establishes a theme,http://en.wikipedia.org/wiki/Keynote
 
-   =rdfs:= and =owl:= are well-known prefixes that abbreviate URIs.  =rdfs:label= (actually: http://www.w3.org/2000/01/rdf-schema#label) once more is a vocabulary term, in a widely used standard vocabulary.  Its =rdfs:comment= is “A human-readable name for the subject.”.
+   =rdfs:= is a well-known prefix that abbreviates a URI.  =rdfs:label= (actually: http://www.w3.org/2000/01/rdf-schema#label) once more is a vocabulary term, in a widely used standard vocabulary.  Its =rdfs:comment= is “A human-readable name for the subject.”.
 ** Distinguishing data and metadata
    When a CSV has a type declaration rows such as =url,rdfs:label,rdfs:comment,owl:seeAlso=, how do we know that this is metadata rather than data?
 
@@ -329,6 +329,125 @@ head -n 3 4.5star_CSV/presenters-more.csv
   Whenever a URI conforms to linked data, you can expect RDF there (usually in the ugly but widely supported RDF/XML encoding).
   
   Let's therefore redo our example in RDF, and discuss some differences from CSV.
+
+  * [[file+emacs:5star_RDF/data.ttl][data.ttl]] (Turtle, human-friendly)
+  * [[file+emacs:5star_RDF/data.rdf][data.rdf]] (RDF/XML, widely understood by machines)
+
+#+NAME: code-rdf-start
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+grep -A 2 '^<#day1intro>' 5star_RDF/data.ttl
+#+END_SRC
+
+#+RESULTS: code-rdf-start
+: <#day1intro>
+:         dct:time "2014-08-25T09:00:00+02:00"^^xsd:date ;
+:         dct:title "Introduction" .
+
+   CSV is based on records (one per row, with a fixed number of columns).
+
+   RDF is based on triples (subject–predicate–object).
+
+   Usually more than one triple belongs to a subject (“resource”), which is why it's convenient to group them.
+
+   Every resource needs to have an identifier.  (In the CSV, our events didn't have any.)
+
+   You can precisely indicate the datatype of an object, but you also /have/ to do it always.
+   
+#+NAME: code-rdf-more
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+grep -A 4 '^<#day1keynote>' 5star_RDF/data.ttl
+#+END_SRC
+
+#+RESULTS: code-rdf-more
+: <#day1keynote>
+:         a wv:Keynote ;
+:         dct:time "2014-08-25T09:15:00+02:00"^^xsd:date ;
+:         dct:title "Keynote" ;
+:         marcrel:pre <http://purl.org/wiss2014/presenters/#stefan> .
+
+   It's no problem for resources to have different number of properties.
+
+   Compare sparsely populated CSV:
+#+NAME: code-csv-sparse
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+head -n 3 4.5star_CSV/schedule-more.csv
+#+END_SRC
+
+#+RESULTS: code-csv-sparse
+: #,Time,Event,Type,Presenter,Location
+: type,dct:time,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,schema:location
+: ,2014-08-25T09:00:00+02:00,Introduction,,,
+
+   On the other hand, the CSV data model has an order, which RDF does not have.
+
+   Also, $n$-ary structures are much harder to represent in RDF.
+
+   For one subject and predicate, there can be multiple objects.  In the CSV we had to cheat:
+
+#+NAME: code-csv-multi-object
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+fgrep ';http://' 4.5star_CSV/schedule-more.csv | head -n 1
+#+END_SRC
+
+#+RESULTS: code-csv-multi-object
+: ,2014-08-26T18:00:00+02:00,Hackathon dinner,http://purl.org/wiss2014/vocab/#Dinner;http://purl.org/wiss2014/vocab/#Hackathon,,Maison des Élèves
+
+   In RDF, that's no problem:
+
+#+NAME: code-rdf-multi-object
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+grep -A 4 '^<#day2hackathondinner>' 5star_RDF/data.ttl ;
+echo ;
+grep -A 4 '^<http://purl.org/wiss2014/presenters/#stefan>' 5star_RDF/data.ttl ;
+#+END_SRC
+
+#+RESULTS: code-rdf-multi-object
+#+begin_example
+<#day2hackathondinner>
+        rdf:type wv:Dinner, wv:Hackathon ;
+        dct:time "2014-08-26T18:00:00+02:00"^^xsd:date ;
+        dct:title "Hackathon dinner" ;
+        schema:location "Maison des Élèves" .
+
+<http://purl.org/wiss2014/presenters/#stefan>
+        foaf:name "Stefan Decker" ;
+        schema:affiliation "INSIGHT", "National University of Ireland" ;
+        wv:town "Galway" ;
+        wv:country "Ireland" .
+#+end_example
+
+   Vocabulary definitions are no problem in RDF either:
+#+NAME: code-rdf-vocab
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+grep -A 3 '^wv:Hackathon' 5star_RDF/data.ttl
+#+END_SRC
+
+#+RESULTS: code-rdf-vocab
+: wv:Hackathon
+:         rdfs:label "hackathon" ;
+:         rdfs:comment "an event of intensive collaboration on a software project" ;
+:         rdfs:seeAlso <http://dbpedia.org/resource/Hackathon> .
+
+   Here, we introduced a custom prefix to abbreviate the URI of our vocabulary.  Here's how prefixes work:
+#+NAME: code-rdf-prefix
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+sed -ne '0,/^$/p' 5star_RDF/data.ttl
+#+END_SRC
+
+#+RESULTS: code-rdf-prefix
+: @prefix dct: <http://purl.org/dc/terms/> .
+: @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+: @prefix marcrel: <http://id.loc.gov/vocabulary/relators/> .
+: @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+: @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+: @prefix schema: <http://schema.org/> .
+: @prefix wv: <http://purl.org/wiss2014/vocab/#> .
+: @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+: 
+
+   Note that the =rdfs:seeAlso= link points to DBpedia.
+
+   DBpedia is a linked dataset extracted from Wikipedia.
 * ★★★★★☆ Further possible improvements: standard schemas, quality, …
 
 * Credits

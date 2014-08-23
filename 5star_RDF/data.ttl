@@ -1,0 +1,54 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix marcrel: <http://id.loc.gov/vocabulary/relators/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix wv: <http://purl.org/wiss2014/vocab/#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<#day1intro>
+        dct:time "2014-08-25T09:00:00+02:00"^^xsd:date ;
+        dct:title "Introduction" .
+
+<#day1keynote>
+        rdf:type wv:Keynote ;
+        dct:time "2014-08-25T09:15:00+02:00"^^xsd:date ;
+        dct:title "Keynote" ;
+        marcrel:pre <http://purl.org/wiss2014/presenters/#stefan> .
+
+<#day2hackathondinner>
+        rdf:type wv:Dinner, wv:Hackathon ;
+        dct:time "2014-08-26T18:00:00+02:00"^^xsd:date ;
+        dct:title "Hackathon dinner" ;
+        schema:location "Maison des Élèves" .
+
+<http://purl.org/wiss2014/presenters/#stefan>
+        foaf:name "Stefan Decker" ;
+        schema:affiliation "INSIGHT", "National University of Ireland" ;
+        wv:town "Galway" ;
+        wv:country "Ireland" .
+
+
+wv:Keynote
+        rdfs:label "keynote" ;
+        rdfs:comment "a talk that establishes a theme" ;
+        rdfs:seeAlso <http://dbpedia.org/resource/Keynote> .
+
+wv:Dinner
+        rdfs:label "dinner" ;
+        rdfs:comment "evening meal" ;
+        rdfs:seeAlso <http://dbpedia.org/resource/Dinner> .
+
+wv:Hackathon
+        rdfs:label "hackathon" ;
+        rdfs:comment "an event of intensive collaboration on a software project" ;
+        rdfs:seeAlso <http://dbpedia.org/resource/Hackathon> .
+
+wv:town
+        rdfs:label "town" ;
+        rdfs:comment "the town where someone comes from" .
+
+wv:country
+        rdfs:label "country" ;
+        rdfs:comment "the country where someone comes from" .
