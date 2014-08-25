@@ -1,7 +1,7 @@
 #+TITLE:  Tutorial on publishing 5-star open data
 #+AUTHOR: Christoph Lange
 #+EMAIL:  math.semantic.web@gmail.com
-#+DATE:   <2014-08-21 Thu>
+#+DATE:   <2014-08-25 Mon>
 #+LANGUAGE:  en
 #+STARTUP:   hidestars
 #+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
@@ -15,9 +15,9 @@
 #+STYLE: <style type="text/css"> .timestamp { color: purple; font-weight: bold; } </style>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
 
-*Work in Progress – expect more to be here by <2014-08-25 Mon>*
-
-Practical examples of how to create and publish [[http://5stardata.info][5-star open data]] on the Web; originally written for the [[http://www.emse.fr/~zimmermann/WI_2014_Site/][2014 Web Intelligence Summer School “Web of Data”]].
+Practical examples of how to create and publish [[http://5stardata.info][5-star open data]] on the Web; originally written for the [[http://www.emse.fr/~zimmermann/WI_2014_Site/][2014 Web Intelligence Summer School “Web of Data”]] supported by \\
+#+ATTR_HTML: :alt Université franco-allemande / Deutsch-Französische Hochschule
+  [[file:images/ufa.png]]
 
 Published online at http://clange.github.io/5stardata-tutorial/
 
@@ -27,11 +27,11 @@ Published online at http://clange.github.io/5stardata-tutorial/
 * ★ PDF
   [[http://5stardata.info/#addendum1][Cost and benefits of ★ Web data]]
 
-  [[file:1star_PDF/schedule.pdf][schedule.pdf]]
+  [[file+sys:1star_PDF/schedule.pdf][schedule.pdf]]
 * ★★ Excel (*.xls)
   [[http://5stardata.info/#addendum2][Cost and benefits of ★★ Web data]]
   
-  [[file:2star_Excel/schedule.xls][schedule.xls]]
+  [[file+sys:2star_Excel/schedule.xls][schedule.xls]]
 
   It is not impossible to read this file outside of Excel:
 #+NAME: code-process-xls
@@ -68,7 +68,7 @@ file 2star_Excel/schedule.xls
 * ★★★ OpenDocument (*.ods)
   [[http://5stardata.info/#addendum3][Cost and benefits of ★★★ Web data]]
 
-  [[file:1star_PDF/schedule.pdf][schedule.ods]]
+  [[file+sys:1star_PDF/schedule.pdf][schedule.ods]]
 
   Shell command:
 #+NAME: code-unzip-ods
@@ -155,12 +155,12 @@ fgrep "#markus" 4star_CSV/presenters.csv ;
 #+RESULTS: code-csv-id-after
 : Time,Event,Type,Presenter,Location
 : ...
-: 2014-08-27T09:00:00+02:00,Wikidata,Keynote,http://purl.org/wiss2014/presenters/#markus,
-: 2014-08-27T10:15:00+02:00,Working with Wikidata: A Hands-on Guide for Researchers and Developers,Tutorial,http://purl.org/wiss2014/presenters/#markus,
+: 2014-08-27T09:00:00+02:00,Wikidata,Keynote,http://purl.org/net/wiss2014/presenters/#markus,
+: 2014-08-27T10:15:00+02:00,Working with Wikidata: A Hands-on Guide for Researchers and Developers,Tutorial,http://purl.org/net/wiss2014/presenters/#markus,
 : 
 : $id,Name,Affiliation,Town,Country
 : ...
-: http://purl.org/wiss2014/presenters/#markus,Markus Krötzsch,TU Dresden,Dresden,Germany
+: http://purl.org/net/wiss2014/presenters/#markus,Markus Krötzsch,TU Dresden,Dresden,Germany
 
    (The timestamp format has also changed; we'll discuss this [[id:2e724ba4-6b8b-4bbc-bdf8-60f07e223620][next]].)
 
@@ -204,7 +204,7 @@ head -n 3 4star_CSV/schedule.csv
 #+RESULTS: code-csv-datatype-after
 : Time,Event,Type,Presenter,Location
 : 2014-08-25T09:00:00+02:00,Introduction,,,
-: 2014-08-25T09:15:00+02:00,Keynote,Keynote,http://purl.org/wiss2014/presenters/#stefan,
+: 2014-08-25T09:15:00+02:00,Keynote,Keynote,http://purl.org/net/wiss2014/presenters/#stefan,
 
 * ★★★★☆ CSV with a schema
   Let's continue to make our CSV even more self-describing, by introducing a /schema/ (also called /vocabulary/ on the Web of Data).
@@ -222,7 +222,7 @@ head -n 3 4star_CSV/schedule.csv
 fgrep 'vocab/#Keynote' 4.5star_CSV/schedule.csv | head -n 1
 #+END_SRC
 #+RESULTS: code-csv-vocab-ref
-: ,2014-08-25T09:15:00+02:00,Keynote,http://purl.org/wiss2014/vocab/#Keynote,http://purl.org/wiss2014/presenters/#stefan,
+: ,2014-08-25T09:15:00+02:00,Keynote,http://purl.org/net/wiss2014/vocab/#Keynote,http://purl.org/net/wiss2014/presenters/#stefan,
 
    And let's create another CSV file for the vocabulary, where we define our terms:
 #+NAME: code-csv-vocab-def
@@ -234,7 +234,7 @@ fgrep '#Keynote' 4.5star_CSV/vocab.csv | head -n 1
 : $id,label,description,see also
 : #Keynote,keynote,a talk that establishes a theme,http://en.wikipedia.org/wiki/Keynote
 
-   The relative URI =#Keynote= works out if this file is published at http://purl.org/wiss2014/vocab/.
+   The relative URI =#Keynote= works out if this file is published at http://purl.org/net/wiss2014/vocab/.
 
 ** An explicit description of types
    We introduced ISO 8601 timestamps, but how does a client /know/ that the first column of =schedule.csv= is an ISO 8601 timestamp?
@@ -306,7 +306,7 @@ fgrep 'vocab/#Keynote' 4.5star_CSV/schedule-more.csv | head -n 1
 #+RESULTS: code-csv-type-vocab-schedule
 : #,Time,Event,Type,Presenter,Location
 : type,dct:time,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,http://linkedevents.org/ontology/atPlace
-: ,2014-08-25T09:15:00+02:00,Keynote,http://purl.org/wiss2014/vocab/#Keynote,http://purl.org/wiss2014/presenters/#stefan,
+: ,2014-08-25T09:15:00+02:00,Keynote,http://purl.org/net/wiss2014/vocab/#Keynote,http://purl.org/net/wiss2014/presenters/#stefan,
 
    Presenters:
 #+NAME: code-csv-type-vocab-presenters
@@ -315,8 +315,8 @@ head -n 3 4.5star_CSV/presenters-more.csv
 #+END_SRC
 #+RESULTS: code-csv-type-vocab-presenters
 : #,$id,Name,Affiliation,Town,Country
-: type,url,foaf:name,schema:affiliation,http://purl.org/wiss2014/vocab/#town,http://purl.org/wiss2014/vocab/#country
-: ,http://purl.org/wiss2014/presenters/#soeren,Sören Auer,Universität Bonn;Fraunhofer IAIS,Bonn,Germany
+: type,url,foaf:name,schema:affiliation,http://purl.org/net/wiss2014/vocab/#town,http://purl.org/net/wiss2014/vocab/#country
+: ,http://purl.org/net/wiss2014/presenters/#soeren,Sören Auer,Universität Bonn;Fraunhofer IAIS,Bonn,Germany
 
    * We found a lot of reusable terms in standard vocabularies.
    * [[http://lov.okfn.org][Linked Open Vocabularies (LOV)]] helps with that.
@@ -363,7 +363,7 @@ grep -A 4 '^<#day1keynote>' 5star_RDF/data.ttl
 :         a wv:Keynote ;
 :         dct:time "2014-08-25T09:15:00+02:00"^^xsd:date ;
 :         dct:title "Keynote" ;
-:         marcrel:pre <http://purl.org/wiss2014/presenters/#stefan> .
+:         marcrel:pre <http://purl.org/net/wiss2014/presenters/#stefan> .
 
    It's no problem for resources to have different number of properties.
 
@@ -391,8 +391,8 @@ grep '.*#stefan.*;' 4.5star_CSV/presenters-more.csv | head -n 1
 #+END_SRC
 
 #+RESULTS: code-csv-multi-object
-: ,2014-08-26T18:00:00+02:00,Hackathon dinner,http://purl.org/wiss2014/vocab/#Dinner;http://purl.org/wiss2014/vocab/#Hackathon,,Maison des Élèves
-: ,http://purl.org/wiss2014/presenters/#stefan,Stefan Decker,INSIGHT;National University of Ireland,Galway,Ireland
+: ,2014-08-26T18:00:00+02:00,Hackathon dinner,http://purl.org/net/wiss2014/vocab/#Dinner;http://purl.org/net/wiss2014/vocab/#Hackathon,,Maison des Élèves
+: ,http://purl.org/net/wiss2014/presenters/#stefan,Stefan Decker,INSIGHT;National University of Ireland,Galway,Ireland
 
    In RDF, that's no problem:
 
@@ -400,7 +400,7 @@ grep '.*#stefan.*;' 4.5star_CSV/presenters-more.csv | head -n 1
 #+BEGIN_SRC sh :results output verbatim replace :exports results
 grep -A 4 '^<#day2hackathondinner>' 5star_RDF/data.ttl ;
 echo ;
-grep -A 4 '^<http://purl.org/wiss2014/presenters/#stefan>' 5star_RDF/data.ttl ;
+grep -A 4 '^<http://purl.org/net/wiss2014/presenters/#stefan>' 5star_RDF/data.ttl ;
 #+END_SRC
 
 #+RESULTS: code-rdf-multi-object
@@ -411,7 +411,7 @@ grep -A 4 '^<http://purl.org/wiss2014/presenters/#stefan>' 5star_RDF/data.ttl ;
         dct:title "Hackathon dinner" ;
         schema:location "Maison des Élèves" .
 
-<http://purl.org/wiss2014/presenters/#stefan>
+<http://purl.org/net/wiss2014/presenters/#stefan>
         foaf:name "Stefan Decker" ;
         schema:affiliation "INSIGHT", "National University of Ireland" ;
         wv:town "Galway" ;
@@ -433,7 +433,7 @@ grep -A 3 '^wv:Hackathon' 5star_RDF/data.ttl
    Here, we introduced a custom prefix to abbreviate the URI of our vocabulary.  Here's how prefixes work:
 #+NAME: code-rdf-prefix
 #+BEGIN_SRC sh :results output verbatim replace :exports results
-sed -ne '0,/^$/p' 5star_RDF/data.ttl
+sed -ne '/@prefix/,/^$/p' 5star_RDF/data.ttl
 #+END_SRC
 
 #+RESULTS: code-rdf-prefix
@@ -443,7 +443,7 @@ sed -ne '0,/^$/p' 5star_RDF/data.ttl
 : @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 : @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 : @prefix schema: <http://schema.org/> .
-: @prefix wv: <http://purl.org/wiss2014/vocab/#> .
+: @prefix wv: <http://purl.org/net/wiss2014/vocab/#> .
 : @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 : 
 
@@ -464,6 +464,9 @@ sed -ne '0,/^$/p' 5star_RDF/data.ttl
 * Credits
   This tutorial is based on an idea by [[http://www.emse.fr/~zimmermann/][Antoine Zimmermann]].  The motivation was to prepare something for the [[http://www.emse.fr/~zimmermann/WI_2014_Site/][2014 Web Intelligence Summer School “Web of Data”]] that's not too heavily biased towards RDF.
 
+  This summer school was funded by\\
+#+ATTR_HTML: :alt Université franco-allemande / Deutsch-Französische Hochschule
+  [[file:images/ufa.png]]
 * License
   [[https://i.creativecommons.org/l/by-sa/4.0/88x31.png]]\\
   This work is licensed under a [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Commons Attribution-ShareAlike 4.0 International License]].
