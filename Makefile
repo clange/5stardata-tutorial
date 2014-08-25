@@ -1,5 +1,5 @@
 HOMEPAGE = homepage
-SYNC_FILES = org-info.js bootstrap.min.css
+SYNC_FILES = org-info.js bootstrap.min.css images
 DEMO_FILES = 1star_PDF/schedule.pdf \
 	2star_Excel/schedule.xls \
 	3star_OpenDocument/schedule.ods \
