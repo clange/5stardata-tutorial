@@ -1,4 +1,4 @@
-#+TITLE:  Tutorial on publishing 5-star open data
+#+TITLE:  Publishing 5-star Open Data
 #+AUTHOR: Christoph Lange
 #+EMAIL:  math.semantic.web@gmail.com
 #+DATE:   <2014-08-25 Mon>
@@ -15,7 +15,7 @@
 #+STYLE: <style type="text/css"> .timestamp { color: purple; font-weight: bold; } </style>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
 
-Practical examples of how to create and publish [[http://5stardata.info][5-star open data]] on the Web; originally written for the [[http://www.emse.fr/~zimmermann/WI_2014_Site/][2014 Web Intelligence Summer School “Web of Data”]] supported by \\
+A tutorial with practical examples of how to create and publish [[http://5stardata.info][5-star open data]] on the Web; originally written for the [[http://www.emse.fr/~zimmermann/WI_2014_Site/][2014 Web Intelligence Summer School “Web of Data”]] supported by \\
 #+ATTR_HTML: :alt Université franco-allemande / Deutsch-Französische Hochschule
   [[file:images/ufa.png]]
 
@@ -473,6 +473,19 @@ sed -ne '/@prefix/,/^$/p' 5star_RDF/data.ttl
   This summer school was funded by\\
 #+ATTR_HTML: :alt Université franco-allemande / Deutsch-Französische Hochschule
   [[file:images/ufa.png]]
-* License
+* License and Citation
   [[https://i.creativecommons.org/l/by-sa/4.0/88x31.png]]\\
   This work is licensed under a [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Commons Attribution-ShareAlike 4.0 International License]].
+
+  Here is how you can cite this using BibTeX ([[http://www.ctan.org/pkg/biblatex][BibLaTeX]] recommended):
+#+BEGIN_SRC bibtex
+  @misc{Lange:5StarData,
+    title = {Publishing 5-star Open Data},
+    author = {Christoph Lange},
+    note = {Tutorial at the Web Intelligence Summer School ``Web of Data''},
+    year = {2014},
+    date = {2014-08-25},
+    venue = {Saint-{\'E}tienne, France},
+    url = {http://clange.github.io/5stardata-tutorial/},
+  }
+#+END_SRC
