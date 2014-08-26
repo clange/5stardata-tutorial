@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Tutorial on publishing 5-star open data</title>
-<!-- 2014-08-26 Tue 10:56 -->
+<!-- 2014-08-26 Tue 11:08 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Christoph Lange" />
@@ -315,10 +315,14 @@ Original data (HTML): <a href="http://www.emse.fr/~zimmermann/WI_2014_Site/Progr
 <p>
 <a href="1star_PDF/schedule.pdf">schedule.pdf</a>
 </p>
+
+<p>
+OK, to be honest, this PDF was exported from <a href="#sec-3">Excel</a>, which is more than one star.  But PDF is how organisations often “publish” data.
+</p>
 </div>
 </div>
 <div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> ★★ Excel (*.xls)</h2>
+<h2 id="sec-3"><a id="ID-2717d69f-f50d-47af-9fce-78eed20214d7" name="ID-2717d69f-f50d-47af-9fce-78eed20214d7"></a><span class="section-number-2">3</span> ★★ Excel (*.xls)</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 <a href="http://5stardata.info/#addendum2">Cost and benefits of ★★ Web data</a>
@@ -329,7 +333,7 @@ Original data (HTML): <a href="http://www.emse.fr/~zimmermann/WI_2014_Site/Progr
 </p>
 
 <p>
-It is not impossible to read this file outside of Excel:
+Even though the old binary *.xls format is proprietary, it is not impossible to read this file outside of Excel:
 </p>
 <div class="org-src-container">
 
@@ -350,7 +354,7 @@ Output:
 </pre>
 
 <p>
-It is harder, but not impossible, to have questions answered such as “when is the first coffee break”.
+It is harder, but still possible, to have questions answered such as “when is the first coffee break”.
 </p>
 
 <p>
@@ -395,7 +399,7 @@ Output:
 </p>
 
 <p>
-Shell command:
+We can process this file with standard tools:
 </p>
 <div class="org-src-container">
 
@@ -427,6 +431,10 @@ Archive:  3star_OpenDocument/schedule.ods
 ---------                     -------
    107002                     17 files
 </pre>
+
+<p>
+<code>content.xml</code> contains the actual tabular data, so we could process it using XPath/XQuery/XSLT tools.
+</p>
 </div>
 </div>
 <div id="outline-container-sec-5" class="outline-2">
@@ -443,7 +451,6 @@ We need one CSV file per sheet:
 </ul>
 </div>
 </div>
-
 <div id="outline-container-sec-6" class="outline-2">
 <h2 id="sec-6"><span class="section-number-2">6</span> ★★★★ CSV for the Web</h2>
 <div class="outline-text-2" id="text-6">
@@ -452,7 +459,7 @@ We need one CSV file per sheet:
 </p>
 
 <p>
-From here onwards, <a href="http://5stardata.info/">the original 5-star open data examples</a> use RDF.  We will continue with CSV for a while, to point out that open data on the Web is not <i>only</i> RDF.
+From here onwards, <a href="http://5stardata.info/">the original 5-star open data examples</a> use RDF.  We will continue with CSV for a while, taking it to its limits, to point out that open data on the Web is not <i>only</i> RDF.
 </p>
 
 <p>
@@ -878,11 +885,11 @@ This is just syntactic sugar, not part of the RDF data model.
 </p>
 
 <p>
-Note that the <code>rdfs:seeAlso</code> link points to DBpedia.
+Note that the <code>rdfs:seeAlso</code> link points to <a href="http://dbpedia.org">DBpedia</a>.
 </p>
 
 <p>
-DBpedia is a linked dataset extracted from Wikipedia.
+DBpedia is a linked dataset extracted from <a href="http://wikipedia.org">Wikipedia</a>.
 </p>
 </div>
 </div>
@@ -903,11 +910,11 @@ Additional stars have been suggested for publishing data …
 Also recall that our original use case started from an HTML homepage.  With the following standards it's possible to embed linked data into HTML:
 </p>
 <ul class="org-ul">
-<li>Microformats (very basic)
+<li><a href="http://microformats.org/">Microformats</a> (very basic)
 </li>
-<li>Microdata (more powerful; emphasizes syntactic conciseness)
+<li><a href="http://www.w3.org/TR/microdata/">Microdata</a> (more powerful; emphasizes syntactic conciseness)
 </li>
-<li>RDFa (widest support of the RDF data model) – try it with <a href="http://rdfa.info/play/">http://rdfa.info/play/</a>!
+<li><a href="http://rdfa.info">RDFa</a> (widest support of the RDF data model) – try it with <a href="http://rdfa.info/play/">http://rdfa.info/play/</a>!
 </li>
 </ul>
 </div>
@@ -916,7 +923,7 @@ Also recall that our original use case started from an HTML homepage.  With the 
 <h2 id="sec-10"><span class="section-number-2">10</span> Credits</h2>
 <div class="outline-text-2" id="text-10">
 <p>
-This tutorial is based on an idea by <a href="http://www.emse.fr/~zimmermann/">Antoine Zimmermann</a>.  The motivation was to prepare something for the <a href="http://www.emse.fr/~zimmermann/WI_2014_Site/">2014 Web Intelligence Summer School “Web of Data”</a> that's not too heavily biased towards RDF.
+The idea for this tutorial was inspired by <a href="http://www.emse.fr/~zimmermann/">Antoine Zimmermann</a>.  The motivation was to prepare something for the <a href="http://www.emse.fr/~zimmermann/WI_2014_Site/">2014 Web Intelligence Summer School “Web of Data”</a> that's not too heavily biased towards RDF.
 </p>
 
 <p>
@@ -942,7 +949,7 @@ This summer school was funded by<br  />
 <div id="postamble" class="status">
 <p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-08-25 Mon&gt;</span></span></p>
 <p class="author">Author: Christoph Lange</p>
-<p class="date">Created: 2014-08-26 Tue 10:56</p>
+<p class="date">Created: 2014-08-26 Tue 11:08</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
