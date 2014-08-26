@@ -269,12 +269,12 @@ head -n 3 4.5star_CSV/vocab.csv
 #+END_SRC
 #+RESULTS: code-csv-vocab-properties
 : $id,label,description,see also
-: url,rdfs:label,rdfs:comment,owl:seeAlso
+: url,rdfs:label,rdfs:comment,rdfs:seeAlso
 : #Keynote,keynote,a talk that establishes a theme,http://en.wikipedia.org/wiki/Keynote
 
    =rdfs:= is a well-known prefix that abbreviates a URI.  =rdfs:label= (actually: http://www.w3.org/2000/01/rdf-schema#label) once more is a vocabulary term, in a widely used standard vocabulary.  Its =rdfs:comment= is “A human-readable name for the subject.”.
 ** Distinguishing data and metadata
-   When a CSV has a type declaration rows such as =url,rdfs:label,rdfs:comment,owl:seeAlso=, how do we know that this is metadata rather than data?
+   When a CSV has a type declaration rows such as =url,rdfs:label,rdfs:comment,rdfs:seeAlso=, how do we know that this is metadata rather than data?
 
    Let's make it explicit!
 
