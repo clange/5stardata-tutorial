@@ -1,5 +1,5 @@
 #,Time,Event,Type,Presenter,Location
-type,dct:time,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,schema:location
+type,dct:date,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,schema:location
 ,2014-08-25T09:00:00+02:00,Introduction,,,
 ,2014-08-25T09:15:00+02:00,Keynote,http://purl.org/net/wiss2014/vocab/#Keynote,http://purl.org/net/wiss2014/presenters/#stefan,
 ,2014-08-25T10:15:00+02:00,Coffee break,http://purl.org/net/wiss2014/vocab/#CoffeeBreak,,
@@ -14,7 +14,7 @@ type,dct:time,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,schem
 ,2014-08-26T10:00:00+02:00,Coffee break,http://purl.org/net/wiss2014/vocab/#CoffeeBreak,,
 ,2014-08-26T10:15:00+02:00,Querying the Web of Data with SPARQL and XSPARQL,http://purl.org/net/wiss2014/vocab/#Tutorial,http://purl.org/net/wiss2014/presenters/#axel,
 ,2014-08-26T12:00:00+02:00,Lunch break,,,
-,2014-08-26T13:30:00+02:00, Provenance on the Web through the lens of PROV,http://purl.org/net/wiss2014/vocab/#Tutorial,http://purl.org/net/wiss2014/presenters/#paul,
+,2014-08-26T13:30:00+02:00,Provenance on the Web through the lens of PROV,http://purl.org/net/wiss2014/vocab/#Tutorial,http://purl.org/net/wiss2014/presenters/#paul,
 ,2014-08-26T15:00:00+02:00,Coffee break,http://purl.org/net/wiss2014/vocab/#CoffeeBreak,,
 ,2014-08-26T15:30:00+02:00,“Understanding” Web Data – Named Entity Resolution,http://purl.org/net/wiss2014/vocab/#Tutorial,http://purl.org/net/wiss2014/presenters/#harald,
 ,2014-08-26T18:00:00+02:00,Hackathon dinner,http://purl.org/net/wiss2014/vocab/#Dinner;http://purl.org/net/wiss2014/vocab/#Hackathon,,Maison des Élèves

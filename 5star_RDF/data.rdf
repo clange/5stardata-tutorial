@@ -15,16 +15,16 @@
     <foaf:name>Stefan Decker</foaf:name>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/net/wiss2014/schedule/#day1intro">
-    <dct:time rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2014-08-25T09:00:00+02:00</dct:time>
+    <dct:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2014-08-25T09:00:00+02:00</dct:date>
     <dct:title>Introduction</dct:title>
   </rdf:Description>
   <wv:Keynote rdf:about="http://purl.org/net/wiss2014/schedule/#day1keynote">
     <marcrel:pre rdf:resource="http://purl.org/net/wiss2014/presenters/#stefan"/>
-    <dct:time rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2014-08-25T09:15:00+02:00</dct:time>
+    <dct:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2014-08-25T09:15:00+02:00</dct:date>
     <dct:title>Keynote</dct:title>
   </wv:Keynote>
   <wv:Dinner rdf:about="http://purl.org/net/wiss2014/schedule/#day2hackathondinner">
-    <dct:time rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2014-08-26T18:00:00+02:00</dct:time>
+    <dct:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2014-08-26T18:00:00+02:00</dct:date>
     <dct:title>Hackathon dinner</dct:title>
     <schema:location>Maison des Élèves</schema:location>
     <rdf:type rdf:resource="http://purl.org/net/wiss2014/vocab/#Hackathon"/>

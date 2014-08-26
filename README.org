@@ -305,7 +305,7 @@ fgrep 'vocab/#Keynote' 4.5star_CSV/schedule-more.csv | head -n 1
 #+END_SRC
 #+RESULTS: code-csv-type-vocab-schedule
 : #,Time,Event,Type,Presenter,Location
-: type,dct:time,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,http://linkedevents.org/ontology/atPlace
+: type,dct:date,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,http://linkedevents.org/ontology/atPlace
 : ,2014-08-25T09:15:00+02:00,Keynote,http://purl.org/net/wiss2014/vocab/#Keynote,http://purl.org/net/wiss2014/presenters/#stefan,
 
    Presenters:
@@ -340,7 +340,7 @@ grep -A 2 '^<#day1intro>' 5star_RDF/data.ttl
 
 #+RESULTS: code-rdf-start
 : <#day1intro>
-:         dct:time "2014-08-25T09:00:00+02:00"^^xsd:date ;
+:         dct:date "2014-08-25T09:00:00+02:00"^^xsd:date ;
 :         dct:title "Introduction" .
 
    CSV is based on records (one per row, with a fixed number of columns).
@@ -361,7 +361,7 @@ grep -A 4 '^<#day1keynote>' 5star_RDF/data.ttl
 #+RESULTS: code-rdf-more
 : <#day1keynote>
 :         a wv:Keynote ;
-:         dct:time "2014-08-25T09:15:00+02:00"^^xsd:date ;
+:         dct:date "2014-08-25T09:15:00+02:00"^^xsd:date ;
 :         dct:title "Keynote" ;
 :         marcrel:pre <http://purl.org/net/wiss2014/presenters/#stefan> .
 
@@ -375,7 +375,7 @@ head -n 3 4.5star_CSV/schedule-more.csv
 
 #+RESULTS: code-csv-sparse
 : #,Time,Event,Type,Presenter,Location
-: type,dct:time,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,schema:location
+: type,dct:date,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,schema:location
 : ,2014-08-25T09:00:00+02:00,Introduction,,,
 
    On the other hand, the CSV data model has an order, which RDF does not have.
@@ -407,7 +407,7 @@ grep -A 4 '^<http://purl.org/net/wiss2014/presenters/#stefan>' 5star_RDF/data.tt
 #+begin_example
 <#day2hackathondinner>
         rdf:type wv:Dinner, wv:Hackathon ;
-        dct:time "2014-08-26T18:00:00+02:00"^^xsd:date ;
+        dct:date "2014-08-26T18:00:00+02:00"^^xsd:date ;
         dct:title "Hackathon dinner" ;
         schema:location "Maison des Élèves" .
 

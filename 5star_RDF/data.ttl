@@ -10,18 +10,18 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <#day1intro>
-        dct:time "2014-08-25T09:00:00+02:00"^^xsd:date ;
+        dct:date "2014-08-25T09:00:00+02:00"^^xsd:date ;
         dct:title "Introduction" .
 
 <#day1keynote>
         rdf:type wv:Keynote ;
-        dct:time "2014-08-25T09:15:00+02:00"^^xsd:date ;
+        dct:date "2014-08-25T09:15:00+02:00"^^xsd:date ;
         dct:title "Keynote" ;
         marcrel:pre <http://purl.org/net/wiss2014/presenters/#stefan> .
 
 <#day2hackathondinner>
         rdf:type wv:Dinner, wv:Hackathon ;
-        dct:time "2014-08-26T18:00:00+02:00"^^xsd:date ;
+        dct:date "2014-08-26T18:00:00+02:00"^^xsd:date ;
         dct:title "Hackathon dinner" ;
         schema:location "Maison des Élèves" .
 
