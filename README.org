@@ -28,12 +28,17 @@ Published online at http://clange.github.io/5stardata-tutorial/
   [[http://5stardata.info/#addendum1][Cost and benefits of ★ Web data]]
 
   [[file+sys:1star_PDF/schedule.pdf][schedule.pdf]]
+
+  OK, to be honest, this PDF was exported from [[id:2717d69f-f50d-47af-9fce-78eed20214d7][Excel]], which is more than one star.  But PDF is how organisations often “publish” data.
 * ★★ Excel (*.xls)
+  :PROPERTIES:
+  :ID:       2717d69f-f50d-47af-9fce-78eed20214d7
+  :END:
   [[http://5stardata.info/#addendum2][Cost and benefits of ★★ Web data]]
   
   [[file+sys:2star_Excel/schedule.xls][schedule.xls]]
 
-  It is not impossible to read this file outside of Excel:
+  Even though the old binary *.xls format is proprietary, it is not impossible to read this file outside of Excel:
 #+NAME: code-process-xls
 #+BEGIN_SRC sh :results output replace :exports both
 perl -MSpreadsheet::ParseExcel -le '
@@ -48,7 +53,7 @@ perl -MSpreadsheet::ParseExcel -le '
 #+RESULTS: code-process-xls
 : 25 Aug 2014 09:00
 
-  It is harder, but not impossible, to have questions answered such as “when is the first coffee break”.
+  It is harder, but still possible, to have questions answered such as “when is the first coffee break”.
 
   Think of an algorithm that does the following:
   1. In the column titled “Event”, identify all cells whose value is “Coffee break”.
@@ -70,7 +75,7 @@ file 2star_Excel/schedule.xls
 
   [[file+sys:3star_OpenDocument/schedule.ods][schedule.ods]]
 
-  Shell command:
+  We can process this file with standard tools:
 #+NAME: code-unzip-ods
 #+BEGIN_SRC sh :results output replace :exports both
 unzip -l 3star_OpenDocument/schedule.ods
@@ -101,15 +106,16 @@ Archive:  3star_OpenDocument/schedule.ods
 ---------                     -------
    107002                     17 files
 #+end_example
+
+  =content.xml= contains the actual tabular data, so we could process it using XPath/XQuery/XSLT tools.
 * ★★★☆ CSV
   We need one CSV file per sheet:
   * [[file+emacs:3.5star_CSV/schedule.csv][schedule.csv]]
   * [[file+emacs:3.5star_CSV/presenters.csv][presenters.csv]]
-  
 * ★★★★ CSV for the Web
   [[http://5stardata.info/#addendum4][Cost and benefits of ★★★★ Web data]]
 
-  From here onwards, [[http://5stardata.info/][the original 5-star open data examples]] use RDF.  We will continue with CSV for a while, to point out that open data on the Web is not /only/ RDF.
+  From here onwards, [[http://5stardata.info/][the original 5-star open data examples]] use RDF.  We will continue with CSV for a while, taking it to its limits, to point out that open data on the Web is not /only/ RDF.
 
   The following examples roughly conform to [[http://jenit.github.io/linked-csv/][Linked CSV]], one of the candidates for an RDF-conforming specification of CSV, as discussed by the [[http://www.w3.org/2013/csvw/][CSV on the Web Working Group]].
 
@@ -449,20 +455,20 @@ sed -ne '/@prefix/,/^$/p' 5star_RDF/data.ttl
 
    This is just syntactic sugar, not part of the RDF data model.
 
-   Note that the =rdfs:seeAlso= link points to DBpedia.
+   Note that the =rdfs:seeAlso= link points to [[http://dbpedia.org][DBpedia]].
 
-   DBpedia is a linked dataset extracted from Wikipedia.
+   DBpedia is a linked dataset extracted from [[http://wikipedia.org][Wikipedia]].
 * ★★★★★☆ Further possible improvements
   Additional stars have been suggested for publishing data …
   * … that uses standard schemas – we've done this already.
   * … whose quality has been checked – our group does research on this.
 
   Also recall that our original use case started from an HTML homepage.  With the following standards it's possible to embed linked data into HTML:
-  * Microformats (very basic)
-  * Microdata (more powerful; emphasizes syntactic conciseness)
-  * RDFa (widest support of the RDF data model) – try it with http://rdfa.info/play/!
+  * [[http://microformats.org/][Microformats]] (very basic)
+  * [[http://www.w3.org/TR/microdata/][Microdata]] (more powerful; emphasizes syntactic conciseness)
+  * [[http://rdfa.info][RDFa]] (widest support of the RDF data model) – try it with http://rdfa.info/play/!
 * Credits
-  This tutorial is based on an idea by [[http://www.emse.fr/~zimmermann/][Antoine Zimmermann]].  The motivation was to prepare something for the [[http://www.emse.fr/~zimmermann/WI_2014_Site/][2014 Web Intelligence Summer School “Web of Data”]] that's not too heavily biased towards RDF.
+  The idea for this tutorial was inspired by [[http://www.emse.fr/~zimmermann/][Antoine Zimmermann]].  The motivation was to prepare something for the [[http://www.emse.fr/~zimmermann/WI_2014_Site/][2014 Web Intelligence Summer School “Web of Data”]] that's not too heavily biased towards RDF.
 
   This summer school was funded by\\
 #+ATTR_HTML: :alt Université franco-allemande / Deutsch-Französische Hochschule
