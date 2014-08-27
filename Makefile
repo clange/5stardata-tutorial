@@ -40,6 +40,8 @@ $(HOMEPAGE)/.sync: $(DEMO_FILES) $(SYNC_FILES)
 .deploy: $(DEPLOY_FILES)
 	STAGE=$$(mktemp -d) ; \
 	cp -av $(DEPLOY_FILES) $$STAGE ; \
+	chmod 755 $$STAGE ; \
+	chmod 644 $$STAGE/* ; \
 	( cd $$STAGE ; \
 		for i in $(DEPLOY_DIRS) ; \
 		do \
@@ -47,7 +49,7 @@ $(HOMEPAGE)/.sync: $(DEMO_FILES) $(SYNC_FILES)
 			mv -v $$i.rdf $$i/index.rdf ; \
 			mv -v $$i.csv $$i/index.csv ; \
 		done ; \
-		ls $(DEPLOY_DIRS) ) ; \
+		chmod 755 $(DEPLOY_DIRS) ) ; \
 	rsync -av $$STAGE/ iai:public_html/wiss2014 ; \
 	rm -rf $$STAGE ; \
 	touch $@
