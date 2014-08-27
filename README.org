@@ -337,7 +337,9 @@ head -n 3 4.5star_CSV/more/presenters.csv
   Let's therefore redo our example in RDF, and discuss some differences from CSV.
 
   * [[file+emacs:5star_RDF/data.ttl][data.ttl]] (Turtle, human-friendly)
-  * [[file+emacs:5star_RDF/data.rdf][data.rdf]] (RDF/XML, widely understood by machines)
+  * [[file+emacs:5star_RDF/presenters.rdf][presenters.rdf]], [[file+emacs:5star_RDF/schedule.rdf][schedule.rdf]], [[file+emacs:5star_RDF/vocab.rdf][vocab.rdf]] (RDF/XML, widely understood by machines)
+
+  (For purely pragmatic reasons, the Turtle, which is what I edit, is all-in-one, whereas the RDF/XML is in split files for easier deployment.)
 
 #+NAME: code-rdf-start
 #+BEGIN_SRC sh :results output verbatim replace :exports results
