@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about="http://purl.org/net/wiss2014/presenters/#stefan">
+    <ns1:country xmlns:ns1="http://purl.org/net/wiss2014/vocab/#">Ireland</ns1:country>
+    <ns2:town xmlns:ns2="http://purl.org/net/wiss2014/vocab/#">Galway</ns2:town>
+    <ns3:affiliation xmlns:ns3="http://schema.org/">INSIGHT</ns3:affiliation>
+    <ns4:affiliation xmlns:ns4="http://schema.org/">National University of Ireland</ns4:affiliation>
+    <ns5:name xmlns:ns5="http://xmlns.com/foaf/0.1/">Stefan Decker</ns5:name>
+  </rdf:Description>
+</rdf:RDF>

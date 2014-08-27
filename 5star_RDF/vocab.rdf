@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about="http://purl.org/net/wiss2014/vocab/#Dinner">
+    <ns1:comment xmlns:ns1="http://www.w3.org/2000/01/rdf-schema#">evening meal</ns1:comment>
+    <ns2:label xmlns:ns2="http://www.w3.org/2000/01/rdf-schema#">dinner</ns2:label>
+    <ns3:seeAlso xmlns:ns3="http://www.w3.org/2000/01/rdf-schema#"
+       rdf:resource="http://dbpedia.org/resource/Dinner"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/net/wiss2014/vocab/#Hackathon">
+    <ns4:comment xmlns:ns4="http://www.w3.org/2000/01/rdf-schema#">an event of intensive collaboration on a software project</ns4:comment>
+    <ns5:label xmlns:ns5="http://www.w3.org/2000/01/rdf-schema#">hackathon</ns5:label>
+    <ns6:seeAlso xmlns:ns6="http://www.w3.org/2000/01/rdf-schema#"
+       rdf:resource="http://dbpedia.org/resource/Hackathon"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/net/wiss2014/vocab/#Keynote">
+    <ns7:comment xmlns:ns7="http://www.w3.org/2000/01/rdf-schema#">a talk that establishes a theme</ns7:comment>
+    <ns8:label xmlns:ns8="http://www.w3.org/2000/01/rdf-schema#">keynote</ns8:label>
+    <ns9:seeAlso xmlns:ns9="http://www.w3.org/2000/01/rdf-schema#"
+       rdf:resource="http://dbpedia.org/resource/Keynote"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/net/wiss2014/vocab/#country">
+    <ns10:comment xmlns:ns10="http://www.w3.org/2000/01/rdf-schema#">the country where someone comes from</ns10:comment>
+    <ns11:label xmlns:ns11="http://www.w3.org/2000/01/rdf-schema#">country</ns11:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/net/wiss2014/vocab/#town">
+    <ns12:comment xmlns:ns12="http://www.w3.org/2000/01/rdf-schema#">the town where someone comes from</ns12:comment>
+    <ns13:label xmlns:ns13="http://www.w3.org/2000/01/rdf-schema#">town</ns13:label>
+  </rdf:Description>
+</rdf:RDF>

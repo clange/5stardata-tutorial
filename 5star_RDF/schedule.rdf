@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about="http://purl.org/net/wiss2014/schedule/#day1intro">
+    <ns1:date xmlns:ns1="http://purl.org/dc/terms/"
+       rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2014-08-25T09:00:00+02:00</ns1:date>
+    <ns2:title xmlns:ns2="http://purl.org/dc/terms/">Introduction</ns2:title>
+  </rdf:Description>
+  <ns3:Keynote xmlns:ns3="http://purl.org/net/wiss2014/vocab/#"
+     rdf:about="http://purl.org/net/wiss2014/schedule/#day1keynote">
+    <ns4:pre xmlns:ns4="http://id.loc.gov/vocabulary/relators/"
+       rdf:resource="http://purl.org/net/wiss2014/presenters/#stefan"/>
+    <ns5:date xmlns:ns5="http://purl.org/dc/terms/"
+       rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2014-08-25T09:15:00+02:00</ns5:date>
+    <ns6:title xmlns:ns6="http://purl.org/dc/terms/">Keynote</ns6:title>
+  </ns3:Keynote>
+  <ns7:Dinner xmlns:ns7="http://purl.org/net/wiss2014/vocab/#"
+     rdf:about="http://purl.org/net/wiss2014/schedule/#day2hackathondinner">
+    <ns8:date xmlns:ns8="http://purl.org/dc/terms/"
+       rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2014-08-26T18:00:00+02:00</ns8:date>
+    <ns9:title xmlns:ns9="http://purl.org/dc/terms/">Hackathon dinner</ns9:title>
+    <ns10:location xmlns:ns10="http://schema.org/">Maison des Élèves</ns10:location>
+    <rdf:type rdf:resource="http://purl.org/net/wiss2014/vocab/#Hackathon"/>
+  </ns7:Dinner>
+</rdf:RDF>

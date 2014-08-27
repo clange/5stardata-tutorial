@@ -1,6 +1,6 @@
 Time,Event,Type,Presenter,Location
 2014-08-25T09:00:00+02:00,Introduction,,,
-2014-08-25T09:15:00+02:00,Keynote,Keynote,http://purl.org/wiss2014/presenters/#stefan,
+2014-08-25T09:15:00+02:00,Keynote,Keynote,http://purl.org/net/wiss2014/presenters/#stefan,
 2014-08-25T10:15:00+02:00,Coffee break,Coffee break,,
 2014-08-25T10:30:00+02:00,Publishing Web Data 1,Tutorial,,
 2014-08-25T12:00:00+02:00,Lunch break,,,
@@ -9,17 +9,17 @@ Time,Event,Type,Presenter,Location
 2014-08-25T16:00:00+02:00,Coffee break,Coffee break,,
 2014-08-25T16:30:00+02:00,Poster session,,,
 2014-08-25T18:00:00+02:00,Welcome dinner,Dinner,,
-2014-08-26T09:00:00+02:00,Keynote,Keynote,http://purl.org/wiss2014/presenters/#soeren,
+2014-08-26T09:00:00+02:00,Keynote,Keynote,http://purl.org/net/wiss2014/presenters/#soeren,
 2014-08-26T10:00:00+02:00,Coffee break,Coffee break,,
-2014-08-26T10:15:00+02:00,Querying the Web of Data with SPARQL and XSPARQL,Tutorial,http://purl.org/wiss2014/presenters/#axel,
+2014-08-26T10:15:00+02:00,Querying the Web of Data with SPARQL and XSPARQL,Tutorial,http://purl.org/net/wiss2014/presenters/#axel,
 2014-08-26T12:00:00+02:00,Lunch break,,,
-2014-08-26T13:30:00+02:00, Provenance on the Web through the lens of PROV,Tutorial,http://purl.org/wiss2014/presenters/#paul,
+2014-08-26T13:30:00+02:00, Provenance on the Web through the lens of PROV,Tutorial,http://purl.org/net/wiss2014/presenters/#paul,
 2014-08-26T15:00:00+02:00,Coffee break,Coffee break,,
-2014-08-26T15:30:00+02:00,“Understanding” Web Data – Named Entity Resolution,Tutorial,http://purl.org/wiss2014/presenters/#harald,
+2014-08-26T15:30:00+02:00,“Understanding” Web Data – Named Entity Resolution,Tutorial,http://purl.org/net/wiss2014/presenters/#harald,
 2014-08-26T18:00:00+02:00,Hackathon dinner,Dinner;Hackathon,,Maison des Élèves
-2014-08-27T09:00:00+02:00,Wikidata,Keynote,http://purl.org/wiss2014/presenters/#markus,
+2014-08-27T09:00:00+02:00,Wikidata,Keynote,http://purl.org/net/wiss2014/presenters/#markus,
 2014-08-27T10:00:00+02:00,Coffee break,Coffee break,,
-2014-08-27T10:15:00+02:00,Working with Wikidata: A Hands-on Guide for Researchers and Developers,Tutorial,http://purl.org/wiss2014/presenters/#markus,
+2014-08-27T10:15:00+02:00,Working with Wikidata: A Hands-on Guide for Researchers and Developers,Tutorial,http://purl.org/net/wiss2014/presenters/#markus,
 2014-08-27T12:00:00+02:00,Lunch break,,,
 2014-08-27T13:30:00+02:00,Hiking and archery,Outdoor event,,Château d'Essalois
 2014-08-27T18:00:00+02:00,Social dinner,Dinner,,Domaine d'Essalois
