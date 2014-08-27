@@ -300,14 +300,14 @@ head -n 3 4.5star_CSV/schedule.csv
    
    No! – Let's also reuse some standard vocabularies here!
 
-   * [[file+emacs:4.5star_CSV/schedule-more.csv][schedule-more.csv]]
-   * [[file+emacs:4.5star_CSV/presenters-more.csv][presenters-more.csv]]
+   * [[file+emacs:4.5star_CSV/more/schedule.csv][schedule.csv]]
+   * [[file+emacs:4.5star_CSV/more/presenters.csv][presenters.csv]]
      
    Schedule:
 #+NAME: code-csv-type-vocab-schedule
 #+BEGIN_SRC sh :results output verbatim replace :exports results
-head -n 2 4.5star_CSV/schedule-more.csv ;
-fgrep 'vocab/#Keynote' 4.5star_CSV/schedule-more.csv | head -n 1
+head -n 2 4.5star_CSV/more/schedule.csv ;
+fgrep 'vocab/#Keynote' 4.5star_CSV/more/schedule.csv | head -n 1
 #+END_SRC
 #+RESULTS: code-csv-type-vocab-schedule
 : #,Time,Event,Type,Presenter,Location
@@ -317,7 +317,7 @@ fgrep 'vocab/#Keynote' 4.5star_CSV/schedule-more.csv | head -n 1
    Presenters:
 #+NAME: code-csv-type-vocab-presenters
 #+BEGIN_SRC sh :results output verbatim replace :exports results
-head -n 3 4.5star_CSV/presenters-more.csv
+head -n 3 4.5star_CSV/more/presenters.csv
 #+END_SRC
 #+RESULTS: code-csv-type-vocab-presenters
 : #,$id,Name,Affiliation,Town,Country

@@ -1,0 +1,15 @@
+# Source: http://www.w3.org/TR/swbp-vocab-pub/#recipe3a
+
+#Options -MultiViews
+
+AddType application/rdf+xml .rdf
+AddType text/csv .csv
+
+RewriteEngine On
+# TODO adapt this to the directory on your server
+RewriteBase /~langec/wiss2014/
+RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/csv)
+RewriteCond %{HTTP_ACCEPT} text/csv
+RewriteRule ^(presenters|schedule|vocab)/$ $1/index.csv [R=303]
+
+RewriteRule ^(presenters|schedule|vocab)/$ $1/index.rdf [R=303]
