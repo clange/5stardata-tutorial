@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Publishing 5-star Open Data</title>
-<!-- 2014-08-27 Wed 12:07 -->
+<!-- 2015-01-24 Sat 19:28 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Christoph Lange" />
@@ -276,7 +276,11 @@ for the JavaScript code in this tag.
 <li><a href="#sec-7-4">7.4. More precise types for data columns</a></li>
 </ul>
 </li>
-<li><a href="#sec-8">8. ★★★★★ RDF (and a comparison to CSV)</a></li>
+<li><a href="#sec-8">8. ★★★★★ RDF (and a comparison to CSV)</a>
+<ul>
+<li><a href="#sec-8-1">8.1. How to publish linked datasets</a></li>
+</ul>
+</li>
 <li><a href="#sec-9">9. ★★★★★☆ Further possible improvements</a></li>
 <li><a href="#sec-10">10. Credits</a></li>
 <li><a href="#sec-11">11. License and Citation</a></li>
@@ -294,6 +298,10 @@ A tutorial with practical examples of how to create and publish <a href="http://
 
 <p>
 Published online at <a href="http://clange.github.io/5stardata-tutorial/">http://clange.github.io/5stardata-tutorial/</a>
+</p>
+
+<p>
+Under further development at <a href="https://github.com/clange/5stardata-tutorial">https://github.com/clange/5stardata-tutorial</a>; please report any problems <a href="https://github.com/clange/5stardata-tutorial/issues">there</a>.
 </p>
 
 <div id="outline-container-sec-1" class="outline-2">
@@ -571,7 +579,7 @@ Also, if your family from a different timezone wanted to phone you in the lunch 
 </p>
 
 <p>
-So let's use an ISO 8601 conforming date and time format, with time zone information:
+So let's use an <a href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> conforming date and time format, with time zone information:
 </p>
 <pre class="example">
 Time,Event,Type,Presenter,Location
@@ -583,7 +591,7 @@ Time,Event,Type,Presenter,Location
 </div>
 
 <div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> ★★★★☆ CSV with a schema</h2>
+<h2 id="sec-7"><a id="ID-dd30ef65-28a9-45d7-a2cf-d5ca12752516" name="ID-dd30ef65-28a9-45d7-a2cf-d5ca12752516"></a><span class="section-number-2">7</span> ★★★★☆ CSV with a schema</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Let's continue to make our CSV even more self-describing, by introducing a <i>schema</i> (also called <i>vocabulary</i> on the Web of Data).
@@ -760,7 +768,7 @@ More widely than CSV, the <i>RDF</i> data model is used for linked data.
 </p>
 
 <p>
-Whenever a URI conforms to linked data, you can expect RDF there (usually in the ugly but widely supported RDF/XML encoding).
+Whenever a URI conforms to linked data, you can expect RDF there (usually in the ugly but widely supported <a href="http://www.w3.org/TR/rdf-syntax-grammar/">RDF/XML</a> serialisation).
 </p>
 
 <p>
@@ -768,7 +776,7 @@ Let's therefore redo our example in RDF, and discuss some differences from CSV.
 </p>
 
 <ul class="org-ul">
-<li><a href="5star_RDF/data.ttl">data.ttl</a> (Turtle, human-friendly)
+<li><a href="5star_RDF/data.ttl">data.ttl</a> (<a href="http://www.w3.org/TR/turtle/">Turtle</a>, human-friendly)
 </li>
 <li><a href="5star_RDF/presenters.rdf">presenters.rdf</a>, <a href="5star_RDF/schedule.rdf">schedule.rdf</a>, <a href="5star_RDF/vocab.rdf">vocab.rdf</a> (RDF/XML, widely understood by machines)
 </li>
@@ -896,6 +904,48 @@ Note that the <code>rdfs:seeAlso</code> link points to <a href="http://dbpedia.o
 DBpedia is a linked dataset extracted from <a href="http://wikipedia.org">Wikipedia</a>.
 </p>
 </div>
+<div id="outline-container-sec-8-1" class="outline-3">
+<h3 id="sec-8-1"><span class="section-number-3">8.1</span> How to publish linked datasets</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+Even though we saw <a href="#sec-7">above</a> that we can get quite far with CSV, it is good practice to always publish Linked Open Data <i>at least</i> as RDF, and to publish this RDF <i>at least</i> in the RDF/XML serialisation.
+</p>
+
+<p>
+Once this basic requirement is satisfied, you <i>may</i> also publish your data …
+</p>
+<ul class="org-ul">
+<li>in other RDF serialisations (e.g., <a href="http://www.w3.org/TR/turtle/">Turtle</a> or <a href="http://rdfa.info">RDFa</a>)
+</li>
+<li>or via a SPARQL endpoint,
+</li>
+<li>or in other formats readable for machines (e.g. CSV) or humans (e.g. HTML).
+</li>
+</ul>
+
+<p>
+Thanks to HTTP content negotiation it is possible to serve different formats from the same URL.  An HTTP client can specify the desired format in the request header.  Browsers usually request <code>text/html</code>.  You can experiment with the <a href="http://curl.haxx.se/">curl</a> or <a href="https://www.gnu.org/software/wget/">wget</a> command-line clients.  On Unix-like systems they are installable from the package manager.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">curl -sH <span style="font-style: italic;">'Accept: application/rdf+xml'</span> -L <span style="font-style: italic;">'http://xmlns.com/foaf/0.1/Person'</span>
+wget --header <span style="font-style: italic;">'Accept: application/rdf+xml'</span> -O - <span style="font-style: italic;">'http://xmlns.com/foaf/0.1/Person'</span>
+</pre>
+</div>
+
+<p>
+Here you can find out how to configure your web server for this:
+</p>
+<ul class="org-ul">
+<li>Tom Heath and Christian Bizer (2011) <a href="http://linkeddatabook.com/editions/1.0/">Linked Data: Evolving the Web into a Global Data Space</a> (1st edition). Synthesis Lectures on the Semantic Web: Theory and Technology, 1:1, 1-136. Morgan &amp; Claypool.
+</li>
+<li><a href="http://www.w3.org/TR/swbp-vocab-pub/">Best Practice Recipes for Publishing RDF Vocabularies</a> (W3C Working Group Note of 2008, also largely valid for non-vocabulary data)
+</li>
+<li>The <a href="http://validator.linkeddata.org/vapour">Vapour validator</a> helps you check whether you got it right (including correct use of 303 URIs, which is not a subject of this tutorial).
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div id="outline-container-sec-9" class="outline-2">
 <h2 id="sec-9"><span class="section-number-2">9</span> ★★★★★☆ Further possible improvements</h2>
@@ -906,7 +956,7 @@ Additional stars have been suggested for publishing data …
 <ul class="org-ul">
 <li>… that uses standard schemas – we've done this already.
 </li>
-<li>… whose quality has been checked – our group does research on this.
+<li>… whose quality has been checked – the <a href="http://eis.iai.uni-bonn.de">EIS research group at the University of Bonn</a> is working on this.
 </li>
 </ul>
 
@@ -970,8 +1020,8 @@ Here is how you can cite this using BibTeX (<a href="http://www.ctan.org/pkg/bib
 <div id="postamble" class="status">
 <p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-08-25 Mon&gt;</span></span></p>
 <p class="author">Author: Christoph Lange</p>
-<p class="date">Created: 2014-08-27 Wed 12:07</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
+<p class="date">Created: 2015-01-24 Sat 19:28</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.0.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
