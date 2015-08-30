@@ -27,6 +27,8 @@ DEPLOY_FILES = 4.5star_CSV/more/presenters.csv \
 	deploy/.htaccess
 DEPLOY_DIRS = schedule presenters vocab
 
+include Makefile.vars
+
 .sync: $(HOMEPAGE)/.sync $(HOMEPAGE)/index.html
 	(cd $(HOMEPAGE) ; \
 		git commit -m "regenerated" index.html ; \
