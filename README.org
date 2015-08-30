@@ -1,7 +1,7 @@
 #+TITLE:  Publishing 5-star Open Data
 #+AUTHOR: Christoph Lange
 #+EMAIL:  math.semantic.web@gmail.com
-#+DATE:   <2014-08-25 Mon>
+#+DATE:   <2015-09-01 Tue>
 #+LANGUAGE:  en
 #+STARTUP:   hidestars
 #+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
@@ -12,12 +12,13 @@
 #+LINK_UP:
 #+LINK_HOME:
 #+XSLT:
-#+STYLE: <style type="text/css"> .timestamp { color: purple; font-weight: bold; } </style>
+#+STYLE: <style type="text/css"> body { margin: 5px; } .timestamp { color: purple; font-weight: bold; } </style>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
 
 A tutorial with practical examples of how to create and publish [[http://5stardata.info][5-star open data]] on the Web; originally written for the [[http://www.emse.fr/~zimmermann/WI_2014_Site/][2014 Web Intelligence Summer School “Web of Data”]] supported by \\
 #+ATTR_HTML: :alt Université franco-allemande / Deutsch-Französische Hochschule
-  [[file:images/ufa.png]]
+  [[file:images/ufa.png]]\\
+and updated for the [[https://wiss.univ-st-etienne.fr/][2015 Web Intelligence Summer School “Answering Questions with the Web”]]
 
 Published online at http://clange.github.io/5stardata-tutorial/
 
@@ -29,7 +30,7 @@ Published online at http://clange.github.io/5stardata-tutorial/
 
   [[file+sys:1star_PDF/schedule.pdf][schedule.pdf]]
 
-  OK, to be honest, this PDF was exported from [[id:2717d69f-f50d-47af-9fce-78eed20214d7][Excel]], which is more than one star.  But PDF is how organisations often “publish” data.
+  To be honest, this PDF was exported from [[id:2717d69f-f50d-47af-9fce-78eed20214d7][Excel]], which is more than one star.  But organisations really often “publish” data in PDF.
 * ★★ Excel (*.xls)
   :PROPERTIES:
   :ID:       2717d69f-f50d-47af-9fce-78eed20214d7
@@ -107,7 +108,36 @@ Archive:  3star_OpenDocument/schedule.ods
    107002                     17 files
 #+end_example
 
-  =content.xml= contains the actual tabular data, so we could process it using XPath/XQuery/XSLT tools.
+  [[file+sys:3star_OpenDocument/content.xml][content.xml]] contains the actual tabular data, so we can process it using XPath/XQuery/XSLT tools such as [[http://www.zorba.io][Zorba]]:
+
+#+NAME: code-xquery-ods
+#+BEGIN_SRC sh :results output replace :exports both
+zorba --serialize-text -q '
+  declare namespace office="urn:oasis:names:tc:opendocument:xmlns:office:1.0";
+  declare namespace table="urn:oasis:names:tc:opendocument:xmlns:table:1.0";
+  doc("3star_OpenDocument/content.xml")//office:spreadsheet
+    /table:table[@table:name="Schedule"]
+    /table:table-row[2]/table:table-cell[1]'
+#+END_SRC
+
+#+RESULTS: code-xquery-ods
+: 25 Aug 2014 09:00
+
+  LibreOffice even stored this timestamp in a machine-friendly way.  We'll realise the advantages of this [[id:2e724ba4-6b8b-4bbc-bdf8-60f07e223620][later]].
+
+#+NAME: code-xquery-ods-date
+#+BEGIN_SRC sh :results output replace :exports both
+zorba --serialize-text -q '
+  declare namespace office="urn:oasis:names:tc:opendocument:xmlns:office:1.0";
+  declare namespace table="urn:oasis:names:tc:opendocument:xmlns:table:1.0";
+  string(doc("3star_OpenDocument/content.xml")//office:spreadsheet
+    /table:table[@table:name="Schedule"]
+    /table:table-row[2]/table:table-cell[1]/@office:date-value)'
+#+END_SRC
+
+#+RESULTS: code-xquery-ods-date
+: 2014-08-25T09:00:00
+
 * ★★★☆ CSV
   We need one CSV file per sheet:
   * [[file+emacs:3.5star_CSV/schedule.csv][schedule.csv]]
@@ -115,15 +145,15 @@ Archive:  3star_OpenDocument/schedule.ods
 * ★★★★ CSV for the Web
   [[http://5stardata.info/#addendum4][Cost and benefits of ★★★★ Web data]]
 
-  From here onwards, [[http://5stardata.info/][the original 5-star open data examples]] use RDF.  We will continue with CSV for a while, taking it to its limits, to point out that open data on the Web is not /only/ RDF.
+  From here onwards, [[http://5stardata.info/][the original 5-star open data examples]] use RDF.  We will continue with CSV for a while, taking it to its limits, to point out that open data on the Web is not /only/ RDF.  We will introduce RDF [[id:cce5ed53-2be0-44a0-9692-0a8e66213394][in a later section]].
 
-  The following examples roughly conform to [[http://jenit.github.io/linked-csv/][Linked CSV]], one of the candidates for an RDF-conforming specification of CSV, as discussed by the [[http://www.w3.org/2013/csvw/][CSV on the Web Working Group]].
+  The following examples roughly conform to [[http://jenit.github.io/linked-csv/][Linked CSV]], which was one of the original proposals for an RDF-conforming specification of CSV.  The [[http://www.w3.org/2013/csvw/][CSV on the Web Working Group]] is now taking a different approach, with their Working Draft on [[http://www.w3.org/TR/2015/WD-csv2rdf-20150416/][Generating RDF from Tabular Data on the Web]].  The latter leaves the CSV untouched and provides complementary, /external/ metadata annotations, e.g., in the form of JSON.  This tutorial sticks with the simpler Linked CSV approach, which is self-contained in CSV.
 
   * [[file+emacs:4star_CSV/schedule.csv][schedule.csv]]
   * [[file+emacs:4star_CSV/presenters.csv][presenters.csv]]
 
 ** Links using Web-scale identifiers
-   An example from the 3-star CSV:
+   An example from the 3.5-star CSV:
 #+NAME: code-csv-id-before
 #+BEGIN_SRC sh :results output verbatim replace :exports results
 head -n 1 3.5star_CSV/schedule.csv ;
@@ -173,14 +203,16 @@ fgrep "#markus" 4star_CSV/presenters.csv ;
    It is good practice to …
    * use HTTP URLs for such URIs,
    * choose them from a namespace that /you/ own,
-   * publish a machine-comprehensible, self-describing description of the things identified by these URIs at that same URL,
+   * publish a machine-comprehensible, [[http://www.w3.org/2001/tag/doc/selfDescribingDocuments][self-describing]] representation of the things identified by these URIs at that same URL,
    * so that any client who wants to know something about these things can easily look it up!
-   This approach is called *linked data*.
+   This approach is called *[[http://www.w3.org/DesignIssues/LinkedData.html][linked data]]*.
+
+   Linked data is essential for the [[http://www.w3.org/2001/sw/][Semantic Web]] – “a framework that allows data to be shared and reused across application, enterprise, and community boundaries”.
 ** Datatypes
    :PROPERTIES:
    :ID:       2e724ba4-6b8b-4bbc-bdf8-60f07e223620
    :END:
-   With an alternative export configuration, the 3-star CSV may have ended up [[file+emacs:3.5star_CSV/schedule-alt.csv][like this]]:
+   With an alternative export configuration, the 3.5-star CSV may have ended up [[file+emacs:3.5star_CSV/schedule-alt.csv][like this]]:
 
 #+NAME: code-csv-datatype-before
 #+BEGIN_SRC sh :results output verbatim replace :exports results
@@ -202,7 +234,7 @@ head -n 3 3.5star_CSV/schedule-alt.csv ;
 
    Also, if your family from a different timezone wanted to phone you in the lunch break, how do we know that =09:00:00= is in CEST?
 
-   So let's use an ISO 8601 conforming date and time format, with time zone information:
+   So let's use an [[https://en.wikipedia.org/wiki/ISO_8601][ISO 8601]] conforming date and time format, with time zone information:
 #+NAME: code-csv-datatype-after
 #+BEGIN_SRC sh :results output verbatim replace :exports results
 head -n 3 4star_CSV/schedule.csv
@@ -243,7 +275,7 @@ fgrep '#Keynote' 4.5star_CSV/vocab.csv | head -n 1
    The relative URI =#Keynote= works out if this file is published at http://purl.org/net/wiss2014/vocab/.
 
 ** An explicit description of types
-   We introduced ISO 8601 timestamps, but how does a client /know/ that the first column of =schedule.csv= is an ISO 8601 timestamp?
+   We introduced ISO 8601 timestamps, but how does a client /know/, without having to resort to heuristics, that the first column of =schedule.csv= is intended to be an ISO 8601 timestamp?
 #+NAME: code-csv-datatype-implicit
 #+BEGIN_SRC sh :results output verbatim replace :exports results
 head -n 2 4star_CSV/schedule.csv
@@ -261,12 +293,13 @@ head -n 2 4star_CSV/schedule.csv
 #+BEGIN_SRC sh :results output verbatim replace :exports results
 head -n 3 4.5star_CSV/schedule.csv
 #+END_SRC
+
 #+RESULTS: code-csv-datatype-explicit
 : #,Time,Event,Type,Presenter,Location
 : type,time,string,url,url,string
 : ,2014-08-25T09:00:00+02:00,Introduction,,,
 
-   (We'll get to the structure of the new, first column later.)
+   (We'll get to the structure of the new, first column [[id:fb7888a0-4a51-4ee3-88bd-cfc881464814][later]].)
 
    For the properties of vocabulary terms:
 #+NAME: code-csv-vocab-properties
@@ -280,16 +313,18 @@ head -n 3 4.5star_CSV/vocab.csv
 
    =rdfs:= is a well-known prefix that abbreviates a URI.  =rdfs:label= (actually: http://www.w3.org/2000/01/rdf-schema#label) once more is a vocabulary term, in a widely used standard vocabulary.  Its =rdfs:comment= is “A human-readable name for the subject.”.
 ** Distinguishing data and metadata
-   When a CSV has a type declaration rows such as =url,rdfs:label,rdfs:comment,rdfs:seeAlso=, how do we know that this is metadata rather than data?
+   :PROPERTIES:
+   :ID:       fb7888a0-4a51-4ee3-88bd-cfc881464814
+   :END:
+   When a CSV has a type declaration row such as =url,rdfs:label,rdfs:comment,rdfs:seeAlso=, how do we know that this is metadata rather than data?
 
    Let's make it explicit!
 
-#+NAME: code-csv-datatype-explicit
-#+BEGIN_SRC sh :results output verbatim replace :exports results
-head -n 3 4.5star_CSV/schedule.csv
-#+END_SRC
-#+RESULTS: code-csv-datatype-explicit
+#+CALL: code-csv-datatype-explicit()
+
+#+RESULTS:
 : #,Time,Event,Type,Presenter,Location
+: type,time,string,url,url,string
 : ,2014-08-25T09:00:00+02:00,Introduction,,,
 
    * When the first column has a =type= entry, we are in the type declaration row.
@@ -328,11 +363,14 @@ head -n 3 4.5star_CSV/more/presenters.csv
    * [[http://lov.okfn.org][Linked Open Vocabularies (LOV)]] helps with that.
    * Where didn't find perfectly reusable terms, we defined our own, in /our/ vocabulary.
 * ★★★★★ RDF (and a comparison to CSV)
+  :PROPERTIES:
+  :ID:       cce5ed53-2be0-44a0-9692-0a8e66213394
+  :END:
   [[http://5stardata.info/#addendum5][Cost and benefits of ★★★★★ Web data]]
 
-  More widely than CSV, the /RDF/ data model is used for linked data.
+  More widely than CSV, the /[[http://www.w3.org/RDF/][RDF]]/ data model is used for linked data.
 
-  Whenever a URI conforms to linked data, you can expect RDF there (usually in the ugly but widely supported RDF/XML encoding).
+  Whenever a URI conforms to linked data, you can expect RDF there (usually in the ugly but widely supported [[http://www.w3.org/TR/2014/REC-rdf-syntax-grammar-20140225/][RDF/XML]] encoding).
   
   Let's therefore redo our example in RDF, and discuss some differences from CSV.
 
@@ -353,13 +391,13 @@ grep -A 2 '^<#day1intro>' 5star_RDF/data.ttl
 
    CSV is based on records (one per row, with a fixed number of columns).
 
-   RDF is based on triples (subject–predicate–object).
+   RDF is based on triples (subject–predicate–object statements).
 
    Usually more than one triple belongs to a subject (“resource”), which is why it's convenient to group them.
 
-   Every resource needs to have an identifier.  (In the CSV, our events didn't have any.)
+   Usually every resource has an identifier.  (In the CSV, our events didn't have any.)
 
-   You can precisely indicate the datatype of an object, but you also /have/ to do it always.
+   You can precisely indicate the datatype of an object, but you also /have/ to do it always, except when the datatype is string.
    
 #+NAME: code-rdf-more
 #+BEGIN_SRC sh :results output verbatim replace :exports results
@@ -373,7 +411,7 @@ grep -A 4 '^<#day1keynote>' 5star_RDF/data.ttl
 :         dct:title "Keynote" ;
 :         marcrel:pre <http://purl.org/net/wiss2014/presenters/#stefan> .
 
-   It's no problem for resources to have different number of properties.
+   It's no problem for different resources to have different numbers of properties.
 
    Compare sparsely populated CSV:
 #+NAME: code-csv-sparse
@@ -386,9 +424,7 @@ head -n 3 4.5star_CSV/schedule-more.csv
 : type,dct:date,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,schema:location
 : ,2014-08-25T09:00:00+02:00,Introduction,,,
 
-   On the other hand, the CSV data model has an order, which RDF does not have.
-
-   Also, $n$-ary structures are much harder to represent in RDF.
+   On the other hand, the CSV data model has a built-in order, which RDF does not have.  Order can be expressed in RDF, but doing so leads to a high complexity.  In the specification on [[http://www.w3.org/TR/2015/WD-csv2rdf-20150416/][Generating RDF from Tabular Data on the Web]], compare [[http://www.w3.org/TR/2015/WD-csv2rdf-20150416/#example-countries-minimal-ttl][the “minimal” RDF representation of a CSV table]] to [[http://www.w3.org/TR/2015/WD-csv2rdf-20150416/#example-countries-standard-ttl][the “standard” representation that preserves information about the tabular structure]].
 
    For one subject and predicate, there can be multiple objects.  In the CSV we had to cheat:
 
@@ -438,7 +474,7 @@ grep -A 3 '^wv:Hackathon' 5star_RDF/data.ttl
 :         rdfs:comment "an event of intensive collaboration on a software project" ;
 :         rdfs:seeAlso <http://dbpedia.org/resource/Hackathon> .
 
-   Here, we introduced a custom prefix to abbreviate the URI of our vocabulary.  Here's how prefixes work:
+   Here, we introduced a custom prefix to abbreviate the URI of our vocabulary.  Here's how prefixes are declared:
 #+NAME: code-rdf-prefix
 #+BEGIN_SRC sh :results output verbatim replace :exports results
 sed -ne '/@prefix/,/^$/p' 5star_RDF/data.ttl
@@ -457,13 +493,11 @@ sed -ne '/@prefix/,/^$/p' 5star_RDF/data.ttl
 
    This is just syntactic sugar, not part of the RDF data model.
 
-   Note that the =rdfs:seeAlso= link points to [[http://dbpedia.org][DBpedia]].
-
-   DBpedia is a linked dataset extracted from [[http://wikipedia.org][Wikipedia]].
+   Note that the =rdfs:seeAlso= link points to [[http://dbpedia.org][DBpedia]].  DBpedia is a linked dataset extracted from [[http://wikipedia.org][Wikipedia]].
 * ★★★★★☆ Further possible improvements
   Additional stars have been suggested for publishing data …
   * … that uses standard schemas – we've done this already.
-  * … whose quality has been checked – our group does research on this.
+  * … whose quality has been checked – [[http://eis-bonn.github.io/Luzzu/][our group does research on this]].
 
   Also recall that our original use case started from an HTML homepage.  With the following standards it's possible to embed linked data into HTML:
   * [[http://microformats.org/][Microformats]] (very basic)
@@ -481,12 +515,12 @@ sed -ne '/@prefix/,/^$/p' 5star_RDF/data.ttl
 
   Here is how you can cite this using BibTeX ([[http://www.ctan.org/pkg/biblatex][BibLaTeX]] recommended):
 #+BEGIN_SRC bibtex
-  @misc{Lange:5StarData,
+  @misc{Lange:5StarData2015,
     title = {Publishing 5-star Open Data},
     author = {Christoph Lange},
-    note = {Tutorial at the Web Intelligence Summer School ``Web of Data''},
-    year = {2014},
-    date = {2014-08-25},
+    note = {Tutorial at the Web Intelligence Summer School ``Answering Questions with the Web''},
+    year = {2015},
+    date = {2015-09-01},
     venue = {Saint-{\'E}tienne, France},
     url = {http://clange.github.io/5stardata-tutorial/},
   }
