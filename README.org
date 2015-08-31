@@ -12,7 +12,7 @@
 #+LINK_UP:
 #+LINK_HOME:
 #+XSLT:
-#+STYLE: <style type="text/css"> body { margin: 5px; } .timestamp { color: purple; font-weight: bold; } </style>
+#+HTML_HEAD: <style type="text/css"> body { margin: 5px !important; } .timestamp { color: purple; font-weight: bold; } </style>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
 
 A tutorial with practical examples of how to create and publish [[http://5stardata.info][5-star open data]] on the Web; originally written for the [[http://www.emse.fr/~zimmermann/WI_2014_Site/][2014 Web Intelligence Summer School “Web of Data”]] supported by \\
