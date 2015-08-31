@@ -320,9 +320,12 @@ head -n 3 4.5star_CSV/vocab.csv
 
    Let's make it explicit!
 
-#+CALL: code-csv-datatype-explicit()
+#+NAME: code-csv-datatype-explicit2
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+head -n 3 4.5star_CSV/schedule.csv
+#+END_SRC
 
-#+RESULTS:
+#+RESULTS: code-csv-datatype-explicit2
 : #,Time,Event,Type,Presenter,Location
 : type,time,string,url,url,string
 : ,2014-08-25T09:00:00+02:00,Introduction,,,
@@ -509,6 +512,8 @@ sed -ne '/@prefix/,/^$/p' 5star_RDF/data.ttl
   This summer school was funded by\\
 #+ATTR_HTML: :alt Université franco-allemande / Deutsch-Französische Hochschule
   [[file:images/ufa.png]]
+
+  This document was created with [[http://www.orgmode.org][Emacs Org mode]].
 * License and Citation
   [[https://i.creativecommons.org/l/by-sa/4.0/88x31.png]]\\
   This work is licensed under a [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Commons Attribution-ShareAlike 4.0 International License]].
