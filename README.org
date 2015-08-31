@@ -11,8 +11,7 @@
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+LINK_UP:
 #+LINK_HOME:
-#+XSLT:
-#+HTML_HEAD: <style type="text/css"> body { margin: 5px !important; } .timestamp { color: purple; font-weight: bold; } </style>
+#+HTML_HEAD: <style type="text/css"> body { margin: 5px !important; } .timestamp { color: purple; font-weight: bold; } a[href^='http://'], a[href^='https://'] { background: transparent url(data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%2210%22%3E%3Cg%20transform%3D%22translate%28-826.429%20-698.791%29%22%3E%3Crect%20width%3D%225.982%22%20height%3D%225.982%22%20x%3D%22826.929%22%20y%3D%22702.309%22%20fill%3D%22%23fff%22%20stroke%3D%22%2306c%22%2F%3E%3Cg%3E%3Cpath%20d%3D%22M831.194%20698.791h5.234v5.391l-1.571%201.545-1.31-1.31-2.725%202.725-2.689-2.689%202.808-2.808-1.311-1.311z%22%20fill%3D%22%2306f%22%2F%3E%3Cpath%20d%3D%22M835.424%20699.795l.022%204.885-1.817-1.817-2.881%202.881-1.228-1.228%202.881-2.881-1.851-1.851z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E) center right no-repeat; padding-right: 14px; } </style>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
 
 A tutorial with practical examples of how to create and publish [[http://5stardata.info][5-star open data]] on the Web; originally written for the [[http://www.emse.fr/~zimmermann/WI_2014_Site/][2014 Web Intelligence Summer School “Web of Data”]] supported by \\
@@ -61,7 +60,7 @@ perl -MSpreadsheet::ParseExcel -le '
   2. On each row of such a cell, get the entry of the cell in the “Time” column.
   3. Sort these cells and return the smallest value.
 
-  However, free software libraries do not support all features of this file format.  Here is what happens when we ask a popular free tool to determine the type of this file:
+  However, free software libraries do not support all features of this file format.  Here is what happens when we ask [[https://en.wikipedia.org/wiki/File_(command)][a popular free tool]] to determine the type of this file:
 #+NAME: code-file-xls
 #+BEGIN_SRC sh :results output replace :exports both
 file 2star_Excel/schedule.xls
@@ -108,7 +107,7 @@ Archive:  3star_OpenDocument/schedule.ods
    107002                     17 files
 #+end_example
 
-  [[file+sys:3star_OpenDocument/content.xml][content.xml]] contains the actual tabular data, so we can process it using XPath/XQuery/XSLT tools such as [[http://www.zorba.io][Zorba]]:
+  [[file+sys:3star_OpenDocument/content.xml][content.xml]] contains the actual tabular data, so we can process it using [[http://www.w3.org/TR/xpath20/][XPath]]/[[http://www.w3.org/TR/xquery-30/][XQuery]]/[[http://www.w3.org/TR/xslt-30/][XSLT]] tools such as [[http://www.zorba.io][Zorba]]:
 
 #+NAME: code-xquery-ods
 #+BEGIN_SRC sh :results output replace :exports both
@@ -123,7 +122,7 @@ zorba --serialize-text -q '
 #+RESULTS: code-xquery-ods
 : 25 Aug 2014 09:00
 
-  LibreOffice even stored this timestamp in a machine-friendly way.  We'll realise the advantages of this [[id:2e724ba4-6b8b-4bbc-bdf8-60f07e223620][later]].
+  [[http://www.libreoffice.org][LibreOffice]] even stored this timestamp in a machine-friendly way.  We'll realise the advantages of this [[id:2e724ba4-6b8b-4bbc-bdf8-60f07e223620][later]].
 
 #+NAME: code-xquery-ods-date
 #+BEGIN_SRC sh :results output replace :exports both
@@ -139,7 +138,7 @@ zorba --serialize-text -q '
 : 2014-08-25T09:00:00
 
 * ★★★☆ CSV
-  We need one CSV file per sheet:
+  We need one [[https://en.wikipedia.org/wiki/Comma-separated_values][CSV]] file per sheet:
   * [[file+emacs:3.5star_CSV/schedule.csv][schedule.csv]]
   * [[file+emacs:3.5star_CSV/presenters.csv][presenters.csv]]
 * ★★★★ CSV for the Web
@@ -147,7 +146,7 @@ zorba --serialize-text -q '
 
   From here onwards, [[http://5stardata.info/][the original 5-star open data examples]] use RDF.  We will continue with CSV for a while, taking it to its limits, to point out that open data on the Web is not /only/ RDF.  We will introduce RDF [[id:cce5ed53-2be0-44a0-9692-0a8e66213394][in a later section]].
 
-  The following examples roughly conform to [[http://jenit.github.io/linked-csv/][Linked CSV]], which was one of the original proposals for an RDF-conforming specification of CSV.  The [[http://www.w3.org/2013/csvw/][CSV on the Web Working Group]] is now taking a different approach, with their Working Draft on [[http://www.w3.org/TR/2015/WD-csv2rdf-20150416/][Generating RDF from Tabular Data on the Web]].  The latter leaves the CSV untouched and provides complementary, /external/ metadata annotations, e.g., in the form of JSON.  This tutorial sticks with the simpler Linked CSV approach, which is self-contained in CSV.
+  The following examples roughly conform to [[http://jenit.github.io/linked-csv/][Linked CSV]], which was one of the original proposals for an RDF-conforming specification of CSV.  The [[http://www.w3.org/2013/csvw/][CSV on the Web Working Group]] is now taking a different approach.  Their Working Draft on [[http://www.w3.org/TR/2015/WD-csv2rdf-20150416/][Generating RDF from Tabular Data on the Web]] suggests leaving the CSV untouched but providing complementary, /external/ metadata annotations, e.g., in the form of [[http://json.org/][JSON]].  This tutorial sticks with the simpler Linked CSV approach, which is self-contained in CSV.
 
   * [[file+emacs:4star_CSV/schedule.csv][schedule.csv]]
   * [[file+emacs:4star_CSV/presenters.csv][presenters.csv]]
@@ -174,10 +173,10 @@ fgrep "Markus Krötzsch" 3.5star_CSV/presenters.csv ;
 : ...
 : Markus Krötzsch,TU Dresden,Dresden,Germany
 
-  * How do we know it's twice the same instructor?
+  * How do we know it's twice [[http://korrekt.org/][the same instructor]]?
   * How can we make this connection Web-safe?  (There might be others by the same name; how about [[https://www.facebook.com/markus.krotzsch][this person on Facebook]]?)
   
-  Give the presenter a unique identifier!
+  Give the presenter a unique identifier!  On the Web, this means using a URI ([[https://en.wikipedia.org/wiki/Uniform_resource_identifier][Uniform Resource Identifier]]).
 #+NAME: code-csv-id-after
 #+BEGIN_SRC sh :results output verbatim replace :exports results
 head -n 1 4star_CSV/schedule.csv ;
@@ -204,7 +203,7 @@ fgrep "#markus" 4star_CSV/presenters.csv ;
    * use HTTP URLs for such URIs,
    * choose them from a namespace that /you/ own,
    * publish a machine-comprehensible, [[http://www.w3.org/2001/tag/doc/selfDescribingDocuments][self-describing]] representation of the things identified by these URIs at that same URL,
-   * so that any client who wants to know something about these things can easily look it up!
+   * so that any client who wants to know something about these things can easily look it up by downloading.
    This approach is called *[[http://www.w3.org/DesignIssues/LinkedData.html][linked data]]*.
 
    Linked data is essential for the [[http://www.w3.org/2001/sw/][Semantic Web]] – “a framework that allows data to be shared and reused across application, enterprise, and community boundaries”.
@@ -245,7 +244,7 @@ head -n 3 4star_CSV/schedule.csv
 : 2014-08-25T09:15:00+02:00,Keynote,Keynote,http://purl.org/net/wiss2014/presenters/#stefan,
 
 * ★★★★☆ CSV with a schema
-  Let's continue to make our CSV even more self-describing, by introducing a /schema/ (also called /vocabulary/ on the Web of Data).
+  Let's continue to make our CSV even more self-describing, by introducing a /schema/ (also called /vocabulary/ on the Web of Data, or /ontology/, especially when it involves more complex formal logic).
 
   * [[file+emacs:4.5star_CSV/schedule.csv][schedule.csv]]
   * [[file+emacs:4.5star_CSV/presenters.csv][presenters.csv]]
@@ -311,7 +310,7 @@ head -n 3 4.5star_CSV/vocab.csv
 : url,rdfs:label,rdfs:comment,rdfs:seeAlso
 : #Keynote,keynote,a talk that establishes a theme,http://en.wikipedia.org/wiki/Keynote
 
-   =rdfs:= is a well-known prefix that abbreviates a URI.  =rdfs:label= (actually: http://www.w3.org/2000/01/rdf-schema#label) once more is a vocabulary term, in a widely used standard vocabulary.  Its =rdfs:comment= is “A human-readable name for the subject.”.
+   =rdfs:= is a well-known prefix that abbreviates a URI.  =rdfs:label= (actually: http://www.w3.org/2000/01/rdf-schema#label) once more is a vocabulary term, in the widely used standard vocabulary [[http://www.w3.org/TR/rdf-schema/][RDF Schema]].  Its =rdfs:comment= is “A human-readable name for the subject.”.  So, RDF Schema is a vocabulary for describing vocabularies.  Such vocabularies are also known as /ontology languages/.
 ** Distinguishing data and metadata
    :PROPERTIES:
    :ID:       fb7888a0-4a51-4ee3-88bd-cfc881464814
@@ -363,7 +362,7 @@ head -n 3 4.5star_CSV/more/presenters.csv
 : ,http://purl.org/net/wiss2014/presenters/#soeren,Sören Auer,Universität Bonn;Fraunhofer IAIS,Bonn,Germany
 
    * We found a lot of reusable terms in standard vocabularies.
-   * [[http://lov.okfn.org][Linked Open Vocabularies (LOV)]] helps with that.
+   * [[http://lov.okfn.org][Linked Open Vocabularies (LOV)]] is a search engine that helps with this task.
    * Where didn't find perfectly reusable terms, we defined our own, in /our/ vocabulary.
 * ★★★★★ RDF (and a comparison to CSV)
   :PROPERTIES:
@@ -377,7 +376,7 @@ head -n 3 4.5star_CSV/more/presenters.csv
   
   Let's therefore redo our example in RDF, and discuss some differences from CSV.
 
-  * [[file+emacs:5star_RDF/data.ttl][data.ttl]] (Turtle, human-friendly)
+  * [[file+emacs:5star_RDF/data.ttl][data.ttl]] ([[http://www.w3.org/TR/turtle/][Turtle]], human-friendly)
   * [[file+emacs:5star_RDF/presenters.rdf][presenters.rdf]], [[file+emacs:5star_RDF/schedule.rdf][schedule.rdf]], [[file+emacs:5star_RDF/vocab.rdf][vocab.rdf]] (RDF/XML, widely understood by machines)
 
   (For purely pragmatic reasons, the Turtle, which is what I edit, is all-in-one, whereas the RDF/XML is in split files for easier deployment.)
@@ -392,11 +391,11 @@ grep -A 2 '^<#day1intro>' 5star_RDF/data.ttl
 :         dct:date "2014-08-25T09:00:00+02:00"^^xsd:date ;
 :         dct:title "Introduction" .
 
-   CSV is based on records (one per row, with a fixed number of columns).
+   CSV is based on /records/ (one per row, with a fixed number of columns).
 
-   RDF is based on triples (subject–predicate–object statements).
+   RDF is based on /triples/ (/subject–predicate–object/ /statements/).
 
-   Usually more than one triple belongs to a subject (“resource”), which is why it's convenient to group them.
+   Usually more than one triple belongs to a subject (/resource/), which is why it's convenient to group them.
 
    Usually every resource has an identifier.  (In the CSV, our events didn't have any.)
 
@@ -465,7 +464,7 @@ grep -A 4 '^<http://purl.org/net/wiss2014/presenters/#stefan>' 5star_RDF/data.tt
         wv:country "Ireland" .
 #+end_example
 
-   Vocabulary definitions are no problem in RDF either:
+   Vocabulary definitions are no problem in RDF either, as RDF Schema itself has an RDF-based syntax:
 #+NAME: code-rdf-vocab
 #+BEGIN_SRC sh :results output verbatim replace :exports results
 grep -A 3 '^wv:Hackathon' 5star_RDF/data.ttl
@@ -530,3 +529,7 @@ sed -ne '/@prefix/,/^$/p' 5star_RDF/data.ttl
     url = {http://clange.github.io/5stardata-tutorial/},
   }
 #+END_SRC
+* COMMENT Emacs setup
+Local Variables:
+org-export-babel-evaluate: nil
+End:
