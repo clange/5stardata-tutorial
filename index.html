@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2015-08-31 Mon 16:51 -->
+<!-- 2015-08-31 Mon 17:31 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Publishing 5-star Open Data</title>
@@ -94,7 +94,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<style type="text/css"> body { margin: 5px !important; } .timestamp { color: purple; font-weight: bold; } </style>
+<style type="text/css"> body { margin: 5px !important; } .timestamp { color: purple; font-weight: bold; } a[href^='http://'], a[href^='https://'] { background: transparent url(data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%2210%22%3E%3Cg%20transform%3D%22translate%28-826.429%20-698.791%29%22%3E%3Crect%20width%3D%225.982%22%20height%3D%225.982%22%20x%3D%22826.929%22%20y%3D%22702.309%22%20fill%3D%22%23fff%22%20stroke%3D%22%2306c%22%2F%3E%3Cg%3E%3Cpath%20d%3D%22M831.194%20698.791h5.234v5.391l-1.571%201.545-1.31-1.31-2.725%202.725-2.689-2.689%202.808-2.808-1.311-1.311z%22%20fill%3D%22%2306f%22%2F%3E%3Cpath%20d%3D%22M835.424%20699.795l.022%204.885-1.817-1.817-2.881%202.881-1.228-1.228%202.881-2.881-1.851-1.851z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E) center right no-repeat; padding-right: 14px; } </style>
 <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
 
 <script type="text/javascript" src="org-info.js">
@@ -331,7 +331,7 @@ Think of an algorithm that does the following:
 </ol>
 
 <p>
-However, free software libraries do not support all features of this file format.  Here is what happens when we ask a popular free tool to determine the type of this file:
+However, free software libraries do not support all features of this file format.  Here is what happens when we ask <a href="https://en.wikipedia.org/wiki/File_(command)">a popular free tool</a> to determine the type of this file:
 </p>
 <div class="org-src-container">
 
@@ -394,7 +394,7 @@ Archive:  3star_OpenDocument/schedule.ods
 </pre>
 
 <p>
-<a href="3star_OpenDocument/content.xml">content.xml</a> contains the actual tabular data, so we can process it using XPath/XQuery/XSLT tools such as <a href="http://www.zorba.io/">Zorba</a>:
+<a href="3star_OpenDocument/content.xml">content.xml</a> contains the actual tabular data, so we can process it using <a href="http://www.w3.org/TR/xpath20/">XPath</a>/<a href="http://www.w3.org/TR/xquery-30/">XQuery</a>/<a href="http://www.w3.org/TR/xslt-30/">XSLT</a> tools such as <a href="http://www.zorba.io/">Zorba</a>:
 </p>
 
 <div class="org-src-container">
@@ -413,7 +413,7 @@ Archive:  3star_OpenDocument/schedule.ods
 </pre>
 
 <p>
-LibreOffice even stored this timestamp in a machine-friendly way.  We'll realise the advantages of this <a href="#orgheadline4">later</a>.
+<a href="http://www.libreoffice.org/">LibreOffice</a> even stored this timestamp in a machine-friendly way.  We'll realise the advantages of this <a href="#orgheadline4">later</a>.
 </p>
 
 <div class="org-src-container">
@@ -437,7 +437,7 @@ LibreOffice even stored this timestamp in a machine-friendly way.  We'll realise
 <h2 id="orgheadline6"><span class="section-number-2">5</span> ★★★☆ CSV</h2>
 <div class="outline-text-2" id="text-5">
 <p>
-We need one CSV file per sheet:
+We need one <a href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> file per sheet:
 </p>
 <ul class="org-ul">
 <li><a href="3.5star_CSV/schedule.csv">schedule.csv</a></li>
@@ -457,7 +457,7 @@ From here onwards, <a href="http://5stardata.info/">the original 5-star open dat
 </p>
 
 <p>
-The following examples roughly conform to <a href="http://jenit.github.io/linked-csv/">Linked CSV</a>, which was one of the original proposals for an RDF-conforming specification of CSV.  The <a href="http://www.w3.org/2013/csvw/">CSV on the Web Working Group</a> is now taking a different approach, with their Working Draft on <a href="http://www.w3.org/TR/2015/WD-csv2rdf-20150416/">Generating RDF from Tabular Data on the Web</a>.  The latter leaves the CSV untouched and provides complementary, <i>external</i> metadata annotations, e.g., in the form of JSON.  This tutorial sticks with the simpler Linked CSV approach, which is self-contained in CSV.
+The following examples roughly conform to <a href="http://jenit.github.io/linked-csv/">Linked CSV</a>, which was one of the original proposals for an RDF-conforming specification of CSV.  The <a href="http://www.w3.org/2013/csvw/">CSV on the Web Working Group</a> is now taking a different approach.  Their Working Draft on <a href="http://www.w3.org/TR/2015/WD-csv2rdf-20150416/">Generating RDF from Tabular Data on the Web</a> suggests leaving the CSV untouched but providing complementary, <i>external</i> metadata annotations, e.g., in the form of <a href="http://json.org/">JSON</a>.  This tutorial sticks with the simpler Linked CSV approach, which is self-contained in CSV.
 </p>
 
 <ul class="org-ul">
@@ -484,12 +484,12 @@ Markus Krötzsch,TU Dresden,Dresden,Germany
 </pre>
 
 <ul class="org-ul">
-<li>How do we know it's twice the same instructor?</li>
+<li>How do we know it's twice <a href="http://korrekt.org/">the same instructor</a>?</li>
 <li>How can we make this connection Web-safe?  (There might be others by the same name; how about <a href="https://www.facebook.com/markus.krotzsch">this person on Facebook</a>?)</li>
 </ul>
 
 <p>
-Give the presenter a unique identifier!
+Give the presenter a unique identifier!  On the Web, this means using a URI (<a href="https://en.wikipedia.org/wiki/Uniform_resource_identifier">Uniform Resource Identifier</a>).
 </p>
 <pre class="example">
 Time,Event,Type,Presenter,Location
@@ -513,7 +513,7 @@ It is good practice to …
 <li>use HTTP URLs for such URIs,</li>
 <li>choose them from a namespace that <i>you</i> own,</li>
 <li>publish a machine-comprehensible, <a href="http://www.w3.org/2001/tag/doc/selfDescribingDocuments">self-describing</a> representation of the things identified by these URIs at that same URL,</li>
-<li>so that any client who wants to know something about these things can easily look it up!</li>
+<li>so that any client who wants to know something about these things can easily look it up by downloading.</li>
 </ul>
 <p>
 This approach is called <b><a href="http://www.w3.org/DesignIssues/LinkedData.html">linked data</a></b>.
@@ -572,7 +572,7 @@ Time,Event,Type,Presenter,Location
 <h2 id="orgheadline14"><span class="section-number-2">7</span> ★★★★☆ CSV with a schema</h2>
 <div class="outline-text-2" id="text-7">
 <p>
-Let's continue to make our CSV even more self-describing, by introducing a <i>schema</i> (also called <i>vocabulary</i> on the Web of Data).
+Let's continue to make our CSV even more self-describing, by introducing a <i>schema</i> (also called <i>vocabulary</i> on the Web of Data, or <i>ontology</i>, especially when it involves more complex formal logic).
 </p>
 
 <ul class="org-ul">
@@ -654,7 +654,7 @@ url,rdfs:label,rdfs:comment,rdfs:seeAlso
 </pre>
 
 <p>
-<code>rdfs:</code> is a well-known prefix that abbreviates a URI.  <code>rdfs:label</code> (actually: <a href="http://www.w3.org/2000/01/rdf-schema#label">http://www.w3.org/2000/01/rdf-schema#label</a>) once more is a vocabulary term, in a widely used standard vocabulary.  Its <code>rdfs:comment</code> is “A human-readable name for the subject.”.
+<code>rdfs:</code> is a well-known prefix that abbreviates a URI.  <code>rdfs:label</code> (actually: <a href="http://www.w3.org/2000/01/rdf-schema#label">http://www.w3.org/2000/01/rdf-schema#label</a>) once more is a vocabulary term, in the widely used standard vocabulary <a href="http://www.w3.org/TR/rdf-schema/">RDF Schema</a>.  Its <code>rdfs:comment</code> is “A human-readable name for the subject.”.  So, RDF Schema is a vocabulary for describing vocabularies.  Such vocabularies are also known as <i>ontology languages</i>.
 </p>
 </div>
 </div>
@@ -718,7 +718,7 @@ type,url,foaf:name,schema:affiliation,http://purl.org/net/wiss2014/vocab/#town,h
 
 <ul class="org-ul">
 <li>We found a lot of reusable terms in standard vocabularies.</li>
-<li><a href="http://lov.okfn.org/">Linked Open Vocabularies (LOV)</a> helps with that.</li>
+<li><a href="http://lov.okfn.org/">Linked Open Vocabularies (LOV)</a> is a search engine that helps with this task.</li>
 <li>Where didn't find perfectly reusable terms, we defined our own, in <i>our</i> vocabulary.</li>
 </ul>
 </div>
@@ -744,7 +744,7 @@ Let's therefore redo our example in RDF, and discuss some differences from CSV.
 </p>
 
 <ul class="org-ul">
-<li><a href="5star_RDF/data.ttl">data.ttl</a> (Turtle, human-friendly)</li>
+<li><a href="5star_RDF/data.ttl">data.ttl</a> (<a href="http://www.w3.org/TR/turtle/">Turtle</a>, human-friendly)</li>
 <li><a href="5star_RDF/presenters.rdf">presenters.rdf</a>, <a href="5star_RDF/schedule.rdf">schedule.rdf</a>, <a href="5star_RDF/vocab.rdf">vocab.rdf</a> (RDF/XML, widely understood by machines)</li>
 </ul>
 
@@ -759,15 +759,15 @@ Let's therefore redo our example in RDF, and discuss some differences from CSV.
 </pre>
 
 <p>
-CSV is based on records (one per row, with a fixed number of columns).
+CSV is based on <i>records</i> (one per row, with a fixed number of columns).
 </p>
 
 <p>
-RDF is based on triples (subject–predicate–object statements).
+RDF is based on <i>triples</i> (<i>subject–predicate–object</i> <i>statements</i>).
 </p>
 
 <p>
-Usually more than one triple belongs to a subject (“resource”), which is why it's convenient to group them.
+Usually more than one triple belongs to a subject (<i>resource</i>), which is why it's convenient to group them.
 </p>
 
 <p>
@@ -831,7 +831,7 @@ In RDF, that's no problem:
 </pre>
 
 <p>
-Vocabulary definitions are no problem in RDF either:
+Vocabulary definitions are no problem in RDF either, as RDF Schema itself has an RDF-based syntax:
 </p>
 <pre class="example">
 wv:Hackathon
@@ -935,7 +935,7 @@ Here is how you can cite this using BibTeX (<a href="http://www.ctan.org/pkg/bib
 <div id="postamble" class="status">
 <p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-09-01 Tue&gt;</span></span></p>
 <p class="author">Author: Christoph Lange</p>
-<p class="date">Created: 2015-08-31 Mon 16:51</p>
+<p class="date">Created: 2015-08-31 Mon 17:31</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
