@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2015-08-30 Sun 22:44 -->
+<!-- 2015-08-31 Mon 08:07 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Publishing 5-star Open Data</title>
@@ -94,6 +94,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
+<style type="text/css"> body { margin: 5px !important; } .timestamp { color: purple; font-weight: bold; } </style>
 <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
 
 <script type="text/javascript" src="org-info.js">
@@ -312,6 +313,10 @@ Even though the old binary *.xls format is proprietary, it is not impossible to 
 <p>
 Output:
 </p>
+<pre class="example">
+25 Aug 2014 09:00
+</pre>
+
 <p>
 It is harder, but still possible, to have questions answered such as “when is the first coffee break”.
 </p>
@@ -338,7 +343,7 @@ However, free software libraries do not support all features of this file format
 Output:
 </p>
 <pre class="example">
-2star_Excel/schedule.xls: Composite Document File V2 Document, Little Endian, Os: Windows, Version 6.2, Code page: 1252, Author: Christoph Lange, Last Saved By: Christoph Lange, Name of Creating Application: Microsoft Excel, Last Printed: Thu Aug 21 16:03:33 2014, Create Time/Date: Thu Aug 21 08:39:59 2014, Last Saved Time/Date: Thu Aug 21 17:18:05 2014, Security: 0
+2star_Excel/schedule.xls: Composite Document File V2 Document, corrupt: Can't read SSAT
 </pre>
 </div>
 </div>
@@ -367,25 +372,25 @@ We can process this file with standard tools:
 Archive:  3star_OpenDocument/schedule.ods
   Length      Date    Time    Name
 ---------  ---------- -----   ----
-       46  2014-08-21 15:07   mimetype
-    39881  2014-08-21 15:07   Thumbnails/thumbnail.png
-    27410  2014-08-21 15:07   styles.xml
-    34153  2014-08-21 15:07   content.xml
-      907  2014-08-21 15:07   meta.xml
-     8778  2014-08-21 15:07   settings.xml
-      899  2014-08-21 15:07   manifest.rdf
-        0  2014-08-21 15:07   Configurations2/accelerator/current.xml
-        0  2014-08-21 15:07   Configurations2/progressbar/
-        0  2014-08-21 15:07   Configurations2/statusbar/
-        0  2014-08-21 15:07   Configurations2/images/Bitmaps/
-        0  2014-08-21 15:07   Configurations2/floater/
-        0  2014-08-21 15:07   Configurations2/toolbar/
-        0  2014-08-21 15:07   Configurations2/popupmenu/
-        0  2014-08-21 15:07   Configurations2/toolpanel/
-        0  2014-08-21 15:07   Configurations2/menubar/
-     1093  2014-08-21 15:07   META-INF/manifest.xml
+       46  08-21-2014 08:13   mimetype
+    52832  08-21-2014 08:13   Thumbnails/thumbnail.png
+    27279  08-21-2014 08:13   styles.xml
+    15227  08-21-2014 08:13   content.xml
+      852  08-21-2014 08:13   meta.xml
+     8774  08-21-2014 08:13   settings.xml
+      899  08-21-2014 08:13   manifest.rdf
+        0  08-21-2014 08:13   Configurations2/accelerator/current.xml
+        0  08-21-2014 08:13   Configurations2/progressbar/
+        0  08-21-2014 08:13   Configurations2/statusbar/
+        0  08-21-2014 08:13   Configurations2/images/Bitmaps/
+        0  08-21-2014 08:13   Configurations2/floater/
+        0  08-21-2014 08:13   Configurations2/toolbar/
+        0  08-21-2014 08:13   Configurations2/popupmenu/
+        0  08-21-2014 08:13   Configurations2/toolpanel/
+        0  08-21-2014 08:13   Configurations2/menubar/
+     1093  08-21-2014 08:13   META-INF/manifest.xml
 ---------                     -------
-   113167                     17 files
+   107002                     17 files
 </pre>
 
 <p>
@@ -512,6 +517,10 @@ It is good practice to …
 </ul>
 <p>
 This approach is called <b><a href="http://www.w3.org/DesignIssues/LinkedData.html">linked data</a></b>.
+</p>
+
+<p>
+Linked data is essential for the <a href="http://www.w3.org/2001/sw/">Semantic Web</a> – “a framework that allows data to be shared and reused across application, enterprise, and community boundaries”.
 </p>
 </div>
 </div>
@@ -661,9 +670,7 @@ Let's make it explicit!
 </p>
 
 <pre class="example">
-#,Time,Event,Type,Presenter,Location
-type,time,string,url,url,string
-,2014-08-25T09:00:00+02:00,Introduction,,,
+nil
 </pre>
 
 <ul class="org-ul">
@@ -694,7 +701,7 @@ Schedule:
 </p>
 <pre class="example">
 #,Time,Event,Type,Presenter,Location
-type,dct:date,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,schema:location
+type,dct:date,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,http://linkedevents.org/ontology/atPlace
 ,2014-08-25T09:15:00+02:00,Keynote,http://purl.org/net/wiss2014/vocab/#Keynote,http://purl.org/net/wiss2014/presenters/#stefan,
 </pre>
 
@@ -771,7 +778,7 @@ You can precisely indicate the datatype of an object, but you also <i>have</i> t
 
 <pre class="example">
 &lt;#day1keynote&gt;
-        rdf:type wv:Keynote ;
+        a wv:Keynote ;
         dct:date "2014-08-25T09:15:00+02:00"^^xsd:date ;
         dct:title "Keynote" ;
         marcrel:pre &lt;http://purl.org/net/wiss2014/presenters/#stefan&gt; .
@@ -784,6 +791,12 @@ It's no problem for different resources to have different numbers of properties.
 <p>
 Compare sparsely populated CSV:
 </p>
+<pre class="example">
+#,Time,Event,Type,Presenter,Location
+type,dct:date,dct:title,rdf:type,http://id.loc.gov/vocabulary/relators/pre,schema:location
+,2014-08-25T09:00:00+02:00,Introduction,,,
+</pre>
+
 <p>
 On the other hand, the CSV data model has a built-in order, which RDF does not have.  Order can be expressed in RDF, but doing so leads to a high complexity.  In the specification on <a href="http://www.w3.org/TR/2015/WD-csv2rdf-20150416/">Generating RDF from Tabular Data on the Web</a>, compare <a href="http://www.w3.org/TR/2015/WD-csv2rdf-20150416/#example-countries-minimal-ttl">the “minimal” RDF representation of a CSV table</a> to <a href="http://www.w3.org/TR/2015/WD-csv2rdf-20150416/#example-countries-standard-ttl">the “standard” representation that preserves information about the tabular structure</a>.
 </p>
@@ -791,6 +804,11 @@ On the other hand, the CSV data model has a built-in order, which RDF does not h
 <p>
 For one subject and predicate, there can be multiple objects.  In the CSV we had to cheat:
 </p>
+
+<pre class="example">
+,2014-08-26T18:00:00+02:00,Hackathon dinner,http://purl.org/net/wiss2014/vocab/#Dinner;http://purl.org/net/wiss2014/vocab/#Hackathon,,Maison des Élèves
+,http://purl.org/net/wiss2014/presenters/#stefan,Stefan Decker,INSIGHT;National University of Ireland,Galway,Ireland
+</pre>
 
 <p>
 In RDF, that's no problem:
@@ -894,12 +912,12 @@ Here is how you can cite this using BibTeX (<a href="http://www.ctan.org/pkg/bib
 </p>
 <div class="org-src-container">
 
-<pre class="src src-bibtex"><span style="color: #0000ff;">@misc</span>{<span style="color: #008b8b;">Lange:5StarData</span>,
+<pre class="src src-bibtex"><span style="color: #0000ff;">@misc</span>{<span style="color: #008b8b;">Lange:5StarData2015</span>,
   <span style="color: #a0522d;">title</span> = {Publishing 5-star Open Data},
   <span style="color: #a0522d;">author</span> = {Christoph Lange},
-  <span style="color: #a0522d;">note</span> = {Tutorial at the Web Intelligence Summer School ``Web of Data''},
-  <span style="color: #a0522d;">year</span> = {2014},
-  <span style="color: #a0522d;">date</span> = {2014-08-25},
+  <span style="color: #a0522d;">note</span> = {Tutorial at the Web Intelligence Summer School ``Answering Questions with the Web''},
+  <span style="color: #a0522d;">year</span> = {2015},
+  <span style="color: #a0522d;">date</span> = {2015-09-01},
   <span style="color: #a0522d;">venue</span> = {Saint-{\'E}tienne, France},
   <span style="color: #a0522d;">url</span> = {<span style="color: #3a5fcd; text-decoration: underline;">http://clange.github.io/5stardata-tutorial/</span>},
 }
@@ -911,7 +929,7 @@ Here is how you can cite this using BibTeX (<a href="http://www.ctan.org/pkg/bib
 <div id="postamble" class="status">
 <p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-09-01 Tue&gt;</span></span></p>
 <p class="author">Author: Christoph Lange</p>
-<p class="date">Created: 2015-08-30 Sun 22:44</p>
+<p class="date">Created: 2015-08-31 Mon 08:07</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
