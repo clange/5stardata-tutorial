@@ -22,10 +22,13 @@ and updated for the [[https://wiss.univ-st-etienne.fr/][2015 Web Intelligence Su
 Published online at http://clange.github.io/5stardata-tutorial/
 
 * Use case: event schedule and presenters of a summer school
+  :PROPERTIES:
+  :ID:       3ae45ca2-ebb0-4163-b94c-109fbf470b6b
+  :END:
   Original data (HTML): [[http://www.emse.fr/~zimmermann/WI_2014_Site/Programme/][schedule]], [[http://www.emse.fr/~zimmermann/WI_2014_Site/Committee/][presenters]]
 
 * ★ PDF
-  [[http://5stardata.info/#addendum1][Cost and benefits of ★ Web data]]
+  [[http://5stardata.info/en/#addendum1][Cost and benefits of ★ Web data]]
 
   [[file+sys:1star_PDF/schedule.pdf][schedule.pdf]]
 
@@ -34,7 +37,7 @@ Published online at http://clange.github.io/5stardata-tutorial/
   :PROPERTIES:
   :ID:       2717d69f-f50d-47af-9fce-78eed20214d7
   :END:
-  [[http://5stardata.info/#addendum2][Cost and benefits of ★★ Web data]]
+  [[http://5stardata.info/en/#addendum2][Cost and benefits of ★★ Web data]]
   
   [[file+sys:2star_Excel/schedule.xls][schedule.xls]]
 
@@ -71,7 +74,7 @@ file 2star_Excel/schedule.xls
 : 2star_Excel/schedule.xls: Composite Document File V2 Document, corrupt: Can't read SSAT
 
 * ★★★ OpenDocument (*.ods)
-  [[http://5stardata.info/#addendum3][Cost and benefits of ★★★ Web data]]
+  [[http://5stardata.info/en/#addendum3][Cost and benefits of ★★★ Web data]]
 
   [[file+sys:3star_OpenDocument/schedule.ods][schedule.ods]]
 
@@ -142,7 +145,7 @@ zorba --serialize-text -q '
   * [[file+emacs:3.5star_CSV/schedule.csv][schedule.csv]]
   * [[file+emacs:3.5star_CSV/presenters.csv][presenters.csv]]
 * ★★★★ CSV for the Web
-  [[http://5stardata.info/#addendum4][Cost and benefits of ★★★★ Web data]]
+  [[http://5stardata.info/en/#addendum4][Cost and benefits of ★★★★ Web data]]
 
   From here onwards, [[http://5stardata.info/][the original 5-star open data examples]] use RDF.  We will continue with CSV for a while, taking it to its limits, to point out that open data on the Web is not /only/ RDF.  We will introduce RDF [[id:cce5ed53-2be0-44a0-9692-0a8e66213394][in a later section]].
 
@@ -368,7 +371,7 @@ head -n 3 4.5star_CSV/more/presenters.csv
   :PROPERTIES:
   :ID:       cce5ed53-2be0-44a0-9692-0a8e66213394
   :END:
-  [[http://5stardata.info/#addendum5][Cost and benefits of ★★★★★ Web data]]
+  [[http://5stardata.info/en/#addendum5][Cost and benefits of ★★★★★ Web data]]
 
   More widely than CSV, the /[[http://www.w3.org/RDF/][RDF]]/ data model is used for linked data.
 
@@ -501,7 +504,7 @@ sed -ne '/@prefix/,/^$/p' 5star_RDF/data.ttl
   * … that uses standard schemas – we've done this already.
   * … whose quality has been checked – [[http://eis-bonn.github.io/Luzzu/][our group does research on this]].
 
-  Also recall that our original use case started from an HTML homepage.  With the following standards it's possible to embed linked data into HTML:
+  Also recall that [[id:3ae45ca2-ebb0-4163-b94c-109fbf470b6b][our original use case started from an HTML homepage]].  With the following standards it's possible to embed linked data into HTML:
   * [[http://microformats.org/][Microformats]] (very basic)
   * [[http://www.w3.org/TR/microdata/][Microdata]] (more powerful; emphasizes syntactic conciseness)
   * [[http://rdfa.info][RDFa]] (widest support of the RDF data model) – try it with http://rdfa.info/play/!
@@ -513,6 +516,8 @@ sed -ne '/@prefix/,/^$/p' 5star_RDF/data.ttl
   [[file:images/ufa.png]]
 
   This document was created with [[http://www.orgmode.org][Emacs Org mode]].
+
+  The icon for highlighting external links is reused from [[http://www.mediawiki.org][MediaWiki]], developed by the [[http://www.wikimediafoundation.org][Wikimedia Foundation]].  Its source code is licensed under [[https://www.gnu.org/licenses/old-licenses/gpl-2.0.html][GPL version 2]] and whose homepage content is licensed under the [[https://creativecommons.org/licenses/by-sa/3.0/][Creative Commons Attribute-ShareAlike 3.0 Unported License]].
 * License and Citation
   [[https://i.creativecommons.org/l/by-sa/4.0/88x31.png]]\\
   This work is licensed under a [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Commons Attribution-ShareAlike 4.0 International License]].
