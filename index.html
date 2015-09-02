@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2015-09-01 Tue 19:05 -->
+<!-- 2015-09-02 Wed 11:52 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Publishing 5-star Open Data</title>
@@ -156,7 +156,7 @@ for the JavaScript code in this tag.
 */
 
 <!--/*--><![CDATA[/*><!--*/
-org_html_manager.set("TOC_DEPTH", "2");
+org_html_manager.set("TOC_DEPTH", "4");
 org_html_manager.set("LINK_HOME", "");
 org_html_manager.set("LINK_UP", "");
 org_html_manager.set("LOCAL_TOC", "1");
@@ -227,24 +227,36 @@ for the JavaScript code in this tag.
 <li><a href="#orgheadline2">3. ★★ Excel (*.xls)</a></li>
 <li><a href="#orgheadline5">4. ★★★ OpenDocument (*.ods)</a></li>
 <li><a href="#orgheadline6">5. ★★★☆ CSV</a></li>
-<li><a href="#orgheadline9">6. ★★★★ CSV for the Web</a>
+<li><a href="#orgheadline11">6. ★★★★ CSV for the Web</a>
 <ul>
-<li><a href="#orgheadline8">6.1. Links using Web-scale identifiers</a></li>
+<li><a href="#orgheadline10">6.1. Links using Web-scale identifiers</a>
+<ul>
+<li><a href="#orgheadline8">6.1.1. Dereferencing Linked Data Identifiers</a>
+<ul>
+<li><a href="#orgheadline9">6.1.1.1. Dereferencing Example with cURL</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#orgheadline4">6.2. Datatypes</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline14">7. ★★★★☆ CSV with a schema</a>
+<li><a href="#orgheadline16">7. ★★★★☆ CSV with a schema</a>
 <ul>
-<li><a href="#orgheadline10">7.1. A vocabulary of domain-specific concepts</a></li>
-<li><a href="#orgheadline12">7.2. An explicit description of types</a></li>
-<li><a href="#orgheadline11">7.3. Distinguishing data and metadata</a></li>
-<li><a href="#orgheadline13">7.4. More precise types for data columns</a></li>
+<li><a href="#orgheadline12">7.1. A vocabulary of domain-specific concepts</a></li>
+<li><a href="#orgheadline14">7.2. An explicit description of types</a></li>
+<li><a href="#orgheadline13">7.3. Distinguishing data and metadata</a></li>
+<li><a href="#orgheadline15">7.4. More precise types for data columns</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline7">8. ★★★★★ RDF (and a comparison to CSV)</a></li>
-<li><a href="#orgheadline15">9. ★★★★★☆ Further possible improvements</a></li>
-<li><a href="#orgheadline16">10. Credits</a></li>
-<li><a href="#orgheadline17">11. License and Citation</a></li>
+<li><a href="#orgheadline7">8. ★★★★★ RDF (and a comparison to CSV)</a>
+<ul>
+<li><a href="#orgheadline17">8.1. Publishing RDF</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline18">9. ★★★★★☆ Further possible improvements</a></li>
+<li><a href="#orgheadline19">10. Credits</a></li>
+<li><a href="#orgheadline20">11. License and Citation</a></li>
 </ul>
 </div>
 </div>
@@ -445,8 +457,8 @@ We need one <a href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9"><span class="section-number-2">6</span> ★★★★ CSV for the Web</h2>
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11"><span class="section-number-2">6</span> ★★★★ CSV for the Web</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 <a href="http://5stardata.info/en/#addendum4">Cost and benefits of ★★★★ Web data</a>
@@ -466,8 +478,8 @@ The following examples roughly conform to <a href="http://jenit.github.io/linked
 </ul>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8"><span class="section-number-3">6.1</span> Links using Web-scale identifiers</h3>
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10"><span class="section-number-3">6.1</span> Links using Web-scale identifiers</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 An example from the 3.5-star CSV:
@@ -523,7 +535,131 @@ This approach is called <b><a href="http://www.w3.org/DesignIssues/LinkedData.ht
 Linked data is essential for the <a href="http://www.w3.org/2001/sw/">Semantic Web</a> – “a framework that allows data to be shared and reused across application, enterprise, and community boundaries”.
 </p>
 </div>
+<div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8"><a id="ID-554eace2-d4e6-41d0-a6e4-a5814a034725"></a><span class="section-number-4">6.1.1</span> Dereferencing Linked Data Identifiers</h4>
+<div class="outline-text-4" id="text-6-1-1">
+<p>
+The presenters in the summer school are now identified by URIs such as <a href="http://purl.org/net/wiss2014/presenters/#markus">http://purl.org/net/wiss2014/presenters/#markus</a>.  As these are HTTP URLs, they can be <i>dereferenced</i> in order to download a description of a person.  This is easiest to do by entering the URL into the address bar of a web browser, but a command-line HTTP client such as <a href="http://www.gnu.org/software/wget/">wget</a> or <a href="http://curl.haxx.se/">cURL</a> gives you more control.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh" id="orgsrcblock6">wget -O - --header <span style="color: #8b2252;">'Accept: text/csv'</span> <span style="color: #8b2252;">'http://purl.org/net/wiss2014/presenters/#markus'</span>
+</pre>
 </div>
+<pre class="example">
+--2015-09-02 11:21:11--  http://purl.org/net/wiss2014/presenters/
+Resolving purl.org (purl.org)... 132.174.1.35
+Connecting to purl.org (purl.org)|132.174.1.35|:80... connected.
+HTTP request sent, awaiting response... 302 Moved Temporarily
+Location: http://www.iai.uni-bonn.de/~langec/wiss2014/presenters/ [following]
+--2015-09-02 11:21:11--  http://www.iai.uni-bonn.de/~langec/wiss2014/presenters/
+Resolving www.iai.uni-bonn.de (www.iai.uni-bonn.de)... 131.220.8.244
+Connecting to www.iai.uni-bonn.de (www.iai.uni-bonn.de)|131.220.8.244|:80... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: http://www.iai.uni-bonn.de/~langec/wiss2014/presenters/index.csv [following]
+--2015-09-02 11:21:11--  http://www.iai.uni-bonn.de/~langec/wiss2014/presenters/index.csv
+Reusing existing connection to www.iai.uni-bonn.de:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 1499 (1.5K) [text/csv]
+Saving to: 'STDOUT'
+#,$id,Name,Affiliation,Town,Country
+type,url,foaf:name,schema:affiliation,http://purl.org/net/wiss2014/vocab/#town,http://purl.org/net/wiss2014/vocab/#country
+,http://purl.org/net/wiss2014/presenters/#soeren,Sören Auer,Universität Bonn;Fraunhofer IAIS,Bonn,Germany
+,http://purl.org/net/wiss2014/presenters/#mathieu,Mathieu d'Aquin,,Milton Keynes,UK
+,http://purl.org/net/wiss2014/presenters/#aba-sah,Aba-Sah Dadzie,University of Birmingham,Birmingham,UK
+,http://purl.org/net/wiss2014/presenters/#jerome,Jérôme David,Université Pierre-Mendès-France;INRIA-LIG,Grenoble,France
+,http://purl.org/net/wiss2014/presenters/#stefan,Stefan Decker,INSIGHT;National University of Ireland,Galway,Ireland
+,http://purl.org/net/wiss2014/presenters/#paul,Paul Groth,VU Amsterdam,Amsterdam,Netherlands
+,http://purl.org/net/wiss2014/presenters/#markus,Markus Krötzsch,TU Dresden,Dresden,Germany
+,http://purl.org/net/wiss2014/presenters/#christoph,Christoph Lange,Universität Bonn;Fraunhofer IAIS,Bonn,Germany
+,http://purl.org/net/wiss2014/presenters/#axel,Axel Polleres,WU Wien,Vienna,Austria
+,http://purl.org/net/wiss2014/presenters/#eric,Eric Prud'hommeaux,W3C,,
+,http://purl.org/net/wiss2014/presenters/#harald,Harald Sack,"HPI, Universität Potsdam",Potsdam,Germany
+,http://purl.org/net/wiss2014/presenters/#thomas,Thomas Steiner,Université Lyon;Google,Lyon,France
+,http://purl.org/net/wiss2014/presenters/#antoine,Antoine Zimmermann,École des mines de Saint-Étienne,Saint-Étienne,France
+
+     0K .                                                     100% 17.7M=0s
+
+2015-09-02 11:21:11 (17.7 MB/s) - written to stdout [1499/1499]
+</pre>
+<p>
+I will not go into full detail, but here are some observations, in the order of appearance:
+</p>
+<ul class="org-ul">
+<li>I actually published the data in a place easily accessible for me: my personal webspace at the University of Bonn.</li>
+<li>To publish the data in a sustainable way, independent from me leaving the University of Bonn, or the University of Bonn reorganising their IT infrastructure, I used the <a href="https://purl.org/">PURL</a> (Persistent URL) redirection service.</li>
+<li>The first redirect is due to the use of PURL.</li>
+<li>The second redirect happens because we are using <a href="https://en.wikipedia.org/wiki/Content_negotiation">content negotiation</a> to give data consumers a choice from multiple data formats.  We will see another format, RDF/XML, below.</li>
+<li>Instead of just the description of Markus Krötzsch, we get the descriptions of all presenters.  This is because we lazily published all descriptions in the same file on the server and used hash (#) URIs for them.  This approach is OK for small amounts of data.  The part after the hash has to be interpreted by the client.  Here, the client actually downloads <a href="http://purl.org/net/wiss2014/presenters/">http://purl.org/net/wiss2014/presenters/</a> from the server and then has to locate, inside the downloaded document, the <i>fragment</i> <code>#markus</code> by its own means.</li>
+</ul>
+
+<p>
+Further background on publishing data on the Web can be found in the following specifications:
+</p>
+<ul class="org-ul">
+<li><a href="http://www.w3.org/TR/cooluris/">Cool URIs for the Semantic Web</a>: how to choose the right URIs (hash vs. slash), how to design content negotiation</li>
+<li><a href="http://www.w3.org/TR/swbp-vocab-pub/">Best Practice Recipes for Publishing RDF Vocabularies</a> (actually also addresses datasets, as vocabularies are just a special case of that): how to configure the <a href="http://httpd.apache.org/">Apache HTTP server</a> for these settings</li>
+</ul>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-5">
+<h5 id="orgheadline9"><span class="section-number-5">6.1.1.1</span> Dereferencing Example with cURL</h5>
+<div class="outline-text-5" id="text-6-1-1-1">
+<p>
+Here is the same example <a href="#orgheadline8">as above</a>, redone using <a href="http://curl.haxx.se/">cURL</a>:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh" id="orgsrcblock7">curl -i -H <span style="color: #8b2252;">'Accept: text/csv'</span> -L <span style="color: #8b2252;">'http://purl.org/net/wiss2014/presenters/#markus'</span>
+</pre>
+</div>
+<pre class="example">
+HTTP/1.1 302 Moved Temporarily
+Date: Wed, 02 Sep 2015 09:24:08 GMT
+Server: 1060 NetKernel v3.3 - Powered by Jetty
+Location: http://www.iai.uni-bonn.de/~langec/wiss2014/presenters/
+Content-Type: text/html; charset=iso-8859-1
+X-Purl: 2.0; http://localhost:8080
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Content-Length: 288
+
+HTTP/1.1 302 Found
+Date: Wed, 02 Sep 2015 09:24:08 GMT
+Server: Apache
+Location: http://www.iai.uni-bonn.de/~langec/wiss2014/presenters/index.csv
+Content-Length: 248
+Content-Type: text/html; charset=iso-8859-1
+
+HTTP/1.1 200 OK
+Date: Wed, 02 Sep 2015 09:24:08 GMT
+Server: Apache
+Last-Modified: Tue, 26 Aug 2014 04:44:11 GMT
+ETag: "5db-50180f4611cc0"
+Accept-Ranges: bytes
+Content-Length: 1499
+Content-Type: text/csv
+
+#,$id,Name,Affiliation,Town,Country
+type,url,foaf:name,schema:affiliation,http://purl.org/net/wiss2014/vocab/#town,http://purl.org/net/wiss2014/vocab/#country
+,http://purl.org/net/wiss2014/presenters/#soeren,Sören Auer,Universität Bonn;Fraunhofer IAIS,Bonn,Germany
+,http://purl.org/net/wiss2014/presenters/#mathieu,Mathieu d'Aquin,,Milton Keynes,UK
+,http://purl.org/net/wiss2014/presenters/#aba-sah,Aba-Sah Dadzie,University of Birmingham,Birmingham,UK
+,http://purl.org/net/wiss2014/presenters/#jerome,Jérôme David,Université Pierre-Mendès-France;INRIA-LIG,Grenoble,France
+,http://purl.org/net/wiss2014/presenters/#stefan,Stefan Decker,INSIGHT;National University of Ireland,Galway,Ireland
+,http://purl.org/net/wiss2014/presenters/#paul,Paul Groth,VU Amsterdam,Amsterdam,Netherlands
+,http://purl.org/net/wiss2014/presenters/#markus,Markus Krötzsch,TU Dresden,Dresden,Germany
+,http://purl.org/net/wiss2014/presenters/#christoph,Christoph Lange,Universität Bonn;Fraunhofer IAIS,Bonn,Germany
+,http://purl.org/net/wiss2014/presenters/#axel,Axel Polleres,WU Wien,Vienna,Austria
+,http://purl.org/net/wiss2014/presenters/#eric,Eric Prud'hommeaux,W3C,,
+,http://purl.org/net/wiss2014/presenters/#harald,Harald Sack,"HPI, Universität Potsdam",Potsdam,Germany
+,http://purl.org/net/wiss2014/presenters/#thomas,Thomas Steiner,Université Lyon;Google,Lyon,France
+,http://purl.org/net/wiss2014/presenters/#antoine,Antoine Zimmermann,École des mines de Saint-Étienne,Saint-Étienne,France
+</pre>
+</div>
+</div>
+</div>
+</div>
+
 <div id="outline-container-orgheadline4" class="outline-3">
 <h3 id="orgheadline4"><a id="ID-2e724ba4-6b8b-4bbc-bdf8-60f07e223620"></a><span class="section-number-3">6.2</span> Datatypes</h3>
 <div class="outline-text-3" id="text-6-2">
@@ -568,8 +704,8 @@ Time,Event,Type,Presenter,Location
 </div>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-2">
-<h2 id="orgheadline14"><span class="section-number-2">7</span> ★★★★☆ CSV with a schema</h2>
+<div id="outline-container-orgheadline16" class="outline-2">
+<h2 id="orgheadline16"><span class="section-number-2">7</span> ★★★★☆ CSV with a schema</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Let's continue to make our CSV even more self-describing, by introducing a <i>schema</i> (also called <i>vocabulary</i> on the Web of Data, or <i>ontology</i>, especially when it involves more complex formal logic).
@@ -580,8 +716,8 @@ Let's continue to make our CSV even more self-describing, by introducing a <i>sc
 <li><a href="4.5star_CSV/presenters.csv">presenters.csv</a></li>
 </ul>
 </div>
-<div id="outline-container-orgheadline10" class="outline-3">
-<h3 id="orgheadline10"><span class="section-number-3">7.1</span> A vocabulary of domain-specific concepts</h3>
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12"><span class="section-number-3">7.1</span> A vocabulary of domain-specific concepts</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 We introduced linked data style URIs for the presenters (so that they describe themselves); let's also do it for other concepts, e.g. the types of presentations.
@@ -612,8 +748,8 @@ The relative URI <code>#Keynote</code> works out if this file is published at <a
 </div>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-3">
-<h3 id="orgheadline12"><span class="section-number-3">7.2</span> An explicit description of types</h3>
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14"><span class="section-number-3">7.2</span> An explicit description of types</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 We introduced ISO 8601 timestamps, but how does a client <i>know</i>, without having to resort to heuristics, that the first column of <code>schedule.csv</code> is intended to be an ISO 8601 timestamp?
@@ -641,7 +777,7 @@ type,time,string,url,url,string
 </pre>
 
 <p>
-(We'll get to the structure of the new, first column <a href="#orgheadline11">later</a>.)
+(We'll get to the structure of the new, first column <a href="#orgheadline13">later</a>.)
 </p>
 
 <p>
@@ -658,8 +794,8 @@ url,rdfs:label,rdfs:comment,rdfs:seeAlso
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline11" class="outline-3">
-<h3 id="orgheadline11"><a id="ID-fb7888a0-4a51-4ee3-88bd-cfc881464814"></a><span class="section-number-3">7.3</span> Distinguishing data and metadata</h3>
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13"><a id="ID-fb7888a0-4a51-4ee3-88bd-cfc881464814"></a><span class="section-number-3">7.3</span> Distinguishing data and metadata</h3>
 <div class="outline-text-3" id="text-7-3">
 <p>
 When a CSV has a type declaration row such as <code>url,rdfs:label,rdfs:comment,rdfs:seeAlso</code>, how do we know that this is metadata rather than data?
@@ -681,8 +817,8 @@ type,time,string,url,url,string
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="orgheadline13"><span class="section-number-3">7.4</span> More precise types for data columns</h3>
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15"><span class="section-number-3">7.4</span> More precise types for data columns</h3>
 <div class="outline-text-3" id="text-7-4">
 <ul class="org-ul">
 <li>Is the title of an event really just a string?</li>
@@ -862,9 +998,61 @@ This is just syntactic sugar, not part of the RDF data model.
 Note that the <code>rdfs:seeAlso</code> link points to <a href="http://dbpedia.org/">DBpedia</a>.  DBpedia is a linked dataset extracted from <a href="http://wikipedia.org/">Wikipedia</a>.
 </p>
 </div>
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17"><span class="section-number-3">8.1</span> Publishing RDF</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+Linked data clients usually expect data to be published as RDF, and RDF/XML is the most widely supported serialization of RDF.  Therefore, we have also published our data as RDF/XML:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh" id="orgsrcblock8">wget --quiet -O - --header <span style="color: #8b2252;">'Accept: text/rdf+xml'</span> <span style="color: #8b2252;">'http://purl.org/net/wiss2014/presenters/#markus'</span>
+</pre>
 </div>
-<div id="outline-container-orgheadline15" class="outline-2">
-<h2 id="orgheadline15"><span class="section-number-2">9</span> ★★★★★☆ Further possible improvements</h2>
+
+<pre class="example">
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"&gt;
+  &lt;rdf:Description rdf:about="http://purl.org/net/wiss2014/presenters/#stefan"&gt;
+    &lt;ns1:country xmlns:ns1="http://purl.org/net/wiss2014/vocab/#"&gt;Ireland&lt;/ns1:country&gt;
+    &lt;ns2:town xmlns:ns2="http://purl.org/net/wiss2014/vocab/#"&gt;Galway&lt;/ns2:town&gt;
+    &lt;ns3:affiliation xmlns:ns3="http://schema.org/"&gt;INSIGHT&lt;/ns3:affiliation&gt;
+    &lt;ns4:affiliation xmlns:ns4="http://schema.org/"&gt;National University of Ireland&lt;/ns4:affiliation&gt;
+    &lt;ns5:name xmlns:ns5="http://xmlns.com/foaf/0.1/"&gt;Stefan Decker&lt;/ns5:name&gt;
+  &lt;/rdf:Description&gt;
+&lt;/rdf:RDF&gt;
+</pre>
+<p>
+A few notes:
+</p>
+<ul class="org-ul">
+<li>This RDF/XML was auto-generated from the Turtle source and therefore looks a bit unfriendly.</li>
+<li>Additionally, it is good practice to also publish a human-comprehensible version of your data in HTML.  Here, we did not do this.</li>
+<li>We configured RDF/XML to be the content served by default.  Therefore, it is also served when no specific content type is requested via the <code>Accept</code> HTTP request header.</li>
+</ul>
+
+<p>
+This is the <code>.htaccess</code> configuration file that implements this behaviour in the Apache web server:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-htaccess">AddType application/rdf+xml .rdf
+AddType text/csv .csv
+
+RewriteEngine On
+RewriteBase /~langec/wiss2014/
+RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/csv)
+RewriteCond %{HTTP_ACCEPT} text/csv
+RewriteRule ^(presenters|schedule|vocab)/$ $1/index.csv [R=302]
+
+RewriteRule ^(presenters|schedule|vocab)/$ $1/index.rdf [R=302]
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline18" class="outline-2">
+<h2 id="orgheadline18"><span class="section-number-2">9</span> ★★★★★☆ Further possible improvements</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 Additional stars have been suggested for publishing data …
@@ -884,8 +1072,8 @@ Also recall that <a href="#orgheadline1">our original use case started from an H
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline16" class="outline-2">
-<h2 id="orgheadline16"><span class="section-number-2">10</span> Credits</h2>
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19"><span class="section-number-2">10</span> Credits</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 The idea for this tutorial was inspired by <a href="http://www.emse.fr/~zimmermann/">Antoine Zimmermann</a>.  The motivation was to prepare something for the <a href="http://www.emse.fr/~zimmermann/WI_2014_Site/">2014 Web Intelligence Summer School “Web of Data”</a> that's not too heavily biased towards RDF.
@@ -909,8 +1097,8 @@ The icon for highlighting external links is reused from <a href="http://www.medi
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline17" class="outline-2">
-<h2 id="orgheadline17"><span class="section-number-2">11</span> License and Citation</h2>
+<div id="outline-container-orgheadline20" class="outline-2">
+<h2 id="orgheadline20"><span class="section-number-2">11</span> License and Citation</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 <img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="88x31.png" /><br  />
@@ -939,7 +1127,7 @@ Here is how you can cite this using BibTeX (<a href="http://www.ctan.org/pkg/bib
 <div id="postamble" class="status">
 <p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-09-01 Tue&gt;</span></span></p>
 <p class="author">Author: Christoph Lange</p>
-<p class="date">Created: 2015-09-01 Tue 19:05</p>
+<p class="date">Created: 2015-09-02 Wed 11:52</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
