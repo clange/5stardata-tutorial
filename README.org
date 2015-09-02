@@ -4,7 +4,7 @@
 #+DATE:   <2015-09-01 Tue>
 #+LANGUAGE:  en
 #+STARTUP:   hidestars
-#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   H:4 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:showall toc:t ltoc:t mouse:underline buttons:t path:org-info.js
 #+EXPORT_SELECT_TAGS: export
@@ -210,6 +210,118 @@ fgrep "#markus" 4star_CSV/presenters.csv ;
    This approach is called *[[http://www.w3.org/DesignIssues/LinkedData.html][linked data]]*.
 
    Linked data is essential for the [[http://www.w3.org/2001/sw/][Semantic Web]] – “a framework that allows data to be shared and reused across application, enterprise, and community boundaries”.
+*** Dereferencing Linked Data Identifiers
+    :PROPERTIES:
+    :ID:       554eace2-d4e6-41d0-a6e4-a5814a034725
+    :END:
+    The presenters in the summer school are now identified by URIs such as http://purl.org/net/wiss2014/presenters/#markus.  As these are HTTP URLs, they can be /dereferenced/ in order to download a description of a person.  This is easiest to do by entering the URL into the address bar of a web browser, but a command-line HTTP client such as [[http://www.gnu.org/software/wget/][wget]] or [[http://curl.haxx.se/][cURL]] gives you more control.
+#+NAME: code-deref-wget-csv-uri
+#+BEGIN_SRC sh :results output verbatim replace :exports code
+wget -O - --header 'Accept: text/csv' 'http://purl.org/net/wiss2014/presenters/#markus'
+#+END_SRC
+#+NAME: code-deref-wget-csv-uri-actual
+#+BEGIN_SRC sh :results output verbatim replace :exports results
+wget -O - --header 'Accept: text/csv' 'http://purl.org/net/wiss2014/presenters/#markus' 2>&1
+#+END_SRC
+#+RESULTS: code-deref-wget-csv-uri-actual
+#+begin_example
+--2015-09-02 11:21:11--  http://purl.org/net/wiss2014/presenters/
+Resolving purl.org (purl.org)... 132.174.1.35
+Connecting to purl.org (purl.org)|132.174.1.35|:80... connected.
+HTTP request sent, awaiting response... 302 Moved Temporarily
+Location: http://www.iai.uni-bonn.de/~langec/wiss2014/presenters/ [following]
+--2015-09-02 11:21:11--  http://www.iai.uni-bonn.de/~langec/wiss2014/presenters/
+Resolving www.iai.uni-bonn.de (www.iai.uni-bonn.de)... 131.220.8.244
+Connecting to www.iai.uni-bonn.de (www.iai.uni-bonn.de)|131.220.8.244|:80... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: http://www.iai.uni-bonn.de/~langec/wiss2014/presenters/index.csv [following]
+--2015-09-02 11:21:11--  http://www.iai.uni-bonn.de/~langec/wiss2014/presenters/index.csv
+Reusing existing connection to www.iai.uni-bonn.de:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 1499 (1.5K) [text/csv]
+Saving to: 'STDOUT'
+#,$id,Name,Affiliation,Town,Country
+type,url,foaf:name,schema:affiliation,http://purl.org/net/wiss2014/vocab/#town,http://purl.org/net/wiss2014/vocab/#country
+,http://purl.org/net/wiss2014/presenters/#soeren,Sören Auer,Universität Bonn;Fraunhofer IAIS,Bonn,Germany
+,http://purl.org/net/wiss2014/presenters/#mathieu,Mathieu d'Aquin,,Milton Keynes,UK
+,http://purl.org/net/wiss2014/presenters/#aba-sah,Aba-Sah Dadzie,University of Birmingham,Birmingham,UK
+,http://purl.org/net/wiss2014/presenters/#jerome,Jérôme David,Université Pierre-Mendès-France;INRIA-LIG,Grenoble,France
+,http://purl.org/net/wiss2014/presenters/#stefan,Stefan Decker,INSIGHT;National University of Ireland,Galway,Ireland
+,http://purl.org/net/wiss2014/presenters/#paul,Paul Groth,VU Amsterdam,Amsterdam,Netherlands
+,http://purl.org/net/wiss2014/presenters/#markus,Markus Krötzsch,TU Dresden,Dresden,Germany
+,http://purl.org/net/wiss2014/presenters/#christoph,Christoph Lange,Universität Bonn;Fraunhofer IAIS,Bonn,Germany
+,http://purl.org/net/wiss2014/presenters/#axel,Axel Polleres,WU Wien,Vienna,Austria
+,http://purl.org/net/wiss2014/presenters/#eric,Eric Prud'hommeaux,W3C,,
+,http://purl.org/net/wiss2014/presenters/#harald,Harald Sack,"HPI, Universität Potsdam",Potsdam,Germany
+,http://purl.org/net/wiss2014/presenters/#thomas,Thomas Steiner,Université Lyon;Google,Lyon,France
+,http://purl.org/net/wiss2014/presenters/#antoine,Antoine Zimmermann,École des mines de Saint-Étienne,Saint-Étienne,France
+
+     0K .                                                     100% 17.7M=0s
+
+2015-09-02 11:21:11 (17.7 MB/s) - written to stdout [1499/1499]
+
+#+end_example
+    I will not go into full detail, but here are some observations, in the order of appearance:
+    * I actually published the data in a place easily accessible for me: my personal webspace at the University of Bonn.
+    * To publish the data in a sustainable way, independent from me leaving the University of Bonn, or the University of Bonn reorganising their IT infrastructure, I used the [[https://purl.org][PURL]] (Persistent URL) redirection service.
+    * The first redirect is due to the use of PURL.
+    * The second redirect happens because we are using [[https://en.wikipedia.org/wiki/Content_negotiation][content negotiation]] to give data consumers a choice from multiple data formats.  We will see another format, RDF/XML, below.
+    * Instead of just the description of Markus Krötzsch, we get the descriptions of all presenters.  This is because we lazily published all descriptions in the same file on the server and used hash (#) URIs for them.  This approach is OK for small amounts of data.  The part after the hash has to be interpreted by the client.  Here, the client actually downloads http://purl.org/net/wiss2014/presenters/ from the server and then has to locate, inside the downloaded document, the /fragment/ =#markus= by its own means.
+    
+    Further background on publishing data on the Web can be found in the following specifications:
+    * [[http://www.w3.org/TR/cooluris/][Cool URIs for the Semantic Web]]: how to choose the right URIs (hash vs. slash), how to design content negotiation
+    * [[http://www.w3.org/TR/swbp-vocab-pub/][Best Practice Recipes for Publishing RDF Vocabularies]] (actually also addresses datasets, as vocabularies are just a special case of that): how to configure the [[http://httpd.apache.org/][Apache HTTP server]] for these settings
+
+**** Dereferencing Example with cURL
+     Here is the same example [[id:554eace2-d4e6-41d0-a6e4-a5814a034725][as above]], redone using [[http://curl.haxx.se/][cURL]]:
+#+NAME: code-deref-curl-csv-uri
+#+BEGIN_SRC sh :results output verbatim replace :exports both
+curl -i -H 'Accept: text/csv' -L 'http://purl.org/net/wiss2014/presenters/#markus'
+#+END_SRC
+#+RESULTS: code-deref-curl-csv-uri
+#+begin_example
+HTTP/1.1 302 Moved Temporarily
+Date: Wed, 02 Sep 2015 09:24:08 GMT
+Server: 1060 NetKernel v3.3 - Powered by Jetty
+Location: http://www.iai.uni-bonn.de/~langec/wiss2014/presenters/
+Content-Type: text/html; charset=iso-8859-1
+X-Purl: 2.0; http://localhost:8080
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Content-Length: 288
+
+HTTP/1.1 302 Found
+Date: Wed, 02 Sep 2015 09:24:08 GMT
+Server: Apache
+Location: http://www.iai.uni-bonn.de/~langec/wiss2014/presenters/index.csv
+Content-Length: 248
+Content-Type: text/html; charset=iso-8859-1
+
+HTTP/1.1 200 OK
+Date: Wed, 02 Sep 2015 09:24:08 GMT
+Server: Apache
+Last-Modified: Tue, 26 Aug 2014 04:44:11 GMT
+ETag: "5db-50180f4611cc0"
+Accept-Ranges: bytes
+Content-Length: 1499
+Content-Type: text/csv
+
+#,$id,Name,Affiliation,Town,Country
+type,url,foaf:name,schema:affiliation,http://purl.org/net/wiss2014/vocab/#town,http://purl.org/net/wiss2014/vocab/#country
+,http://purl.org/net/wiss2014/presenters/#soeren,Sören Auer,Universität Bonn;Fraunhofer IAIS,Bonn,Germany
+,http://purl.org/net/wiss2014/presenters/#mathieu,Mathieu d'Aquin,,Milton Keynes,UK
+,http://purl.org/net/wiss2014/presenters/#aba-sah,Aba-Sah Dadzie,University of Birmingham,Birmingham,UK
+,http://purl.org/net/wiss2014/presenters/#jerome,Jérôme David,Université Pierre-Mendès-France;INRIA-LIG,Grenoble,France
+,http://purl.org/net/wiss2014/presenters/#stefan,Stefan Decker,INSIGHT;National University of Ireland,Galway,Ireland
+,http://purl.org/net/wiss2014/presenters/#paul,Paul Groth,VU Amsterdam,Amsterdam,Netherlands
+,http://purl.org/net/wiss2014/presenters/#markus,Markus Krötzsch,TU Dresden,Dresden,Germany
+,http://purl.org/net/wiss2014/presenters/#christoph,Christoph Lange,Universität Bonn;Fraunhofer IAIS,Bonn,Germany
+,http://purl.org/net/wiss2014/presenters/#axel,Axel Polleres,WU Wien,Vienna,Austria
+,http://purl.org/net/wiss2014/presenters/#eric,Eric Prud'hommeaux,W3C,,
+,http://purl.org/net/wiss2014/presenters/#harald,Harald Sack,"HPI, Universität Potsdam",Potsdam,Germany
+,http://purl.org/net/wiss2014/presenters/#thomas,Thomas Steiner,Université Lyon;Google,Lyon,France
+,http://purl.org/net/wiss2014/presenters/#antoine,Antoine Zimmermann,École des mines de Saint-Étienne,Saint-Étienne,France
+#+end_example
+
 ** Datatypes
    :PROPERTIES:
    :ID:       2e724ba4-6b8b-4bbc-bdf8-60f07e223620
@@ -499,6 +611,44 @@ sed -ne '/@prefix/,/^$/p' 5star_RDF/data.ttl
    This is just syntactic sugar, not part of the RDF data model.
 
    Note that the =rdfs:seeAlso= link points to [[http://dbpedia.org][DBpedia]].  DBpedia is a linked dataset extracted from [[http://wikipedia.org][Wikipedia]].
+** Publishing RDF
+   Linked data clients usually expect data to be published as RDF, and RDF/XML is the most widely supported serialization of RDF.  Therefore, we have also published our data as RDF/XML:
+#+NAME: code-deref-wget-rdf-uri
+#+BEGIN_SRC sh :results output verbatim replace :exports both
+wget --quiet -O - --header 'Accept: text/rdf+xml' 'http://purl.org/net/wiss2014/presenters/#markus'
+#+END_SRC
+
+#+RESULTS: code-deref-wget-rdf-uri
+#+begin_example
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about="http://purl.org/net/wiss2014/presenters/#stefan">
+    <ns1:country xmlns:ns1="http://purl.org/net/wiss2014/vocab/#">Ireland</ns1:country>
+    <ns2:town xmlns:ns2="http://purl.org/net/wiss2014/vocab/#">Galway</ns2:town>
+    <ns3:affiliation xmlns:ns3="http://schema.org/">INSIGHT</ns3:affiliation>
+    <ns4:affiliation xmlns:ns4="http://schema.org/">National University of Ireland</ns4:affiliation>
+    <ns5:name xmlns:ns5="http://xmlns.com/foaf/0.1/">Stefan Decker</ns5:name>
+  </rdf:Description>
+</rdf:RDF>
+#+end_example
+   A few notes:
+   * This RDF/XML was auto-generated from the Turtle source and therefore looks a bit unfriendly.
+   * Additionally, it is good practice to also publish a human-comprehensible version of your data in HTML.  Here, we did not do this.
+   * We configured RDF/XML to be the content served by default.  Therefore, it is also served when no specific content type is requested via the =Accept= HTTP request header.
+
+   This is the =.htaccess= configuration file that implements this behaviour in the Apache web server:
+#+BEGIN_SRC htaccess
+AddType application/rdf+xml .rdf
+AddType text/csv .csv
+
+RewriteEngine On
+RewriteBase /~langec/wiss2014/
+RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/csv)
+RewriteCond %{HTTP_ACCEPT} text/csv
+RewriteRule ^(presenters|schedule|vocab)/$ $1/index.csv [R=302]
+
+RewriteRule ^(presenters|schedule|vocab)/$ $1/index.rdf [R=302]
+#+END_SRC
 * ★★★★★☆ Further possible improvements
   Additional stars have been suggested for publishing data …
   * … that uses standard schemas – we've done this already.
